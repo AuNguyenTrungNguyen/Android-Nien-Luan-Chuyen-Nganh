@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Cài đật">
+        <menu>
+            <item
+                android:id="@+id/mn_my_account"
+                app:showAsAction="never"
+                android:title="Quản lý tài khoản cá nhân " />
+
+            <item
+                app:showAsAction="never"
+                android:id="@+id/mn_my_employees"
+                android:title="Quản lý nhân viên" />
+
+            <item
+                app:showAsAction="never"
+                android:id="@+id/mn_sign_out"
+                android:title="Đăng xuất" />
+
+        </menu>
+    </item>
+
+    <item android:title="Công việc">
+        <menu>
+            <item
+                app:showAsAction="never"
+                android:id="@+id/mn_job"
+                android:title="Giao việc" />
+
+        </menu>
+    </item>
+
+    <item android:title="Về chúng tôi">
+        <menu>
+            <item
+                app:showAsAction="never"
+                android:title="Thông tin ứng dụng " />
+
+            <item
+                app:showAsAction="never"
+                android:title="Liên hệ với nhà phát triển" />
+        </menu>
+    </item>
+
+</menu>

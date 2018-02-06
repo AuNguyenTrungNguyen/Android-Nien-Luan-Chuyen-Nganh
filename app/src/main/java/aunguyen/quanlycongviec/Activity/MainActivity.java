@@ -3,9 +3,13 @@ package aunguyen.quanlycongviec.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -14,6 +18,9 @@ import aunguyen.quanlycongviec.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,19 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
+    private void jobManage() {
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.mn_sign_out:
-                signOut();
-        }
-        return super.onOptionsItemSelected(item);
+    private void settingEmployeesAccount() {
+    }
+
+    private void settingMyAccount() {
     }
 
     private void signOut() {
@@ -54,6 +56,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
+        //Setup toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Setup drawer
+        drawerLayout = findViewById(R.id.drawer);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        //Setup navigation
+        navigationView = findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.mn_my_account:
+                        settingMyAccount();
+                        break;
+
+                    case R.id.mn_my_employees:
+                        settingEmployeesAccount();
+                        break;
+
+                    case R.id.mn_sign_out:
+                        signOut();
+                        break;
+
+                    case R.id.mn_job:
+                        jobManage();
+                        break;
+                }
+                return true;
+            }
+        });
 
     }
 }
