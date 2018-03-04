@@ -1,18 +1,24 @@
 package aunguyen.quanlycongviec.Activity;
 
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import aunguyen.quanlycongviec.Fragment.EmployeesAccountFragment;
+import aunguyen.quanlycongviec.Fragment.JobManageFragment;
 import aunguyen.quanlycongviec.Object.Constant;
 import aunguyen.quanlycongviec.R;
 
@@ -32,10 +38,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void jobManage() {
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainer, new JobManageFragment());
+        fragmentTransaction.commit();
+        Log.i("LOG", "jobManage");
     }
 
     private void settingEmployeesAccount() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainer, new EmployeesAccountFragment());
+        fragmentTransaction.commit();
+        Log.i("LOG", "settingEmployeesAccount");
     }
 
     private void settingMyAccount() {
@@ -55,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void init(){
+    private void init() {
         //Setup toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,26 +91,39 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.mn_my_account:
                         settingMyAccount();
+                        drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
                     case R.id.mn_my_employees:
                         settingEmployeesAccount();
+                        drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
                     case R.id.mn_sign_out:
                         signOut();
+                        drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
                     case R.id.mn_job:
                         jobManage();
+                        drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                 }
                 return true;
             }
         });
 
+        setUpJobManage();
+
+    }
+
+    private void setUpJobManage() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainer, new JobManageFragment());
+        fragmentTransaction.commit();
     }
 }
