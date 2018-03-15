@@ -6,18 +6,18 @@
         <menu>
             <item
                 android:id="@+id/mn_my_account"
-                app:showAsAction="never"
-                android:title="Quản lý tài khoản cá nhân " />
+                android:title="Quản lý tài khoản cá nhân "
+                app:showAsAction="never" />
 
             <item
-                app:showAsAction="never"
                 android:id="@+id/mn_my_employees"
-                android:title="Quản lý nhân viên" />
+                android:title="Quản lý nhân viên"
+                app:showAsAction="never" />
 
             <item
-                app:showAsAction="never"
                 android:id="@+id/mn_sign_out"
-                android:title="Đăng xuất" />
+                android:title="Đăng xuất"
+                app:showAsAction="never" />
 
         </menu>
     </item>
@@ -25,12 +25,14 @@
     <item android:title="Về chúng tôi">
         <menu>
             <item
-                app:showAsAction="never"
-                android:title="Thông tin ứng dụng " />
+                android:id="@+id/mn_information"
+                android:title="Thông tin ứng dụng "
+                app:showAsAction="never" />
 
             <item
-                app:showAsAction="never"
-                android:title="Liên hệ với nhà phát triển" />
+                android:id="@+id/mn_about_me"
+                android:title="Liên hệ với nhà phát triển"
+                app:showAsAction="never" />
         </menu>
     </item>
 

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private Toolbar toolbar;
+    private Toolbar toolbarMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +33,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void jobManage() {
+
+    private void manageMyAccount() {
+        Intent intent = new Intent(this, ManageMyAccountActivity.class);
+        startActivity(intent);
     }
 
-    private void settingEmployeesAccount() {
+    private void manageEmployeesAccount() {
+        Intent intent = new Intent(this, ManageMyEmployeesActivity.class);
+        startActivity(intent);
     }
 
-    private void settingMyAccount() {
+    private void information() {
+        Intent intent = new Intent(this, InformationActivity.class);
+        startActivity(intent);
+    }
+
+    private void aboutMe() {
+        Intent intent = new Intent(this, AboutMeActivity.class);
+        startActivity(intent);
     }
 
     private void signOut() {
@@ -57,16 +69,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        //Setup toolbar
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Setup layout_toolbar
+        toolbarMain = findViewById(R.id.toolbar_main);
+        setSupportActionBar(toolbarMain);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Setup drawer
         drawerLayout = findViewById(R.id.drawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbarMain.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawerLayout.openDrawer(GravityCompat.START);
@@ -81,17 +93,27 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.mn_my_account:
-                        settingMyAccount();
+                        manageMyAccount();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
                     case R.id.mn_my_employees:
-                        settingEmployeesAccount();
+                        manageEmployeesAccount();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
                     case R.id.mn_sign_out:
                         signOut();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.mn_information:
+                        information();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.mn_about_me:
+                        aboutMe();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                 }
