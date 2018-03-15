@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,8 @@ import aunguyen.quanlycongviec.R;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Toolbar toolbarSignIn;
+
     private EditText edtUsername;
     private EditText edtPassword;
     private Button btnSignIn;
@@ -38,6 +41,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        setUpToolbar();
 
         init();
     }
@@ -95,6 +100,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                 });
+    }
+
+    private void setUpToolbar(){
+        toolbarSignIn = findViewById(R.id.toolbar_sign_in);
+        setSupportActionBar(toolbarSignIn);
     }
 
     private void updateUI(FirebaseUser user) {

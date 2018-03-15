@@ -1,0 +1,103 @@
+package aunguyen.quanlycongviec.Object;
+
+/**
+ * Created by Au Nguyen on 3/15/2018.
+ */
+
+public class EmployeeObject {
+    private String idEmployee;
+    private String idManage;
+    private String nameEmployee;
+    private String birthdayEmployee;
+    private String genderEmployee; //0 Male, 1 Female
+    private String addressEmployee;
+    private String accountType; //0 Admin, 1 User
+    private String urlAvatar;
+
+    public EmployeeObject() {
+    }
+
+    public EmployeeObject(String idEmployee,
+                          String idManage,
+                          String nameEmployee,
+                          String birthdayEmployee,
+                          String genderEmployee,
+                          String addressEmployee,
+                          String accountType,
+                          String urlAvatar) {
+        this.idEmployee = idEmployee;
+        this.idManage = idManage;
+        this.nameEmployee = nameEmployee;
+        this.birthdayEmployee = birthdayEmployee;
+        this.genderEmployee = genderEmployee;
+        this.addressEmployee = addressEmployee;
+        this.accountType = accountType;
+        this.urlAvatar = urlAvatar;
+    }
+
+    public String getIdEmployee() {
+        return idEmployee;
+    }
+
+    public void setIdEmployee(String idEmployee) {
+        this.idEmployee = idEmployee;
+    }
+
+    public String getIdManage() {
+        return idManage;
+    }
+
+    public void setIdManage(String idManage) {
+        this.idManage = idManage;
+    }
+
+    public String getNameEmployee() {
+        return nameEmployee;
+    }
+
+    public void setNameEmployee(String nameEmployee) {
+        this.nameEmployee = nameEmployee;
+    }
+
+    public String getBirthdayEmployee() {
+        return birthdayEmployee;
+    }
+
+    public void setBirthdayEmployee(String birthdayEmployee) {
+        this.birthdayEmployee = birthdayEmployee;
+    }
+
+    public String getGenderEmployee() {
+        return genderEmployee;
+    }
+
+    public void setGenderEmployee(String genderEmployee) {
+        this.genderEmployee = genderEmployee;
+    }
+
+    public String getAddressEmployee() {
+        return addressEmployee;
+    }
+
+    public void setAddressEmployee(String addressEmployee) {
+        this.addressEmployee = addressEmployee;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+    public String getUrlAvatar() {
+        return urlAvatar;
+    }
+
+    public void setUrlAvatar(String urlAvatar) {
+        this.urlAvatar = urlAvatar;
+    }
+
+    //private String boPhan;
+}

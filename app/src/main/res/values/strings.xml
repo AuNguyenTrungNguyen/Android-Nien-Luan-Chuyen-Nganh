@@ -8,6 +8,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="title_activity_sign_in">Sign In</string>
     <string name="title_activity_my_employees">Management Employees</string>
     <string name="title_activity_my_account">Management My Account</string>
     <string name="title_activity_information">My Account</string>
