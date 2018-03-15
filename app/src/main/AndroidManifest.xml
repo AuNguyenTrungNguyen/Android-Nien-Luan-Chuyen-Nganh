@@ -12,29 +12,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.MainActivity" />
-
         <activity android:name=".Activity.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activity.ManageMyAccountActivity"
+            android:label="@string/title_activity_my_account"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.ManageMyEmployeesActivity"
+            android:label="@string/title_activity_my_employees"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.InformationActivity"
+            android:label="@string/title_activity_information"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.AboutMeActivity"
+            android:label="@string/title_activity_about_me"
+            android:parentActivityName=".Activity.MainActivity" />
 
-        <activity android:name=".Activity.ManageMyAccountActivity"
-            android:parentActivityName=".Activity.MainActivity"
-            android:label="@string/title_activity_my_account"/>
-
-        <activity android:name=".Activity.ManageMyEmployeesActivity"
-            android:parentActivityName=".Activity.MainActivity"
-            android:label="@string/title_activity_my_employees"/>
-
-        <activity android:name=".Activity.InformationActivity"
-            android:parentActivityName=".Activity.MainActivity"
-            android:label="@string/title_activity_information"/>
-
-        <activity android:name=".Activity.AboutMeActivity"
-            android:parentActivityName=".Activity.MainActivity"
-            android:label="@string/title_activity_about_me"></activity>
+        <activity android:name=".Activity.AddJobActivity"
+            android:label="@string/title_activity_add_job"
+            android:parentActivityName=".Activity.MainActivity">
+        </activity>
     </application>
 
 </manifest>

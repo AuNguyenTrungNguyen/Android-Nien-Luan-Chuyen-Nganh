@@ -12,6 +12,7 @@
     <string name="title_activity_my_account">Management My Account</string>
     <string name="title_activity_information">My Account</string>
     <string name="title_activity_about_me">About Me</string>
+    <string name="title_activity_add_job">Add Job</string>
 
     <!--<string name="action_settings">Settings</string>-->
 

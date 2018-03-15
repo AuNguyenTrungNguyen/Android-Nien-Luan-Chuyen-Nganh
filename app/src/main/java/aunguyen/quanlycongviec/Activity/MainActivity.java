@@ -4,25 +4,36 @@ package aunguyen.quanlycongviec.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import aunguyen.quanlycongviec.Object.Constant;
 import aunguyen.quanlycongviec.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbarMain;
+
+    private FloatingActionButton btnAddJod;
+
+    private RecyclerView rvJob;
+    private List<String> listJob;
+    //private AdapterJob adapterJob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +42,32 @@ public class MainActivity extends AppCompatActivity {
 
         setUpToolbar();
 
+        addControls();
+
         init();
+
+        addEvents();
 
     }
 
-    private void setUpToolbar(){
+    //Thêm những sự kiện click ...
+    private void addEvents() {
+        btnAddJod.setOnClickListener(this);
+
+        //rvJob.setOnClickListener();
+
+    }
+
+    //Thêm mặc định
+    private void addControls() {
+        btnAddJod = findViewById(R.id.btn_add_job);
+
+        rvJob = findViewById(R.id.rv_job);
+        listJob = new ArrayList<>();
+        //adapterJob = new AdapterJob();
+    }
+
+    private void setUpToolbar() {
         //Setup layout_toolbar
         toolbarMain = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbarMain);
@@ -124,5 +156,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_add_job:
+                addJob();
+                break;
+        }
+    }
+
+    private void addJob() {
+        Intent intentAddJob = new Intent(this, AddJobActivity.class);
+        startActivity(intentAddJob);
     }
 }
