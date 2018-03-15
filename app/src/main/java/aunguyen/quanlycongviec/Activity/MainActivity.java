@@ -29,10 +29,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setUpToolbar();
+
         init();
 
     }
 
+    private void setUpToolbar(){
+        //Setup layout_toolbar
+        toolbarMain = findViewById(R.id.toolbar_main);
+        setSupportActionBar(toolbarMain);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
     private void manageMyAccount() {
         Intent intent = new Intent(this, ManageMyAccountActivity.class);
@@ -69,11 +77,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        //Setup layout_toolbar
-        toolbarMain = findViewById(R.id.toolbar_main);
-        setSupportActionBar(toolbarMain);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         //Setup drawer
         drawerLayout = findViewById(R.id.drawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
