@@ -35,11 +35,15 @@
             android:name=".Activity.AboutMeActivity"
             android:label="@string/title_activity_about_me"
             android:parentActivityName=".Activity.MainActivity" />
-
-        <activity android:name=".Activity.AddJobActivity"
+        <activity
+            android:name=".Activity.AddJobActivity"
             android:label="@string/title_activity_add_job"
-            android:parentActivityName=".Activity.MainActivity">
-        </activity>
+            android:parentActivityName=".Activity.MainActivity"></activity>
+
+        <activity
+            android:name=".Activity.AddEmployeeActivity"
+            android:label="@string/title_activity_add_employee"
+            android:parentActivityName=".Activity.ManageMyEmployeesActivity"></activity>
     </application>
 
 </manifest>

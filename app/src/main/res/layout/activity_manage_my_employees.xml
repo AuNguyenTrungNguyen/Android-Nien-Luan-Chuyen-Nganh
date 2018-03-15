@@ -10,17 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!--Code here-->
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_my_employees"
+            android:id="@+id/rv_employees"
+            android:layout_margin="16dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
 
-    </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_add_employee"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="bottom|right"/>
+
+    </FrameLayout>
 
 
 </LinearLayout>
