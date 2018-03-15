@@ -5,20 +5,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import aunguyen.quanlycongviec.Fragment.EmployeesAccountFragment;
-import aunguyen.quanlycongviec.Fragment.JobManageFragment;
 import aunguyen.quanlycongviec.Object.Constant;
 import aunguyen.quanlycongviec.R;
 
@@ -38,19 +34,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void jobManage() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer, new JobManageFragment());
-        fragmentTransaction.commit();
-        Log.i("LOG", "jobManage");
     }
 
     private void settingEmployeesAccount() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer, new EmployeesAccountFragment());
-        fragmentTransaction.commit();
-        Log.i("LOG", "settingEmployeesAccount");
     }
 
     private void settingMyAccount() {
@@ -78,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Setup drawer
         drawerLayout = findViewById(R.id.drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.syncState();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,24 +94,10 @@ public class MainActivity extends AppCompatActivity {
                         signOut();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-
-                    case R.id.mn_job:
-                        jobManage();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
                 }
                 return true;
             }
         });
 
-        setUpJobManage();
-
-    }
-
-    private void setUpJobManage() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer, new JobManageFragment());
-        fragmentTransaction.commit();
     }
 }

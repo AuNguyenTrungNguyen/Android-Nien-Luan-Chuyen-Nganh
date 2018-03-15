@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Cài đật">
+    <item android:title="Cài đặt">
         <menu>
             <item
                 android:id="@+id/mn_my_account"
@@ -18,16 +18,6 @@
                 app:showAsAction="never"
                 android:id="@+id/mn_sign_out"
                 android:title="Đăng xuất" />
-
-        </menu>
-    </item>
-
-    <item android:title="Công việc">
-        <menu>
-            <item
-                app:showAsAction="never"
-                android:id="@+id/mn_job"
-                android:title="Giao việc" />
 
         </menu>
     </item>
