@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,6 +38,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText edtUsername;
     private EditText edtPassword;
     private EditText edtDomain;
+    private EditText edtFullName;
+
+    private DatePicker dpBirthday;
+
+    private RadioButton rdbMale;
+    private RadioButton rdbFemale;
+
+    private EditText edtPhone;
+    private EditText edtAddress;
 
     private Button btnSignUp;
 
@@ -71,6 +82,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         edtUsername = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);
         edtDomain = findViewById(R.id.edt_domain);
+        edtFullName = findViewById(R.id.edt_full_name);
+
+        edtPhone = findViewById(R.id.edt_phone);
+        edtAddress = findViewById(R.id.edt_address);
+
+        dpBirthday = findViewById(R.id.date_picker);
+        rdbMale = findViewById(R.id.rdb_male);
+        rdbFemale = findViewById(R.id.rdb_female);
+
+        //Default
+        rdbMale.setChecked(true);
 
         btnSignUp = findViewById(R.id.btn_sign_up);
     }
@@ -100,6 +122,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         final String username = edtUsername.getText().toString();
         final String password = edtPassword.getText().toString();
         final String domain = edtDomain.getText().toString();
+        final String fullName = edtFullName.getText().toString();
+
+        final String phone = edtPhone.getText().toString();
+        final String address = edtAddress.getText().toString();
+        final String birthDay = "";
 
         final DatabaseReference referenceDomain, referenceEmployee;
 
@@ -120,7 +147,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SignUpActivity.this, "Domain cua ban da ton tai!!!", Toast.LENGTH_SHORT).show();
                     isFirst[0] = false;
                 }else if(isFirst[0]){
-                    if(!username.equals("") && !password.equals("")){
+                    if(!username.equals("") && !password.equals("") && !domain.equals("") && !fullName.equals("")){
                         mAuth.createUserWithEmailAndPassword(username+domain, password)
                                 .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                                     @Override
@@ -133,6 +160,30 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             employeeObject.setIdEmployee(user.getUid());
                                             employeeObject.setIdManage("");
                                             employeeObject.setUsernameEmployee(username+domain);
+
+                                            if(!phone.equals("")){
+                                                employeeObject.setPhoneEmployee(phone);
+                                            }else{
+                                                employeeObject.setPhoneEmployee("");
+                                            }
+
+                                            if(!address.equals("")){
+                                                employeeObject.setAddressEmployee(address);
+                                            }else{
+                                                employeeObject.setAddressEmployee("");
+                                            }
+
+                                            employeeObject.setNameEmployee(fullName);
+
+                                            if (rdbMale.isChecked()){
+                                                employeeObject.setGenderEmployee("Nam");
+                                                employeeObject.setUrlAvatar(Constant.URL_MALE);
+                                            }else{
+                                                employeeObject.setGenderEmployee("Nu");
+                                                employeeObject.setUrlAvatar(Constant.URL_FEMALE);
+                                            }
+
+                                            employeeObject.setBirthdayEmployee("01/01/1990");
 
                                             referenceEmployee.child(user.getUid()).setValue(employeeObject);
                                             referenceDomain.push().setValue(domain);

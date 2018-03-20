@@ -4,6 +4,14 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="domain">Domain</string>
+    <string name="full_name">Full Name</string>
+    <string name="birth_day">Birthday</string>
+    <string name="gender">Gender</string>
+    <string name="phone">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
 
