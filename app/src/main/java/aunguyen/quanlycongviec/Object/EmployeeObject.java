@@ -11,6 +11,7 @@ public class EmployeeObject {
     private String officeEmployee; //Chuc vu
     private String nameEmployee;
     private String birthdayEmployee;
+    private String phoneEmployee;
     private String genderEmployee; //0 Male, 1 Female
     private String addressEmployee;
     private String accountType; //0 Admin, 1 User
@@ -25,6 +26,7 @@ public class EmployeeObject {
                           String officeEmployee,
                           String nameEmployee,
                           String birthdayEmployee,
+                          String phoneEmployee,
                           String genderEmployee,
                           String addressEmployee,
                           String accountType,
@@ -35,10 +37,19 @@ public class EmployeeObject {
         this.officeEmployee = officeEmployee;
         this.nameEmployee = nameEmployee;
         this.birthdayEmployee = birthdayEmployee;
+        this.phoneEmployee = phoneEmployee;
         this.genderEmployee = genderEmployee;
         this.addressEmployee = addressEmployee;
         this.accountType = accountType;
         this.urlAvatar = urlAvatar;
+    }
+
+    public String getPhoneEmployee() {
+        return phoneEmployee;
+    }
+
+    public void setPhoneEmployee(String phoneEmployee) {
+        this.phoneEmployee = phoneEmployee;
     }
 
     public String getUsernameEmployee() {

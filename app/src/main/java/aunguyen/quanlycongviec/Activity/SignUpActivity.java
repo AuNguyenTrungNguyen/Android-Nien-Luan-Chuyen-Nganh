@@ -132,6 +132,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             employeeObject.setAccountType("0");
                                             employeeObject.setIdEmployee(user.getUid());
                                             employeeObject.setIdManage("");
+                                            employeeObject.setUsernameEmployee(username+domain);
 
                                             referenceEmployee.child(user.getUid()).setValue(employeeObject);
                                             referenceDomain.push().setValue(domain);
