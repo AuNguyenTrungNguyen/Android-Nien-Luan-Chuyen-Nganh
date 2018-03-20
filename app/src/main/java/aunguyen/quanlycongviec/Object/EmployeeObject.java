@@ -7,6 +7,8 @@ package aunguyen.quanlycongviec.Object;
 public class EmployeeObject {
     private String idEmployee;
     private String idManage;
+    private String usernameEmployee;
+    private String officeEmployee; //Chuc vu
     private String nameEmployee;
     private String birthdayEmployee;
     private String genderEmployee; //0 Male, 1 Female
@@ -19,6 +21,8 @@ public class EmployeeObject {
 
     public EmployeeObject(String idEmployee,
                           String idManage,
+                          String usernameEmployee,
+                          String officeEmployee,
                           String nameEmployee,
                           String birthdayEmployee,
                           String genderEmployee,
@@ -27,12 +31,30 @@ public class EmployeeObject {
                           String urlAvatar) {
         this.idEmployee = idEmployee;
         this.idManage = idManage;
+        this.usernameEmployee = usernameEmployee;
+        this.officeEmployee = officeEmployee;
         this.nameEmployee = nameEmployee;
         this.birthdayEmployee = birthdayEmployee;
         this.genderEmployee = genderEmployee;
         this.addressEmployee = addressEmployee;
         this.accountType = accountType;
         this.urlAvatar = urlAvatar;
+    }
+
+    public String getUsernameEmployee() {
+        return usernameEmployee;
+    }
+
+    public void setUsernameEmployee(String usernameEmployee) {
+        this.usernameEmployee = usernameEmployee;
+    }
+
+    public String getOfficeEmployee() {
+        return officeEmployee;
+    }
+
+    public void setOfficeEmployee(String officeEmployee) {
+        this.officeEmployee = officeEmployee;
     }
 
     public String getIdEmployee() {
@@ -98,6 +120,4 @@ public class EmployeeObject {
     public void setUrlAvatar(String urlAvatar) {
         this.urlAvatar = urlAvatar;
     }
-
-    //private String boPhan;
 }

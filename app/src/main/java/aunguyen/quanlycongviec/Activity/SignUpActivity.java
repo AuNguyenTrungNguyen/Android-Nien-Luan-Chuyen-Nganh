@@ -1,6 +1,7 @@
 package aunguyen.quanlycongviec.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -136,6 +137,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             referenceDomain.push().setValue(domain);
                                             Toast.makeText(SignUpActivity.this, "Dang ky thanh cong!!!", Toast.LENGTH_SHORT).show();
                                             isFirst[0] = false;
+
+                                            SharedPreferences preferences = SignUpActivity.this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = preferences.edit();
+                                            editor.putString(Constant.PREFERENCE_DOMAIN, domain);
+                                            editor.apply();
+
                                             startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
 
                                         }

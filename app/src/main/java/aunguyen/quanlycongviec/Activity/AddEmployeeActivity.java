@@ -66,7 +66,10 @@ public class AddEmployeeActivity extends AppCompatActivity {
                 String password = edtPasswordEmployee.getText().toString();
 
                 if(!username.equals("") && !password.equals("")){
-                    username += Constant.MY_EMAIL;
+                    SharedPreferences preferences = AddEmployeeActivity.this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
+
+                    username += preferences.getString(Constant.PREFERENCE_DOMAIN, "");
+                    Log.i("TAG", username);
                     signUp(username, password);
                 }
             }

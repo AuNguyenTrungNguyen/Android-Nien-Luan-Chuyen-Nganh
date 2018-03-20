@@ -100,12 +100,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putString(Constant.PREFERENCE_KEY_ID, null);
+        editor.putString(Constant.PREFERENCE_DOMAIN, null);
+        editor.apply();
 
         Intent intentSignIn = new Intent(MainActivity.this, SignInActivity.class);
         startActivity(intentSignIn);
         finish();
-
-        editor.apply();
     }
 
     private void init() {
