@@ -29,6 +29,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private EditText edtUsername;
     private EditText edtPassword;
     private Button btnSignIn;
+    private Button btnSignUp;
 
     //Firebase database
     private FirebaseDatabase databaseSignIn;
@@ -61,6 +62,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         btnSignIn = findViewById(R.id.btn_sign_in);
         btnSignIn.setOnClickListener(this);
 
+        btnSignUp = findViewById(R.id.btn_sign_up);
+        btnSignUp.setOnClickListener(this);
+
         //Database
         databaseSignIn = FirebaseDatabase.getInstance();
         referenceSignIn = databaseSignIn.getReference();
@@ -76,7 +80,16 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_sign_in:
                 signIn();
                 break;
+
+            case R.id.btn_sign_up:
+                signUp();
+                break;
         }
+    }
+
+    private void signUp() {
+        Intent intentSignUp = new Intent(this, SignUpActivity.class);
+        startActivity(intentSignUp);
     }
 
     private void signIn() {
@@ -124,4 +137,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
         editor.apply();
     }
+
+
 }
