@@ -1,10 +1,10 @@
 package aunguyen.quanlycongviec.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -134,11 +134,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                                             referenceEmployee.child(user.getUid()).setValue(employeeObject);
                                             referenceDomain.push().setValue(domain);
-                                            Log.i("TN", "Sign Up Success!");
+                                            Toast.makeText(SignUpActivity.this, "Dang ky thanh cong!!!", Toast.LENGTH_SHORT).show();
                                             isFirst[0] = false;
+                                            startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
 
-                                        } else {
-                                            Log.i("TN", "Username is exist!");
                                         }
                                     }
                                 });

@@ -94,7 +94,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     private void signIn() {
 
-        String email = edtUsername.getText().toString() + Constant.MY_EMAIL;
+        String email = edtUsername.getText().toString();
         String password = edtPassword.getText().toString();
 
         mAuth.signInWithEmailAndPassword(email, password)
