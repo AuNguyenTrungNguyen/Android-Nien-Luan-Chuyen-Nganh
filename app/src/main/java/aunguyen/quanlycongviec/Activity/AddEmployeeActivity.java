@@ -92,8 +92,6 @@ public class AddEmployeeActivity extends AppCompatActivity {
                             employeeObject.setIdManage(idManage);
 
                             myRef.child(user.getUid()).setValue(employeeObject);
-                            Log.i("TAG", "Oke");
-
 
                         } else {
                             Log.i("TAG", "No Oke");

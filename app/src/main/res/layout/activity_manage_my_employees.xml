@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,18 +17,19 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_employees"
-            android:layout_margin="16dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            tools:listitem="@layout/item_employee"
+            tools:mockup_opacity="30"></android.support.v7.widget.RecyclerView>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/btn_add_employee"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_gravity="bottom|right"
             android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_gravity="bottom|right"/>
+            android:layout_marginRight="16dp" />
 
     </FrameLayout>
 

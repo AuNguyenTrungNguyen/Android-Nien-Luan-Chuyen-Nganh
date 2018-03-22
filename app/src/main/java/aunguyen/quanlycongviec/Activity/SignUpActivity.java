@@ -163,7 +163,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         final String phone = edtPhone.getText().toString();
         final String address = edtAddress.getText().toString();
-        final String birthDay = "";
 
         final DatabaseReference referenceDomain, referenceEmployee;
 
