@@ -97,6 +97,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         String email = edtUsername.getText().toString();
         String password = edtPassword.getText().toString();
 
+        //check(email, password);
+
         if(!email.equals("") && !password.equals("")){
 
             mAuth.signInWithEmailAndPassword(email, password)
@@ -115,7 +117,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                 updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Toast.makeText(SignInActivity.this, "Authentication failed.",
+                                Toast.makeText(SignInActivity.this, "Tài khoản không đúng!",
                                         Toast.LENGTH_SHORT).show();
                                 updateUI(null);
                             }
@@ -150,5 +152,27 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         editor.apply();
     }
 
+    /*private boolean check(String username, String password){
+
+        if(TextUtils.isEmpty(username)){
+            edtUsername.setError("Username is empty!");
+        }else{
+            if(TextUtils.isEmpty(password)){
+                edtPassword.setError("Password is empty!");
+            }else{
+                if(!username.contains("@")){
+                    edtUsername.setError("Username must @!");
+                }else{
+                    if(!username.contains(".com")){
+                        edtUsername.setError("Username must .com!");
+                    }else{
+                        Toast.makeText(this, "OKE", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
+
+        return true;
+    }*/
 
 }
