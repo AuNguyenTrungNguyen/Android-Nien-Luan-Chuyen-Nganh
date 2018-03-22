@@ -7,6 +7,7 @@
     <string name="full_name">Full Name</string>
     <string name="birth_day">Birthday</string>
     <string name="gender">Gender</string>
+    <string name="account_type">Account Type</string>
     <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="male">Male</string>
@@ -14,6 +15,7 @@
 
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="register">Register</string>
     <string name="save">Save</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
