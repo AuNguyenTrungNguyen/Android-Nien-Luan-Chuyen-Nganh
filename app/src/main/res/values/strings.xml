@@ -7,13 +7,14 @@
     <string name="full_name">Full Name</string>
     <string name="birth_day">Birthday</string>
     <string name="gender">Gender</string>
-    <string name="phone">Phone Number</string>
+    <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
 
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="save">Save</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -27,5 +28,12 @@
     <string name="title_activity_add_job">Add Job</string>
     <string name="title_activity_add_employee">Add Employee</string>
     <string name="title_activity_login">Sign in</string>
+
+    <!--Message and Notification-->
+    <string name="message_admin">Administrator</string>
+    <string name="message_employee">Employee</string>
+    <string name="message_edit_and_save">You not save, are you quit?</string>
+    <string name="message_positive_save">Quit</string>
+    <string name="message_negative_save">Cancel</string>
 
 </resources>
