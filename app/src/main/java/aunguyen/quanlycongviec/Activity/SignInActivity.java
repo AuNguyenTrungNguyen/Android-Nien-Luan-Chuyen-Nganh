@@ -97,28 +97,34 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         String email = edtUsername.getText().toString();
         String password = edtPassword.getText().toString();
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String email = user.getEmail();
-                            String domain = email.substring(email.indexOf('@'));
-                            SharedPreferences preferences = SignInActivity.this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString(Constant.PREFERENCE_DOMAIN, domain);
-                            editor.apply();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(SignInActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+        if(!email.equals("") && !password.equals("")){
+
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                String email = user.getEmail();
+                                String domain = email.substring(email.indexOf('@'));
+                                SharedPreferences preferences = SignInActivity.this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString(Constant.PREFERENCE_DOMAIN, domain);
+                                editor.apply();
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(SignInActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
                         }
-                    }
-                });
+                    });
+
+        }else{
+            Toast.makeText(this, "Username hoặc Password rỗng!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setUpToolbar(){

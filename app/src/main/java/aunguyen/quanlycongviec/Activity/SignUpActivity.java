@@ -1,5 +1,6 @@
 package aunguyen.quanlycongviec.Activity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText edtDomain;
     private EditText edtFullName;
 
-    private DatePicker dpBirthday;
+    private TextView tvBirthday;
 
     private RadioButton rdbMale;
     private RadioButton rdbFemale;
@@ -76,6 +78,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void addEvents() {
         btnSignUp.setOnClickListener(this);
+        tvBirthday.setOnClickListener(this);
     }
 
     private void addControls() {
@@ -87,7 +90,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         edtPhone = findViewById(R.id.edt_phone);
         edtAddress = findViewById(R.id.edt_address);
 
-        dpBirthday = findViewById(R.id.date_picker);
+        tvBirthday = findViewById(R.id.tv_birthday);
         rdbMale = findViewById(R.id.rdb_male);
         rdbFemale = findViewById(R.id.rdb_female);
 
@@ -110,7 +113,41 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_sign_up:
                 signUp();
                 break;
+
+            case R.id.tv_birthday:
+                setBirthday();
+                break;
         }
+    }
+
+    private void setBirthday() {
+        String birthday = tvBirthday.getText().toString();
+        int dayDef = 1;
+        int mouthDef = 0;
+        int yearDef = 1995;
+
+        if(!birthday.equals(getString(R.string.birth_day))){
+            String split[] = birthday.split("/");
+            dayDef =  Integer.parseInt(split[0]);
+            mouthDef =  Integer.parseInt(split[1]) - 1;
+            yearDef =  Integer.parseInt(split[2]);
+        }
+
+        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                String day, month, year;
+                day = (i2 < 10) ? "0"+i2 : ""+i2;
+
+                i1+=1;
+                month = (i1 < 10) ? "0"+i1 : ""+i1;
+                year = ""+i;
+
+                tvBirthday.setText(day + "/" + month + "/" + year);
+
+            }
+        }, yearDef, mouthDef, dayDef);
+        dialog.show();
     }
 
     private void signUp() {
