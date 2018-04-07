@@ -1,10 +1,12 @@
 package aunguyen.quanlycongviec.Object;
 
+import java.io.Serializable;
+
 /**
  * Created by Au Nguyen on 3/15/2018.
  */
 
-public class EmployeeObject {
+public class EmployeeObject implements Serializable {
     private String idEmployee;
     private String idManage;
     private String usernameEmployee;

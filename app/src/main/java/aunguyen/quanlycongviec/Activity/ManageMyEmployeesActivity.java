@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import aunguyen.quanlycongviec.Adapter.EmployeeAdapter;
+import aunguyen.quanlycongviec.Adapter.AddEmployeeAdapter;
 import aunguyen.quanlycongviec.Object.Constant;
 import aunguyen.quanlycongviec.Object.EmployeeObject;
 import aunguyen.quanlycongviec.R;
@@ -33,7 +33,7 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
 
     private RecyclerView rvEmployee;
     private List<EmployeeObject> listEmployee;
-    private EmployeeAdapter employeeAdapter;
+    private AddEmployeeAdapter employeeAdapter;
 
     private FirebaseDatabase database;
 
@@ -92,7 +92,7 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
 
         rvEmployee = findViewById(R.id.rv_employees);
         listEmployee = new ArrayList<>();
-        employeeAdapter = new EmployeeAdapter(this, listEmployee);
+        employeeAdapter = new AddEmployeeAdapter(this, listEmployee);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         rvEmployee.setAdapter(employeeAdapter);

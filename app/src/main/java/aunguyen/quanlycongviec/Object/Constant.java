@@ -27,4 +27,12 @@ public class Constant {
     public static String KEY_NAME = "nameEmployee";
     public static String KEY_PHONE = "phoneEmployee";
 
+    //Activity for result
+    public static int REQUEST_CODE = 999;
+    public static int RESULT_CODE = 111;
+
+    //status of job
+    public static String RECEIVED = "Đã Nhận";
+    public static String NOT_RECEIVED = "Chưa Nhận";
+
 }

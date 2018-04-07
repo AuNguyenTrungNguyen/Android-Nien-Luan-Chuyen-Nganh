@@ -22,19 +22,17 @@
         <activity
             android:name=".Activity.SignInActivity"
             android:label="@string/title_activity_sign_in">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Activity.ManageMyAccountActivity"
             android:label="@string/title_activity_my_account"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".Activity.MainActivity" />
+            android:parentActivityName=".Activity.MainActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.ManageMyEmployeesActivity"
             android:label="@string/title_activity_my_employees"
@@ -58,7 +56,10 @@
         <activity
             android:name=".Activity.SignUpActivity"
             android:label="@string/title_activity_sign_up"
-            android:parentActivityName=".Activity.SignInActivity"></activity>
+            android:parentActivityName=".Activity.SignInActivity" />
+        <activity android:name=".Activity.SelectEmployeeToJobActivity"
+            android:label="@string/title_activity_employee"
+            android:parentActivityName=".Activity.AddJobActivity"/>
     </application>
 
 </manifest>

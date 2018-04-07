@@ -12,11 +12,17 @@
     <string name="address">Address</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="job_title">Title</string>
+    <string name="job_description">Description</string>
+    <string name="job_start">Start time</string>
+    <string name="job_end">End time</string>
+    <string name="job_list">List Employee</string>
+    <string name="job_add">Add job</string>
 
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="register">Register</string>
-    <string name="save">Save</string>
+    <string name="add">Add</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -29,7 +35,7 @@
     <string name="title_activity_about_me">About Me</string>
     <string name="title_activity_add_job">Add Job</string>
     <string name="title_activity_add_employee">Add Employee</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_employee">Employee</string>
 
     <!--Message and Notification-->
     <string name="message_admin">Administrator</string>
@@ -37,5 +43,8 @@
     <string name="message_edit_and_save">You not save, are you quit?</string>
     <string name="message_positive_save">Quit</string>
     <string name="message_negative_save">Cancel</string>
+
+    <!--Dialog-->
+    <string name="dialog">Loading...</string>
 
 </resources>
