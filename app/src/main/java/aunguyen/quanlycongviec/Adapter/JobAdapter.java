@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.List;
+
+import aunguyen.quanlycongviec.Object.JobObject;
 import aunguyen.quanlycongviec.R;
 
 /**
@@ -18,17 +22,11 @@ import aunguyen.quanlycongviec.R;
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
 
     private Context context;
-    private String[] nameJob;
-    private String[] stateJob;
-    private String[] amountEmployee;
+    private List<JobObject> listJobs;
 
-
-    //test
-    private String[] stt;
-
-    public JobAdapter(Context context,String[] stt){
+    public JobAdapter(Context context, List<JobObject> listJobs) {
         this.context = context;
-        this.stt = stt;
+        this.listJobs = listJobs;
     }
 
     @NonNull
@@ -41,22 +39,28 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull JobViewHolder holder, int position) {
-        holder.tvNameJob.setText("Công việc "+stt[position]);
-        /*holder.tvAmount.setText("Số Lượng: "+stt[position]);
-        holder.cvJob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, DetailJobActivity.class);
-                context.startActivity(intent);
-            }
-        });*/
+
+        final JobObject jobObject = listJobs.get(position);
+
+        if (jobObject != null){
+            holder.tvNameJob.setText(jobObject.getTitleJob());
+            holder.tvState.setText(jobObject.getStatusJob());
+            holder.tvAmount.setText("Số lượng: " + jobObject.getListIdMember().size());
+            holder.cvJob.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, jobObject.getDescriptionJob(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
-        return stt.length;
+        return listJobs.size();
     }
     public class JobViewHolder extends RecyclerView.ViewHolder{
+
         private TextView tvNameJob;
         private TextView tvState;
         private TextView tvAmount;
@@ -64,7 +68,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
         public JobViewHolder (View itemView){
             super(itemView);
             tvNameJob = itemView.findViewById(R.id.tv_name_job);
-            tvState = itemView.findViewById(R.id.tv_state);
+            tvState = itemView.findViewById(R.id.tv_status);
             tvAmount = itemView.findViewById(R.id.tv_amount);
             cvJob = itemView.findViewById(R.id.cv_job);
         }

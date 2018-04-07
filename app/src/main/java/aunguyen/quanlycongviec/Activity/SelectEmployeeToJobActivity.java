@@ -81,7 +81,7 @@ public class SelectEmployeeToJobActivity extends AppCompatActivity implements Vi
     }
 
     private void loadDataFromFireBase() {
-        progressDialog =  new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.show();
         SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
@@ -110,7 +110,7 @@ public class SelectEmployeeToJobActivity extends AppCompatActivity implements Vi
                 }
             });
 
-        }else{
+        } else {
             progressDialog.dismiss();
             Log.i("ANTN", "ID Manage is null!");
         }
