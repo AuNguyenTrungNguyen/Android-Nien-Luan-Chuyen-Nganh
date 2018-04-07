@@ -1,5 +1,6 @@
 package aunguyen.quanlycongviec.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
     private AddEmployeeAdapter employeeAdapter;
 
     private FirebaseDatabase database;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,19 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
         loadData();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        listEmployee.clear();
+    }
 
     private void loadData() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(getResources().getString(R.string.dialog));
+        progressDialog.show();
         SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
-
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
+        Log.i("ANTN", "ID: " + id);
         if (id != null) {
             DatabaseReference myRef = database.getReference(Constant.NODE_NHAN_VIEN);
             myRef.addValueEventListener(new ValueEventListener() {
@@ -70,18 +80,16 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
                             employeeAdapter.notifyDataSetChanged();
                         }
                     }
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Log.i("ABC", "Failed to read value.", error.toException());
+                    progressDialog.dismiss();
                 }
             });
         }
-
     }
-
 
     //Thêm mặc định
     private void addControls() {

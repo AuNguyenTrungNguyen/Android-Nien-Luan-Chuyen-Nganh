@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -99,7 +100,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         //check(email, password);
 
-        if(!email.equals("") && !password.equals("")){
+        if (!email.equals("") && !password.equals("")) {
 
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -124,12 +125,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     });
 
-        }else{
+        } else {
             Toast.makeText(this, "Username hoặc Password rỗng!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void setUpToolbar(){
+    private void setUpToolbar() {
         toolbarSignIn = findViewById(R.id.toolbar_sign_in);
         setSupportActionBar(toolbarSignIn);
     }
@@ -139,8 +140,14 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         SharedPreferences.Editor editor = preferences.edit();
 
         if (user != null) {
+            String idRef = preferences.getString(Constant.PREFERENCE_KEY_ID, "");
             String id = user.getUid();
-            editor.putString(Constant.PREFERENCE_KEY_ID, id);
+            Log.i("ANTN", "ID Ref: " + idRef);
+            Log.i("ANTN", "User Login: " + id);
+            if (idRef.equals("")) {
+                editor.putString(Constant.PREFERENCE_KEY_ID, id);
+
+            }
 
             Intent intentMain = new Intent(this, MainActivity.class);
             startActivity(intentMain);

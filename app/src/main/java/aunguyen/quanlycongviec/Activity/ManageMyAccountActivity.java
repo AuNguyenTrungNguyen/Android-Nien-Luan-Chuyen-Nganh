@@ -76,20 +76,22 @@ public class ManageMyAccountActivity extends AppCompatActivity implements View.O
 
                     EmployeeObject employeeObject = dataSnapshot.getValue(EmployeeObject.class);
 
-                    Glide.with(getApplicationContext())
-                            .load(employeeObject.getUrlAvatar())
-                            .into(imgAvartar);
+                    if (employeeObject != null){
+                        Glide.with(getApplicationContext())
+                                .load(employeeObject.getUrlAvatar())
+                                .into(imgAvartar);
 
-                    edtFullName.setText(employeeObject.getNameEmployee());
-                    if ((employeeObject.getAccountType()).equals("0")) {
-                        tvAccountType.setText(getString(R.string.message_admin));
-                    } else if ((employeeObject.getAccountType()).equals("1")) {
-                        tvAccountType.setText(getString(R.string.message_employee));
+                        edtFullName.setText(employeeObject.getNameEmployee());
+                        if ((employeeObject.getAccountType()).equals("0")) {
+                            tvAccountType.setText(getString(R.string.message_admin));
+                        } else if ((employeeObject.getAccountType()).equals("1")) {
+                            tvAccountType.setText(getString(R.string.message_employee));
+                        }
+                        tvOffice.setText("Office "+employeeObject.getOfficeEmployee());
+                        tvBirthday.setText(employeeObject.getBirthdayEmployee());
+                        edtPhone.setText(employeeObject.getPhoneEmployee());
+                        edtAddress.setText(employeeObject.getAddressEmployee());
                     }
-                    tvOffice.setText("Office "+employeeObject.getOfficeEmployee());
-                    tvBirthday.setText(employeeObject.getBirthdayEmployee());
-                    edtPhone.setText(employeeObject.getPhoneEmployee());
-                    edtAddress.setText(employeeObject.getAddressEmployee());
                 }
 
                 @Override
