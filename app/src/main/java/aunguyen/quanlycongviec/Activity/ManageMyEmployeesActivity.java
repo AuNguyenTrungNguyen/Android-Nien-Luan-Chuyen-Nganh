@@ -49,14 +49,14 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
         addControls();
 
         addEvents();
-
-        loadData();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onResume() {
+        super.onResume();
         listEmployee.clear();
+        loadData();
+        Log.i("ANTN", "load onResume");
     }
 
     private void loadData() {
@@ -65,8 +65,8 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
         progressDialog.show();
         SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
-        Log.i("ANTN", "ID: " + id);
         if (id != null) {
+
             DatabaseReference myRef = database.getReference(Constant.NODE_NHAN_VIEN);
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -81,6 +81,7 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
                         }
                     }
                     progressDialog.dismiss();
+                    Log.i("ANTN", ""+listEmployee.size());
                 }
 
                 @Override
