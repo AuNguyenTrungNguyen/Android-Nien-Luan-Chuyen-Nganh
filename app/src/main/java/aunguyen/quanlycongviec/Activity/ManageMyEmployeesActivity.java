@@ -56,7 +56,6 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
         super.onResume();
         listEmployee.clear();
         loadData();
-        Log.i("ANTN", "load onResume");
     }
 
     private void loadData() {
@@ -92,7 +91,6 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
         }
     }
 
-    //Thêm mặc định
     private void addControls() {
 
         database = FirebaseDatabase.getInstance();

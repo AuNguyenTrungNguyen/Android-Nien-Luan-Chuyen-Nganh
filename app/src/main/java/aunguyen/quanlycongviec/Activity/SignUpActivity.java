@@ -1,12 +1,16 @@
 package aunguyen.quanlycongviec.Activity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -38,9 +42,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Toolbar toolbarSignUp;
 
     private EditText edtUsername;
-    private EditText edtPassword;
     private EditText edtDomain;
     private EditText edtFullName;
+
+    private boolean isShow = false;
+    private TextInputLayout layoutPassword;
+    private TextInputEditText edtPassword;
+
 
     private TextView tvBirthday;
 
@@ -79,11 +87,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private void addEvents() {
         btnSignUp.setOnClickListener(this);
         tvBirthday.setOnClickListener(this);
+        layoutPassword.setOnClickListener(this);
     }
 
     private void addControls() {
         edtUsername = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);
+        layoutPassword = findViewById(R.id.lo_password);
         edtDomain = findViewById(R.id.edt_domain);
         edtFullName = findViewById(R.id.edt_full_name);
 
@@ -117,7 +127,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.tv_birthday:
                 setBirthday();
                 break;
+
+            case R.id.lo_password:
+                showPass();
+                break;
         }
+    }
+
+    private void showPass() {
+        if(!isShow){
+            edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            isShow = true;
+            layoutPassword.setPasswordVisibilityToggleEnabled(false);
+        }else{
+            edtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD );
+            isShow = false;
+            layoutPassword.setPasswordVisibilityToggleEnabled(true);
+        }
+        edtPassword.setSelection(edtPassword.length());
     }
 
     private void setBirthday() {
@@ -152,6 +179,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void signUp() {
 
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(getResources().getString(R.string.dialog));
+        progressDialog.show();
+
         final boolean[] isFirst = {true};
 
         final List<String> listDomain = new ArrayList<>();
@@ -180,8 +212,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }
 
                 if(listDomain.contains(domain) && isFirst[0]){
-                    Toast.makeText(SignUpActivity.this, "Domain cua ban da ton tai!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_domain_exist), Toast.LENGTH_SHORT).show();
                     isFirst[0] = false;
+                    progressDialog.dismiss();
                 }else if(isFirst[0]){
                     if(!username.equals("") && !password.equals("") && !domain.equals("") && !fullName.equals("")){
                         mAuth.createUserWithEmailAndPassword(username+domain, password)
@@ -196,6 +229,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             employeeObject.setIdEmployee(user.getUid());
                                             employeeObject.setIdManage("");
                                             employeeObject.setUsernameEmployee(username+domain);
+                                            //employeeObject.setOfficeEmployee(getResources().getString(R.string.office_default));
 
                                             if(!phone.equals("")){
                                                 employeeObject.setPhoneEmployee(phone);
@@ -212,18 +246,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             employeeObject.setNameEmployee(fullName);
 
                                             if (rdbMale.isChecked()){
-                                                employeeObject.setGenderEmployee("Nam");
+                                                employeeObject.setGenderEmployee(getResources().getString(R.string.male));
                                                 employeeObject.setUrlAvatar(Constant.URL_MALE);
                                             }else{
-                                                employeeObject.setGenderEmployee("Nu");
+                                                employeeObject.setGenderEmployee(getResources().getString(R.string.female));
                                                 employeeObject.setUrlAvatar(Constant.URL_FEMALE);
                                             }
 
-                                            employeeObject.setBirthdayEmployee("01/01/1990");
+                                            employeeObject.setBirthdayEmployee("01/01/1995");
 
                                             referenceEmployee.child(user.getUid()).setValue(employeeObject);
                                             referenceDomain.push().setValue(domain);
-                                            Toast.makeText(SignUpActivity.this, "Dang ky thanh cong!!!", Toast.LENGTH_SHORT).show();
+
+                                            progressDialog.dismiss();
+                                            Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_sign_up_success), Toast.LENGTH_SHORT).show();
                                             isFirst[0] = false;
 
                                             SharedPreferences preferences = SignUpActivity.this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
@@ -236,6 +272,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         }
                                     }
                                 });
+                    }else{
+                        progressDialog.dismiss();
+                        Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_data_fail), Toast.LENGTH_SHORT).show();
                     }
                 }
 

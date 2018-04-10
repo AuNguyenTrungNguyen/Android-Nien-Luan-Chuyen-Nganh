@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void statistic() {
-        Intent intent = new Intent(this, MyJobActivity.class);
+        Intent intent = new Intent(this, StatisticActivity.class);
         startActivity(intent);
     }
 

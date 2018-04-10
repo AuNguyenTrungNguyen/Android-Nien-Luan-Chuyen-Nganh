@@ -61,8 +61,13 @@
             android:name=".Activity.SelectEmployeeToJobActivity"
             android:label="@string/title_activity_employee"
             android:parentActivityName=".Activity.AddJobActivity" />
-        <activity android:name=".Activity.MyJobActivity" />
-        <activity android:name=".Activity.StatisticActivity"></activity>
+        <activity android:name=".Activity.MyJobActivity"
+            android:label="@string/title_activity_my_job"
+            android:parentActivityName=".Activity.MainActivity"/>
+
+        <activity android:name=".Activity.StatisticActivity"
+            android:label="@string/title_activity_statistic"
+            android:parentActivityName=".Activity.MainActivity" />
     </application>
 
 </manifest>

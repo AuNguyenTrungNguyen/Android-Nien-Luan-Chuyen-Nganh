@@ -1,12 +1,15 @@
 package aunguyen.quanlycongviec.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +20,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import aunguyen.quanlycongviec.Object.Constant;
 import aunguyen.quanlycongviec.R;
@@ -28,13 +29,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private Toolbar toolbarSignIn;
 
     private EditText edtUsername;
-    private EditText edtPassword;
+
+    private boolean isShow = false;
+    private TextInputLayout layoutPassword;
+    private TextInputEditText edtPassword;
+
     private Button btnSignIn;
     private Button btnSignUp;
-
-    //Firebase database
-    private FirebaseDatabase databaseSignIn;
-    private DatabaseReference referenceSignIn;
 
     //Firebase Auth
     private FirebaseAuth mAuth;
@@ -44,9 +45,23 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        setUpFirebase();
+
         setUpToolbar();
 
-        init();
+        addControls();
+
+        addEvents();
+    }
+
+    private void setUpFirebase() {
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    private void addEvents() {
+        btnSignIn.setOnClickListener(this);
+        btnSignUp.setOnClickListener(this);
+        layoutPassword.setOnClickListener(this);
     }
 
     @Override
@@ -56,22 +71,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         updateUI(currentUser);
     }
 
-    private void init() {
+    private void addControls() {
         edtUsername = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);
+        layoutPassword = findViewById(R.id.lo_password);
 
         btnSignIn = findViewById(R.id.btn_sign_in);
-        btnSignIn.setOnClickListener(this);
-
         btnSignUp = findViewById(R.id.btn_sign_up);
-        btnSignUp.setOnClickListener(this);
-
-        //Database
-        databaseSignIn = FirebaseDatabase.getInstance();
-        referenceSignIn = databaseSignIn.getReference();
-
-        //Auth
-        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -85,7 +91,24 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_sign_up:
                 signUp();
                 break;
+
+            case R.id.lo_password:
+                showPass();
+                break;
         }
+    }
+
+    private void showPass() {
+        if(!isShow){
+            edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            isShow = true;
+            layoutPassword.setPasswordVisibilityToggleEnabled(false);
+        }else{
+            edtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD );
+            isShow = false;
+            layoutPassword.setPasswordVisibilityToggleEnabled(true);
+        }
+        edtPassword.setSelection(edtPassword.length());
     }
 
     private void signUp() {
@@ -94,6 +117,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signIn() {
+
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(getResources().getString(R.string.dialog));
+        progressDialog.show();
 
         String email = edtUsername.getText().toString();
         String password = edtPassword.getText().toString();
@@ -116,17 +144,19 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                 editor.putString(Constant.PREFERENCE_DOMAIN, domain);
                                 editor.apply();
                                 updateUI(user);
+                                progressDialog.dismiss();
                             } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(SignInActivity.this, "Tài khoản không đúng!",
+                                Toast.makeText(SignInActivity.this, getResources().getString(R.string.toast_account_incorrect),
                                         Toast.LENGTH_SHORT).show();
                                 updateUI(null);
+                                progressDialog.dismiss();
                             }
                         }
                     });
 
         } else {
-            Toast.makeText(this, "Username hoặc Password rỗng!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.toast_username_or_password_empty), Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
     }
 
@@ -142,8 +172,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         if (user != null) {
             String idRef = preferences.getString(Constant.PREFERENCE_KEY_ID, "");
             String id = user.getUid();
-            Log.i("ANTN", "ID Ref: " + idRef);
-            Log.i("ANTN", "User Login: " + id);
+
             if (idRef.equals("")) {
                 editor.putString(Constant.PREFERENCE_KEY_ID, id);
 

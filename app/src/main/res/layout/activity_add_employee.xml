@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -26,33 +27,53 @@
                 android:layout_margin="16dp">
 
                 <EditText
-                    android:textColorHint="@color/red"
-                    android:id="@+id/edt_username_employee"
+                    android:id="@+id/edt_full_name_employee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/username" />
+                    android:hint="@string/full_name"
+                    android:inputType="textCapWords"
+                    android:textColorHint="@color/red" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp">
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
 
                 <EditText
-                    android:inputType="textPassword"
-                    android:textColorHint="@color/red"
+                    android:id="@+id/edt_username_employee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/username"
+                    android:textColorHint="@color/red" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/lo_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/edt_password_employee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/password" />
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/red" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
                 android:text="@string/account_type" />
 
             <RadioGroup
@@ -79,35 +100,21 @@
 
             </RadioGroup>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp">
-
-                <EditText
-                    android:inputType="textCapWords"
-                    android:textColorHint="@color/red"
-                    android:id="@+id/edt_full_name_employee"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/full_name" />
-            </android.support.design.widget.TextInputLayout>
-
             <TextView
                 android:id="@+id/tv_birthday_employee"
-                android:gravity="center"
-                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/birth_day" />
+                android:gravity="center"
+                android:text="@string/birth_day"
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
                 android:text="@string/gender" />
 
             <RadioGroup
@@ -137,33 +144,40 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp">
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
 
                 <EditText
-                    android:inputType="phone"
                     android:id="@+id/edt_phone_employee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/phone" />
+                    android:hint="@string/phone"
+                    android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp">
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
 
                 <EditText
-                    android:inputType="textCapWords"
                     android:id="@+id/edt_address_employee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/address" />
+                    android:hint="@string/address"
+                    android:inputType="textCapWords" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_register_employee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:gravity="center"
                 android:text="@string/register" />
 

@@ -20,8 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp"
-            tools:listitem="@layout/item_employee"
-            tools:mockup_opacity="30"></android.support.v7.widget.RecyclerView>
+            tools:listitem="@layout/item_employee">
+        </android.support.v7.widget.RecyclerView>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/btn_add_employee"

@@ -4,8 +4,11 @@ import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,7 +34,9 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
     private Toolbar toolbarAddEmployee;
 
     private EditText edtUsername;
-    private EditText edtPassword;
+    private boolean isShow = false;
+    private TextInputLayout layoutPassword;
+    private TextInputEditText edtPassword;
     private EditText edtFullName;
 
     private RadioButton rdbAdmin;
@@ -71,6 +76,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
 
         edtUsername = findViewById(R.id.edt_username_employee);
         edtPassword = findViewById(R.id.edt_password_employee);
+        layoutPassword = findViewById(R.id.lo_password);
 
         rdbAdmin = findViewById(R.id.rdb_admin);
         rdbEmployee = findViewById(R.id.rdb_employee);
@@ -89,12 +95,25 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
 
         btnRegister = findViewById(R.id.btn_register_employee);
 
+    }
 
+    private void showPass() {
+        if(!isShow){
+            edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            isShow = true;
+            layoutPassword.setPasswordVisibilityToggleEnabled(false);
+        }else{
+            edtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD );
+            isShow = false;
+            layoutPassword.setPasswordVisibilityToggleEnabled(true);
+        }
+        edtPassword.setSelection(edtPassword.length());
     }
 
     private void addEvents() {
         btnRegister.setOnClickListener(this);
         tvBirthday.setOnClickListener(this);
+        layoutPassword.setOnClickListener(this);
     }
 
     private void setUpToolbar(){
@@ -142,6 +161,10 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.tv_birthday_employee:
                 setBirthday();
+                break;
+
+            case R.id.lo_password:
+                showPass();
                 break;
         }
     }

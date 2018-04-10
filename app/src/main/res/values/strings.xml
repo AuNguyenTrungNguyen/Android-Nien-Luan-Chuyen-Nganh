@@ -18,6 +18,7 @@
     <string name="job_end">End time</string>
     <string name="job_list">List Employee</string>
     <string name="job_add">Add job</string>
+    <string name="office_default">Manager</string>
 
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
@@ -36,6 +37,8 @@
     <string name="title_activity_add_job">Add Job</string>
     <string name="title_activity_add_employee">Add Employee</string>
     <string name="title_activity_employee">Employee</string>
+    <string name="title_activity_my_job">My Job</string>
+    <string name="title_activity_statistic">Statistic</string>
 
     <!--Message and Notification-->
     <string name="message_admin">Administrator</string>
@@ -46,5 +49,12 @@
 
     <!--Dialog-->
     <string name="dialog">Loading...</string>
+
+    <!--Toast-->
+    <string name="toast_sign_up_success">Sign Up Success!!!</string>
+    <string name="toast_domain_exist">Domain Exist!!!</string>
+    <string name="toast_data_fail">Data Is Fail!!!</string>
+    <string name="toast_username_or_password_empty">Username Or Password Empty</string>
+    <string name="toast_account_incorrect">Account Incorrect</string>
 
 </resources>
