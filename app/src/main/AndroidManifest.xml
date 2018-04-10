@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="aunguyen.quanlycongviec">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -61,13 +62,20 @@
             android:name=".Activity.SelectEmployeeToJobActivity"
             android:label="@string/title_activity_employee"
             android:parentActivityName=".Activity.AddJobActivity" />
-        <activity android:name=".Activity.MyJobActivity"
+        <activity
+            android:name=".Activity.MyJobActivity"
             android:label="@string/title_activity_my_job"
-            android:parentActivityName=".Activity.MainActivity"/>
-
-        <activity android:name=".Activity.StatisticActivity"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.StatisticActivity"
             android:label="@string/title_activity_statistic"
             android:parentActivityName=".Activity.MainActivity" />
+
+        <activity android:name=".Activity.DetailAccountActivity"
+            android:label="@string/title_activity_detail_account"
+            android:parentActivityName=".Activity.ManageMyEmployeesActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
     </application>
 
 </manifest>

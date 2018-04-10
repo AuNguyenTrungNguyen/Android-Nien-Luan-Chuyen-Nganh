@@ -1,6 +1,7 @@
 package aunguyen.quanlycongviec.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import aunguyen.quanlycongviec.Activity.DetailAccountActivity;
 import aunguyen.quanlycongviec.Object.EmployeeObject;
 import aunguyen.quanlycongviec.R;
 
@@ -43,7 +45,7 @@ public class AddEmployeeAdapter extends RecyclerView.Adapter<AddEmployeeAdapter.
     @Override
     public void onBindViewHolder(@NonNull EmployeeViewHolder holder, final int position) {
 
-        EmployeeObject employeeObject = employeeObjectList.get(position);
+        final EmployeeObject employeeObject = employeeObjectList.get(position);
 
         holder.tvNameEmployee.setText(employeeObject.getNameEmployee());
 
@@ -51,6 +53,15 @@ public class AddEmployeeAdapter extends RecyclerView.Adapter<AddEmployeeAdapter.
                 .load(employeeObject.getUrlAvatar())
                 .into(holder.imgAvatar);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailAccountActivity.class);
+                String id = employeeObject.getIdEmployee();
+                intent.putExtra("ID", id);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

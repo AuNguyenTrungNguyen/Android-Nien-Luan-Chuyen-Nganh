@@ -31,6 +31,7 @@ import aunguyen.quanlycongviec.Adapter.EmployeeSelectedAdapter;
 import aunguyen.quanlycongviec.Object.Constant;
 import aunguyen.quanlycongviec.Object.EmployeeObject;
 import aunguyen.quanlycongviec.Object.JobObject;
+import aunguyen.quanlycongviec.Object.StatusJob;
 import aunguyen.quanlycongviec.R;
 
 public class AddJobActivity extends AppCompatActivity implements View.OnClickListener {
@@ -162,10 +163,13 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
                 SharedPreferences preferences = getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
                 String idManage = preferences.getString(Constant.PREFERENCE_KEY_ID, "");
 
-                List<String> listIdMember = new ArrayList();
+                List<StatusJob> listStatus = new ArrayList();
 
                 for (EmployeeObject object : listEmployees) {
-                    listIdMember.add(object.getIdEmployee());
+                    StatusJob statusJob = new StatusJob();
+                    statusJob.setIdMember(object.getIdEmployee());
+                    statusJob.setStatus(Constant.NOT_RECEIVED);
+                    listStatus.add(statusJob);
                 }
 
                 JobObject jobObject = new JobObject();
@@ -176,7 +180,7 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
                 jobObject.setStartDateJob(timeStart);
                 jobObject.setEndDateJob(timeEnd);
                 jobObject.setStatusJob(Constant.NOT_RECEIVED);
-                jobObject.setListIdMember(listIdMember);
+                jobObject.setListIdMember(listStatus);
 
                 dialog.show();
 

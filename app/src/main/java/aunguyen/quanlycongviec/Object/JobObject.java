@@ -14,7 +14,7 @@ public class JobObject {
     private String startDateJob;
     private String endDateJob;
     private String statusJob;
-    private List<String> listIdMember;
+    private List<StatusJob> listIdMember;
 
     public JobObject() {
     }
@@ -26,7 +26,7 @@ public class JobObject {
                      String startDateJob,
                      String endDateJob,
                      String statusJob,
-                     List<String> listIdMember) {
+                     List<StatusJob> listIdMember) {
         this.idJob = idJob;
         this.idManageJob = idManageJob;
         this.titleJob = titleJob;
@@ -93,11 +93,11 @@ public class JobObject {
         this.statusJob = statusJob;
     }
 
-    public List<String> getListIdMember() {
+    public List<StatusJob> getListIdMember() {
         return listIdMember;
     }
 
-    public void setListIdMember(List<String> listIdMember) {
+    public void setListIdMember(List<StatusJob> listIdMember) {
         this.listIdMember = listIdMember;
     }
 }

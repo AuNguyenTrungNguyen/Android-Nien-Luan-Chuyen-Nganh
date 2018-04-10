@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
@@ -65,7 +64,6 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
         SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
         if (id != null) {
-
             DatabaseReference myRef = database.getReference(Constant.NODE_NHAN_VIEN);
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -80,7 +78,6 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
                         }
                     }
                     progressDialog.dismiss();
-                    Log.i("ANTN", ""+listEmployee.size());
                 }
 
                 @Override
@@ -88,6 +85,8 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
                     progressDialog.dismiss();
                 }
             });
+        }else{
+            progressDialog.dismiss();
         }
     }
 
@@ -109,9 +108,6 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
 
     private void addEvents() {
         btnAddEmployee.setOnClickListener(this);
-
-        //rvJob.setOnClickListener();
-
     }
 
     private void setUpToolbar() {

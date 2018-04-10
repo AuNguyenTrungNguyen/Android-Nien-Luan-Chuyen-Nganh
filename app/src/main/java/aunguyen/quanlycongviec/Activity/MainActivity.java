@@ -61,12 +61,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         addEvents();
 
-        loadDataFromFireBase();
-
     }
 
     private void loadDataFromFireBase() {
         progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(getResources().getString(R.string.dialog));
         progressDialog.show();
         SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
@@ -91,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 @Override
                 public void onCancelled(DatabaseError error) {
+                    progressDialog.dismiss();
                     Log.i("ABC", "Failed to read value.", error.toException());
                 }
             });
@@ -304,6 +304,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intentAddJob);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listJobs.clear();
+        loadDataFromFireBase();
+    }
 
     @Override
     public void onClick(View view) {

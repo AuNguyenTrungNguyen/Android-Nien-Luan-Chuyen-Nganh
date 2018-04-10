@@ -1,6 +1,7 @@
 package aunguyen.quanlycongviec.Activity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -170,6 +171,12 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void signUp() {
+
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(getResources().getString(R.string.dialog));
+        progressDialog.show();
+
         SharedPreferences preferences = AddEmployeeActivity.this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
 
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
@@ -222,20 +229,24 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
                                 employeeObject.setNameEmployee(fullName);
 
                                 if (rdbMale.isChecked()){
-                                    employeeObject.setGenderEmployee("Nam");
+                                    employeeObject.setGenderEmployee(getResources().getString(R.string.male));
                                     employeeObject.setUrlAvatar(Constant.URL_MALE);
                                 }else{
-                                    employeeObject.setGenderEmployee("Nu");
+                                    employeeObject.setGenderEmployee(getResources().getString(R.string.female));
                                     employeeObject.setUrlAvatar(Constant.URL_FEMALE);
                                 }
 
-                                employeeObject.setBirthdayEmployee("01/01/1990");
+                                employeeObject.setBirthdayEmployee("01/01/1995");
 
                                 referenceEmployee.child(user.getUid()).setValue(employeeObject);
-                                Toast.makeText(AddEmployeeActivity.this, "Dang ky thanh cong!!!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_sign_up_success), Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
                             }
                         }
                     });
+        }else{
+            Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_data_fail), Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
     }
 }
