@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Cài đặt">
+        <menu>
+
+            <item
+                android:id="@+id/mn_statistic"
+                android:title="Thống kê"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/mn_sign_out"
+                android:title="Đăng xuất"
+                app:showAsAction="never" />
+
+        </menu>
+    </item>
+
+    <item android:title="Về chúng tôi">
+        <menu>
+            <item
+                android:id="@+id/mn_information"
+                android:title="Thông tin ứng dụng "
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/mn_about_me"
+                android:title="Liên hệ với nhà phát triển"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+</menu>

@@ -57,9 +57,12 @@
             android:name=".Activity.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:parentActivityName=".Activity.SignInActivity" />
-        <activity android:name=".Activity.SelectEmployeeToJobActivity"
+        <activity
+            android:name=".Activity.SelectEmployeeToJobActivity"
             android:label="@string/title_activity_employee"
-            android:parentActivityName=".Activity.AddJobActivity"/>
+            android:parentActivityName=".Activity.AddJobActivity" />
+        <activity android:name=".Activity.MyJobActivity" />
+        <activity android:name=".Activity.StatisticActivity"></activity>
     </application>
 
 </manifest>

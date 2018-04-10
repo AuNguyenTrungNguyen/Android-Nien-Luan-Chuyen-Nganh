@@ -30,6 +30,7 @@ import java.util.List;
 
 import aunguyen.quanlycongviec.Adapter.JobAdapter;
 import aunguyen.quanlycongviec.Object.Constant;
+import aunguyen.quanlycongviec.Object.EmployeeObject;
 import aunguyen.quanlycongviec.Object.JobObject;
 import aunguyen.quanlycongviec.R;
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         addControls();
 
-        init();
+        setupNavigation();
 
         addEvents();
 
@@ -100,7 +101,133 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //Thêm những sự kiện click ...
+    private void setupNavigation() {
+        //Setup drawer
+        drawerLayout = findViewById(R.id.drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.syncState();
+        toolbarMain.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        navigationView = findViewById(R.id.navigation);
+
+        SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
+        String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
+
+        if (id != null) {
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_NHAN_VIEN).child(id);
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    EmployeeObject employeeObject = dataSnapshot.getValue(EmployeeObject.class);
+
+                    if (employeeObject != null){
+                        String accountType = employeeObject.getAccountType();
+
+                        if (accountType.equals("0")){
+                            navigationAdmin();
+                        }else{
+                            navigationEmployee();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+
+                }
+            });
+        }
+
+    }
+
+    private void navigationAdmin(){
+
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.item_navigation_admin);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.mn_my_account:
+                        manageMyAccount();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.mn_my_employees:
+                        manageEmployeesAccount();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.mn_my_job:
+                        myJob();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.mn_sign_out:
+                        signOut();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.mn_information:
+                        information();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.mn_about_me:
+                        aboutMe();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    private void navigationEmployee(){
+
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.item_navigation_employee);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                switch (item.getItemId()) {
+
+                    case R.id.mn_statistic:
+                        statistic();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.mn_sign_out:
+                        signOut();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.mn_information:
+                        information();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.mn_about_me:
+                        aboutMe();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                }
+                return true;
+            }
+        });
+
+    }
+
     private void addEvents() {
         btnAddJod.setOnClickListener(this);
 
@@ -108,7 +235,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    //Thêm mặc định
     private void addControls() {
         btnAddJod = findViewById(R.id.btn_add_job);
 
@@ -139,6 +265,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+    private void myJob() {
+        Intent intent = new Intent(this, MyJobActivity.class);
+        startActivity(intent);
+    }
+
+    private void statistic() {
+        Intent intent = new Intent(this, MyJobActivity.class);
+        startActivity(intent);
+    }
+
     private void information() {
         Intent intent = new Intent(this, InformationActivity.class);
         startActivity(intent);
@@ -163,67 +299,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
-    private void init() {
-        //Setup drawer
-        drawerLayout = findViewById(R.id.drawer);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        toggle.syncState();
-        toolbarMain.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-
-        //Setup navigation
-        navigationView = findViewById(R.id.navigation);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.mn_my_account:
-                        manageMyAccount();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
-
-                    case R.id.mn_my_employees:
-                        manageEmployeesAccount();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
-
-                    case R.id.mn_sign_out:
-                        signOut();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
-
-                    case R.id.mn_information:
-                        information();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
-
-                    case R.id.mn_about_me:
-                        aboutMe();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
-                }
-                return true;
-            }
-        });
-
+    private void addJob() {
+        Intent intentAddJob = new Intent(this, AddJobActivity.class);
+        startActivity(intentAddJob);
     }
+
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_add_job:
                 addJob();
                 break;
         }
     }
 
-    private void addJob() {
-        Intent intentAddJob = new Intent(this, AddJobActivity.class);
-        startActivity(intentAddJob);
-    }
 }

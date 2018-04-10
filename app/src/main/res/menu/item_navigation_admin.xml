@@ -6,12 +6,17 @@
         <menu>
             <item
                 android:id="@+id/mn_my_account"
-                android:title="Quản lý tài khoản cá nhân "
+                android:title="Quản lý tài khoản cá nhân"
                 app:showAsAction="never" />
 
             <item
                 android:id="@+id/mn_my_employees"
                 android:title="Quản lý nhân viên"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/mn_my_job"
+                android:title="Công việc của tui"
                 app:showAsAction="never" />
 
             <item
