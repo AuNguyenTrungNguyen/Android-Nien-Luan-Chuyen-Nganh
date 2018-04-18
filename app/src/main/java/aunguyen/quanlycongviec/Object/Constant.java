@@ -35,4 +35,10 @@ public class Constant {
     public static String RECEIVED = "Đã Nhận";
     public static String NOT_RECEIVED = "Chưa Nhận";
 
+    public static String COMPLETE = "Hoàn Thành";//0
+    public static String STILL_DEADLINE = "Còn Hạn"; //1
+    public static String EARLY_DEADLINE = "Sắp Hết Hạn"; //2
+    public static String DEADLINE = "Hết Hạn"; //3
+    public static String PAST_DEADLINE = "Quá Hạn"; //4
+
 }

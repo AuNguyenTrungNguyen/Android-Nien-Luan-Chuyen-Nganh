@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.vipulasri.timelineview.TimelineView;
+
 import java.util.List;
 
+import aunguyen.quanlycongviec.Object.Constant;
 import aunguyen.quanlycongviec.Object.JobObject;
 import aunguyen.quanlycongviec.R;
 
@@ -19,7 +22,7 @@ import aunguyen.quanlycongviec.R;
  * Created by Sang on 17/03/2018.
  */
 
-public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
+public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
 
     private Context context;
     private List<JobObject> listJobs;
@@ -42,10 +45,36 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
 
         final JobObject jobObject = listJobs.get(position);
 
-        if (jobObject != null){
+        if (jobObject != null) {
             holder.tvNameJob.setText(jobObject.getTitleJob());
             holder.tvState.setText(jobObject.getStatusJob());
             holder.tvAmount.setText("Số lượng: " + jobObject.getListIdMember().size());
+
+            String status[] = jobObject.getStatusJob().split("/");
+
+            if (status[0].equals(Constant.RECEIVED)) {
+                holder.timeMarker.setMarkerColor(context.getResources().getColor(R.color.jobReceive));
+            } else {
+                holder.timeMarker.setMarkerColor(context.getResources().getColor(R.color.jobNotReceive));
+            }
+
+            if (status[1].equals(Constant.COMPLETE)) {
+                holder.timeMarker.setStartLine(context.getResources().getColor(R.color.jobComplete), 0);
+                holder.timeMarker.setEndLine(context.getResources().getColor(R.color.jobComplete), 0);
+            } else if (status[1].equals(Constant.STILL_DEADLINE)) {
+                holder.timeMarker.setStartLine(context.getResources().getColor(R.color.jobStill), 0);
+                holder.timeMarker.setEndLine(context.getResources().getColor(R.color.jobStill), 0);
+            }else if (status[1].equals(Constant.EARLY_DEADLINE)) {
+                holder.timeMarker.setStartLine(context.getResources().getColor(R.color.jobEarly), 0);
+                holder.timeMarker.setEndLine(context.getResources().getColor(R.color.jobEarly), 0);
+            }else if (status[1].equals(Constant.DEADLINE)) {
+                holder.timeMarker.setStartLine(context.getResources().getColor(R.color.jobDeadline), 0);
+                holder.timeMarker.setEndLine(context.getResources().getColor(R.color.jobDeadline), 0);
+            }else if (status[1].equals(Constant.PAST_DEADLINE)) {
+                holder.timeMarker.setStartLine(context.getResources().getColor(R.color.jobPast), 0);
+                holder.timeMarker.setEndLine(context.getResources().getColor(R.color.jobPast), 0);
+            }
+
             holder.cvJob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -59,18 +88,22 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
     public int getItemCount() {
         return listJobs.size();
     }
-    public class JobViewHolder extends RecyclerView.ViewHolder{
+
+    public class JobViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvNameJob;
         private TextView tvState;
         private TextView tvAmount;
         private CardView cvJob;
-        public JobViewHolder (View itemView){
+        private TimelineView timeMarker;
+
+        public JobViewHolder(View itemView) {
             super(itemView);
             tvNameJob = itemView.findViewById(R.id.tv_name_job);
             tvState = itemView.findViewById(R.id.tv_status);
             tvAmount = itemView.findViewById(R.id.tv_amount);
             cvJob = itemView.findViewById(R.id.cv_job);
+            timeMarker = itemView.findViewById(R.id.time_marker);
         }
     }
 }

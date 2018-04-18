@@ -159,6 +159,7 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
                 DatabaseReference reference = database.getReference().child(Constant.NODE_CONG_VIEC);
 
                 String idJob = reference.push().getKey();
+                StringBuilder status = new StringBuilder(Constant.NOT_RECEIVED);
 
                 SharedPreferences preferences = getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
                 String idManage = preferences.getString(Constant.PREFERENCE_KEY_ID, "");
@@ -168,7 +169,30 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
                 for (EmployeeObject object : listEmployees) {
                     StatusJob statusJob = new StatusJob();
                     statusJob.setIdMember(object.getIdEmployee());
-                    statusJob.setStatus(Constant.NOT_RECEIVED);
+
+                    switch (setStatusJob(timeStart, timeEnd)){
+                        case 1:
+                            status.delete(0, status.length());
+                            status.append(Constant.NOT_RECEIVED);
+                            status.append("/").append(Constant.STILL_DEADLINE);
+                            break;
+                        case 2:
+                            status.delete(0, status.length());
+                            status.append(Constant.NOT_RECEIVED);
+                            status.append("/").append(Constant.EARLY_DEADLINE);
+                            break;
+                        case 3:
+                            status.delete(0, status.length());
+                            status.append(Constant.NOT_RECEIVED);
+                            status.append("/").append(Constant.DEADLINE);
+                            break;
+                        case 4:
+                            status.delete(0, status.length());
+                            status.append(Constant.NOT_RECEIVED);
+                            status.append("/").append(Constant.PAST_DEADLINE);
+                            break;
+                    }
+                    statusJob.setStatus(String.valueOf(status));
                     listStatus.add(statusJob);
                 }
 
@@ -179,7 +203,7 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
                 jobObject.setDescriptionJob(description);
                 jobObject.setStartDateJob(timeStart);
                 jobObject.setEndDateJob(timeEnd);
-                jobObject.setStatusJob(Constant.NOT_RECEIVED);
+                jobObject.setStatusJob(String.valueOf(status));
                 jobObject.setListIdMember(listStatus);
 
                 dialog.show();
@@ -254,5 +278,34 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
 
 
         return (yearEnd >= yearStart && mouthEnd >= mouthStart && dayEnd >= dayStart);
+    }
+
+    private int setStatusJob(String start, String end) {
+        String splitStart[] = start.split("/");
+        int dayStart = Integer.parseInt(splitStart[0]);
+        int mouthStart = Integer.parseInt(splitStart[1]) - 1;
+        int yearStart = Integer.parseInt(splitStart[2]);
+
+        String splitEnd[] = end.split("/");
+        int dayEnd = Integer.parseInt(splitEnd[0]);
+        int mouthEnd = Integer.parseInt(splitEnd[1]) - 1;
+        int yearEnd = Integer.parseInt(splitEnd[2]);
+
+        if (yearEnd - yearStart > 0) {
+            return 1;
+        }else{
+            if(mouthEnd - mouthStart > 0){
+                return 1;
+            }else{
+                if(dayEnd - dayStart > 3){
+                    return 1;
+                }else if(dayEnd - dayStart <= 3 && dayEnd - dayStart > 0){
+                    return 2;
+                }else if(dayEnd - dayStart == 0){
+                    return 3;
+                }
+            }
+        }
+        return  4;
     }
 }

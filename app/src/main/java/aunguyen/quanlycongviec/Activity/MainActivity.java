@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void loadDataFromFireBase() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle(getResources().getString(R.string.dialog));
+        progressDialog.setCancelable(false);
         progressDialog.show();
         SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-
+                    listJobs.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         JobObject jobObject = snapshot.getValue(JobObject.class);
 
