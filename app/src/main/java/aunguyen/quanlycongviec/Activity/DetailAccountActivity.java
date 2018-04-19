@@ -3,6 +3,7 @@ package aunguyen.quanlycongviec.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -155,6 +156,10 @@ public class DetailAccountActivity extends AppCompatActivity implements View.OnC
                 Intent intent = new Intent(DetailAccountActivity.this, StatisticActivity.class);
                 String id = getIntent().getStringExtra("ID");
                 intent.putExtra("ID",id);
+                SharedPreferences preferences = getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString(Constant.KEY_ID_EMPLOYEE_STATISTIC, id);
+                editor.apply();
                 startActivity(intent);
         }
     }

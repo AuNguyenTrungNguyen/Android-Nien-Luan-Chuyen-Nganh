@@ -77,12 +77,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     listJobs.clear();
+                    jobAdapter.notifyDataSetChanged();
+
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         JobObject jobObject = snapshot.getValue(JobObject.class);
 
                         if (id.equals(jobObject.getIdManageJob())) {
                             listJobs.add(jobObject);
-                            jobAdapter.notifyDataSetChanged();
+
+
                         }
                     }
 
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onCancelled(DatabaseError error) {
                     progressDialog.dismiss();
-                    Log.i("ABC", "Failed to read value.", error.toException());
+                    Log.i("ANTN", "onCancelled() - Main", error.toException());
                 }
             });
 
@@ -308,7 +311,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        listJobs.clear();
         loadDataFromFireBase();
     }
 

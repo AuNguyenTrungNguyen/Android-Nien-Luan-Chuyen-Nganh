@@ -60,8 +60,13 @@
     <string name="toast_username_or_password_empty">Username Or Password Empty</string>
     <string name="toast_account_incorrect">Account Incorrect</string>
 
-
-
     <string name="message_graph_state">State</string>
+    <string name="spannable_total"> Công việc được giao</string>
+    <string name="spannable_receive"> Công việc đã nhận</string>
+    <string name="spannable_not_receive"> Công việc chưa nhận</string>
+
+    <string name="lable_tap_total"> Total</string>
+    <string name="lable_tap_receive"> RECEIVE</string>
+    <string name="lable_tap_not_receive"> NOT RECEIVE </string>
 
 </resources>
