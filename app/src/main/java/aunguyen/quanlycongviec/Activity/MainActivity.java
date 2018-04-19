@@ -1,15 +1,12 @@
 package aunguyen.quanlycongviec.Activity;
 
 
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -51,22 +48,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private JobAdapter jobAdapter;
 
     private ProgressDialog progressDialog;
-    private boolean notification;
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        if(notification){
-            SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
-            final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
+        setUpToolbar();
 
-            if (id != null) {
-                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_CONG_VIEC);
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+        addControls();
 
+        //pushNotification();
+
+        setupNavigation();
+
+        addEvents();
+
+    }
+
+    /*private void pushNotification() {
+        SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
+        final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
+
+        if (id != null) {
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_CONG_VIEC);
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    if(notification){
                         int count = 0;
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -75,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             List<StatusJob> list = jobObject.getListIdMember();
                             String status[] = jobObject.getStatusJob().split("/");
 
-                            for(int i = 0; i < list.size(); i++){
+                            for (int i = 0; i < list.size(); i++) {
                                 if (id.equals(list.get(i).getIdMember())
                                         && status[0].equals(Constant.NOT_RECEIVED)
                                         && !status[1].equals(Constant.PAST_DEADLINE)) {
@@ -88,38 +98,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                             .setContentText("Có công việc chưa nhận: " + jobObject.getTitleJob())
                                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                             .setContentIntent(pendingIntent)
-                                            .setAutoCancel(true);;
+                                            .setAutoCancel(true);
+                                    ;
                                     NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
                                     notificationManager.notify(count++, mBuilder.build());
                                     break;
                                 }
                             }
                         }
+                        notification = false;
                     }
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                    }
-                });
-            }
-            notification = false;
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        setUpToolbar();
-
-        addControls();
-
-        setupNavigation();
-
-        addEvents();
-
-    }
+    }*/
 
     private void loadDataFromFireBase() {
         progressDialog = new ProgressDialog(this);
@@ -130,29 +126,77 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
 
         if (id != null) {
-            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_CONG_VIEC);
-            myRef.addValueEventListener(new ValueEventListener() {
+
+            DatabaseReference myAccount = FirebaseDatabase.getInstance().getReference(Constant.NODE_NHAN_VIEN);
+            myAccount.child(id).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    listJobs.clear();
-                    jobAdapter.notifyDataSetChanged();
+                    EmployeeObject employeeObject = dataSnapshot.getValue(EmployeeObject.class);
+                    if (id.equals(employeeObject.getIdEmployee())){
+                        String accountType = employeeObject.getAccountType();
+                        if (accountType.equals("0")){
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_CONG_VIEC);
+                            myRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    listJobs.clear();
+                                    jobAdapter.notifyDataSetChanged();
 
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        JobObject jobObject = snapshot.getValue(JobObject.class);
+                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                        JobObject jobObject = snapshot.getValue(JobObject.class);
 
-                        if (id.equals(jobObject.getIdManageJob())) {
-                            listJobs.add(jobObject);
+                                        if (id.equals(jobObject.getIdManageJob())) {
+                                            listJobs.add(jobObject);
+                                        }
+                                    }
+                                    progressDialog.dismiss();
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    progressDialog.dismiss();
+                                    Log.i("ANTN", "onCancelled() - Main", error.toException());
+                                }
+                            });
+                        }else{
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_CONG_VIEC);
+                            myRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    listJobs.clear();
+                                    jobAdapter.notifyDataSetChanged();
+
+                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                        JobObject jobObject = snapshot.getValue(JobObject.class);
+                                        List<StatusJob> list = jobObject.getListIdMember();
+
+                                        for (int i = 0; i < list.size(); i++){
+                                            if(id.equals(list.get(i).getIdMember())){
+                                                listJobs.add(jobObject);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    progressDialog.dismiss();
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    progressDialog.dismiss();
+                                    Log.i("ANTN", "onCancelled() - Main", error.toException());
+                                }
+                            });
                         }
                     }
-                    progressDialog.dismiss();
                 }
 
                 @Override
-                public void onCancelled(DatabaseError error) {
-                    progressDialog.dismiss();
-                    Log.i("ANTN", "onCancelled() - Main", error.toException());
+                public void onCancelled(DatabaseError databaseError) {
+
                 }
             });
+
+            jobAdapter.notifyDataSetChanged();
 
         } else {
             progressDialog.dismiss();
@@ -185,12 +229,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     EmployeeObject employeeObject = dataSnapshot.getValue(EmployeeObject.class);
 
-                    if (employeeObject != null){
+                    if (employeeObject != null) {
                         String accountType = employeeObject.getAccountType();
 
-                        if (accountType.equals("0")){
+                        if (accountType.equals("0")) {
                             navigationAdmin();
-                        }else{
+                        } else {
                             navigationEmployee();
                         }
                     }
@@ -205,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void navigationAdmin(){
+    private void navigationAdmin() {
 
         btnAddJod.setVisibility(View.VISIBLE);
 
@@ -248,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void navigationEmployee(){
+    private void navigationEmployee() {
 
         btnAddJod.setVisibility(View.INVISIBLE);
 
@@ -298,8 +342,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         rvJob.setAdapter(jobAdapter);
         rvJob.setLayoutManager(manager);
-
-        notification = true;
     }
 
     private void setUpToolbar() {
@@ -325,7 +367,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void statistic() {
+        SharedPreferences preferences = getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         Intent intent = new Intent(this, StatisticActivity.class);
+        String id = preferences.getString(Constant.PREFERENCE_KEY_ID, "");
+        intent.putExtra("ID",id);
+        editor.putString(Constant.KEY_ID_EMPLOYEE_STATISTIC, id);
+        editor.apply();
         startActivity(intent);
     }
 

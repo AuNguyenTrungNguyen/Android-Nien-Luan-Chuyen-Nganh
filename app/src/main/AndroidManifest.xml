@@ -66,12 +66,21 @@
             android:name=".Activity.StatisticActivity"
             android:label="@string/title_activity_statistic"
             android:parentActivityName=".Activity.MainActivity" />
-
-        <activity android:name=".Activity.DetailAccountActivity"
+        <activity
+            android:name=".Activity.DetailAccountActivity"
             android:label="@string/title_activity_detail_account"
             android:parentActivityName=".Activity.ManageMyEmployeesActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity android:name=".Activity.DetailJobActivity"
+            android:label="@string/title_activity_detail_job"
+            android:parentActivityName=".Activity.MainActivity"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".Activity.DetailJobEmployeeActivity"
+            android:label="@string/title_activity_detail_job"
+            android:parentActivityName=".Activity.MyJobActivity"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

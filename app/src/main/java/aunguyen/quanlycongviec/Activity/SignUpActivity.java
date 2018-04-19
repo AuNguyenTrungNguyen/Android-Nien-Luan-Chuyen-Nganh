@@ -182,6 +182,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         final ProgressDialog progressDialog;
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle(getResources().getString(R.string.dialog));
+        progressDialog.setCancelable(false);
         progressDialog.show();
 
         final boolean[] isFirst = {true};
@@ -268,7 +269,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             editor.apply();
 
                                             startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-
                                         }
                                     }
                                 });

@@ -121,6 +121,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         final ProgressDialog progressDialog;
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle(getResources().getString(R.string.dialog));
+        progressDialog.setCancelable(false);
         progressDialog.show();
 
         String email = edtUsername.getText().toString();

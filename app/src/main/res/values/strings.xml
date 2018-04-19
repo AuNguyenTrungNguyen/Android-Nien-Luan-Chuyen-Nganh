@@ -5,7 +5,7 @@
     <string name="password">Password</string>
     <string name="domain">Domain</string>
     <string name="full_name">Full Name</string>
-    <string name="birth_day">Birthday</string>
+    <string name="birth_day">Click To Set Birthday</string>
     <string name="gender">Gender</string>
     <string name="account_type">Account Type</string>
     <string name="phone">Phone</string>
@@ -41,6 +41,7 @@
     <string name="title_activity_my_job">My Job</string>
     <string name="title_activity_statistic">Statistic</string>
     <string name="title_activity_detail_account">Detail Account</string>
+    <string name="title_activity_detail_job">Detail Job</string>
 
     <!--Message and Notification-->
     <string name="message_admin">Administrator</string>
@@ -48,6 +49,9 @@
     <string name="message_edit_and_save">You not save, are you quit?</string>
     <string name="message_positive_save">Quit</string>
     <string name="message_negative_save">Cancel</string>
+    <string name="message_delete_job">You want delete?</string>
+    <string name="message_positive_delete_job">Quit</string>
+    <string name="message_negative_delete_job">Delete</string>
 
     <!--Dialog-->
     <string name="dialog">Loading...</string>

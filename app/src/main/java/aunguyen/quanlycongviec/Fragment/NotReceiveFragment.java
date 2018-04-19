@@ -2,7 +2,6 @@ package aunguyen.quanlycongviec.Fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -90,9 +89,6 @@ public class NotReceiveFragment extends Fragment {
 
     public void loadData(final String id, final String start, final String end) {
 
-        Log.i("ANTN: ", "Not:" + start);
-        Log.i("ANTN: ", "Not:" + end);
-
         progressDialog = new ProgressDialog(context);
         progressDialog.setTitle(context.getResources().getString(R.string.dialog));
         progressDialog.setCancelable(false);
@@ -119,7 +115,7 @@ public class NotReceiveFragment extends Fragment {
                         for (int i = 0; i < jobObject.getListIdMember().size(); i++) {
                             if (id.equals(jobObject.getListIdMember().get(i).getIdMember())) {
                                 if (testDate(jobObject.getEndDateJob(), start, end)) {
-                                    String statusJob = jobObject.getListIdMember().get(i).getStatus();
+                                    String statusJob = jobObject.getStatusJob();
                                     String test = statusJob.substring(0, statusJob.indexOf("/"));
                                     if (test.equals(Constant.NOT_RECEIVED)) {
                                         countNotReceived += 1;

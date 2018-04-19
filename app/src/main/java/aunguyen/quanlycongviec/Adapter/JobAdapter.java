@@ -1,6 +1,8 @@
 package aunguyen.quanlycongviec.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -8,13 +10,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.vipulasri.timelineview.TimelineView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import aunguyen.quanlycongviec.Activity.DetailJobActivity;
+import aunguyen.quanlycongviec.Activity.DetailJobEmployeeActivity;
+import aunguyen.quanlycongviec.Activity.MainActivity;
 import aunguyen.quanlycongviec.Object.Constant;
+import aunguyen.quanlycongviec.Object.EmployeeObject;
 import aunguyen.quanlycongviec.Object.JobObject;
 import aunguyen.quanlycongviec.R;
 
@@ -44,6 +54,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     public void onBindViewHolder(@NonNull JobViewHolder holder, int position) {
 
         final JobObject jobObject = listJobs.get(position);
+        SharedPreferences preferences = context.getSharedPreferences(Constant.PREFERENCE_NAME, context.MODE_PRIVATE);
+        final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
 
         if (jobObject != null) {
             holder.tvNameJob.setText(jobObject.getTitleJob());
@@ -64,13 +76,13 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             } else if (status[1].equals(Constant.STILL_DEADLINE)) {
                 holder.timeMarker.setStartLine(context.getResources().getColor(R.color.jobStill), 0);
                 holder.timeMarker.setEndLine(context.getResources().getColor(R.color.jobStill), 0);
-            }else if (status[1].equals(Constant.EARLY_DEADLINE)) {
+            } else if (status[1].equals(Constant.EARLY_DEADLINE)) {
                 holder.timeMarker.setStartLine(context.getResources().getColor(R.color.jobEarly), 0);
                 holder.timeMarker.setEndLine(context.getResources().getColor(R.color.jobEarly), 0);
-            }else if (status[1].equals(Constant.DEADLINE)) {
+            } else if (status[1].equals(Constant.DEADLINE)) {
                 holder.timeMarker.setStartLine(context.getResources().getColor(R.color.jobDeadline), 0);
                 holder.timeMarker.setEndLine(context.getResources().getColor(R.color.jobDeadline), 0);
-            }else if (status[1].equals(Constant.PAST_DEADLINE)) {
+            } else if (status[1].equals(Constant.PAST_DEADLINE)) {
                 holder.timeMarker.setStartLine(context.getResources().getColor(R.color.jobPast), 0);
                 holder.timeMarker.setEndLine(context.getResources().getColor(R.color.jobPast), 0);
             }
@@ -78,7 +90,34 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             holder.cvJob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, jobObject.getDescriptionJob(), Toast.LENGTH_SHORT).show();
+
+                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_NHAN_VIEN).
+                            child(id);
+                    myRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Intent intent;
+                            EmployeeObject employeeObject = dataSnapshot.getValue(EmployeeObject.class);
+
+                            if (employeeObject.getAccountType().equals("1")) {
+                                intent = new Intent(context, DetailJobEmployeeActivity.class);
+                            } else {
+                                if(context.getClass().getSimpleName().equals(MainActivity.class.getSimpleName())){
+                                    intent = new Intent(context, DetailJobActivity.class);
+                                }else{
+                                    intent = new Intent(context, DetailJobEmployeeActivity.class);
+                                }
+                            }
+
+
+                            intent.putExtra("IDJob", jobObject.getIdJob());
+                            context.startActivity(intent);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                        }
+                    });
                 }
             });
         }

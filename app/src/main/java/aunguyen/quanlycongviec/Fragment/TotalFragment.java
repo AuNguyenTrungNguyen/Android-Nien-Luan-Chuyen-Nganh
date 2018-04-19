@@ -89,9 +89,6 @@ public class TotalFragment extends Fragment {
 
     private void loadData(final String id, final String start, final String end) {
 
-        Log.i("ANTN: ", "Not:" + start);
-        Log.i("ANTN: ", "Not:" + end);
-
         progressDialog = new ProgressDialog(context);
         progressDialog.setTitle(context.getResources().getString(R.string.dialog));
         progressDialog.setCancelable(false);
@@ -117,9 +114,9 @@ public class TotalFragment extends Fragment {
                             if (id.equals(jobObject.getListIdMember().get(i).getIdMember())) {
                                 if (testDate(jobObject.getEndDateJob(), start, end)) {
                                     count += 1;
-                                    String statusJob = jobObject.getListIdMember().get(i).getStatus();
+                                    String statusJob = jobObject.getStatusJob();
                                     String status = statusJob.substring(0, statusJob.indexOf("/"));
-                                    if (status.equals("Chưa Nhận")) {
+                                    if (status.equals(Constant.NOT_RECEIVED)) {
                                         countUnReceived += 1;
                                     } else {
                                         countReceived += 1;

@@ -43,7 +43,11 @@ public class MyJobActivity extends AppCompatActivity {
         addControls();
 
         addEvents();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         loadDataFromFireBase();
     }
 
@@ -80,11 +84,14 @@ public class MyJobActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
+                    listJobs.clear();
+                    jobAdapter.notifyDataSetChanged();
+
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         JobObject jobObject = snapshot.getValue(JobObject.class);
 
                         for(int i = 0; i < jobObject.getListIdMember().size(); i++){
-                            if (id.equals(jobObject.getListIdMember().get(i))) {
+                            if (id.equals(jobObject.getListIdMember().get(i).getIdMember())) {
                                 listJobs.add(jobObject);
                                 jobAdapter.notifyDataSetChanged();
                                 break;

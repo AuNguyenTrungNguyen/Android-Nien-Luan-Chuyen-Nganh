@@ -14,6 +14,7 @@
         android:layout_height="wrap_content" />
 
     <ScrollView
+        android:background="@drawable/background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -28,6 +29,9 @@
                 android:layout_margin="16dp">
 
                 <EditText
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textStyle="bold"
                     android:id="@+id/edt_full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -44,6 +48,9 @@
                 android:layout_marginBottom="16dp">
 
                 <EditText
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textStyle="bold"
                     android:id="@+id/edt_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,6 +68,9 @@
                 app:passwordToggleEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textStyle="bold"
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -77,6 +87,9 @@
                 android:layout_marginBottom="16dp">
 
                 <EditText
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textStyle="bold"
                     android:id="@+id/edt_domain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,6 +99,8 @@
 
 
             <TextView
+                android:textColor="@color/red"
+                android:textStyle="bold"
                 android:id="@+id/tv_birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,6 +112,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -113,6 +129,7 @@
                 android:weightSum="2">
 
                 <RadioButton
+                    android:textStyle="bold"
                     android:id="@+id/rdb_male"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -120,6 +137,7 @@
                     android:text="@string/male" />
 
                 <RadioButton
+                    android:textStyle="bold"
                     android:id="@+id/rdb_female"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -136,6 +154,9 @@
                 android:layout_marginRight="16dp">
 
                 <EditText
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textStyle="bold"
                     android:id="@+id/edt_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -151,6 +172,9 @@
                 android:layout_marginRight="16dp">
 
                 <EditText
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textStyle="bold"
                     android:id="@+id/edt_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,11 +183,15 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_button"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:id="@+id/btn_sign_up"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/sign_up" />

@@ -89,9 +89,6 @@ public class ReceiveFragment extends Fragment {
 
     public void loadData(final String id, final String start, final String end) {
 
-        Log.i("ANTN: ", "Re:" + start);
-        Log.i("ANTN: ", "Re:" + end);
-
         progressDialog = new ProgressDialog(context);
         progressDialog.setTitle(context.getResources().getString(R.string.dialog));
         progressDialog.setCancelable(false);
@@ -119,7 +116,7 @@ public class ReceiveFragment extends Fragment {
                         for (int i = 0; i < jobObject.getListIdMember().size(); i++) {
                             if (id.equals(jobObject.getListIdMember().get(i).getIdMember())) {
                                 if (testDate(jobObject.getEndDateJob(), start, end)) {
-                                    String statusJob = jobObject.getListIdMember().get(i).getStatus();
+                                    String statusJob = jobObject.getStatusJob();
                                     String test = statusJob.substring(0, statusJob.indexOf("/"));
                                     if (test.equals(Constant.RECEIVED)) {
                                         countReceived += 1;
@@ -170,7 +167,7 @@ public class ReceiveFragment extends Fragment {
     //Graph
     private SpannableString generateCenterSpannableText(int sumJob) {
 
-        SpannableString s = new SpannableString(sumJob + " " + getString(R.string.spannable_receive));
+        SpannableString s = new SpannableString(sumJob + " " + context.getResources().getString(R.string.spannable_receive));
         s.setSpan(new RelativeSizeSpan(1f), 0, s.length(), 0);
         s.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorPrimary)), 0, s.length(), 0);
 

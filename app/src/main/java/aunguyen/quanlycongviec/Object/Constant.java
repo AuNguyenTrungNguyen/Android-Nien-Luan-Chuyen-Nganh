@@ -28,7 +28,7 @@ public class Constant {
     public static final int REQUEST_CODE = 999;
     public static final int RESULT_CODE = 111;
 
-    //status of jofinal b
+    //status of job
     public static final String RECEIVED = "Đã Nhận";
     public static final String NOT_RECEIVED = "Chưa Nhận";
 
@@ -38,13 +38,17 @@ public class Constant {
     public static final String DEADLINE = "Hết Hạn"; //3
     public static final String PAST_DEADLINE = "Quá Hạn"; //4
 
-    //statisticfinal
+    //statistic
     public static final String KEY_ID_EMPLOYEE_STATISTIC = "idEmployee";
     public static final int TYPE_TOTAL = 0;
     public static final int TYPE_STATUS = 1;
     public static final String KEY_ID_STATISTIC = "idStatistic";
     public static final String KEY_START_STATISTIC = "start";
     public static final String KEY_END_STATISTIC = "end";
+
+    //detail joc
+    public static final String KEY_TITLE_JOB = "titleJob";
+    public static final String KEY_DESCRIPTION_JOB = "descriptionJob";
 
 
 }
