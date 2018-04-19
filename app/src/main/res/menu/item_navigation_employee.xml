@@ -24,11 +24,6 @@
                 android:id="@+id/mn_information"
                 android:title="Thông tin ứng dụng "
                 app:showAsAction="never" />
-
-            <item
-                android:id="@+id/mn_about_me"
-                android:title="Liên hệ với nhà phát triển"
-                app:showAsAction="never" />
         </menu>
     </item>
 

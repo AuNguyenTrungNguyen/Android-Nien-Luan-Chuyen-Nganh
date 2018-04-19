@@ -1,12 +1,15 @@
 package aunguyen.quanlycongviec.Activity;
 
 
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -32,6 +35,7 @@ import aunguyen.quanlycongviec.Adapter.JobAdapter;
 import aunguyen.quanlycongviec.Object.Constant;
 import aunguyen.quanlycongviec.Object.EmployeeObject;
 import aunguyen.quanlycongviec.Object.JobObject;
+import aunguyen.quanlycongviec.Object.StatusJob;
 import aunguyen.quanlycongviec.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -47,6 +51,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private JobAdapter jobAdapter;
 
     private ProgressDialog progressDialog;
+    private boolean notification;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(notification){
+            SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
+            final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
+
+            if (id != null) {
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_CONG_VIEC);
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        int count = 0;
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            JobObject jobObject = snapshot.getValue(JobObject.class);
+
+                            List<StatusJob> list = jobObject.getListIdMember();
+                            String status[] = jobObject.getStatusJob().split("/");
+
+                            for(int i = 0; i < list.size(); i++){
+                                if (id.equals(list.get(i).getIdMember())
+                                        && status[0].equals(Constant.NOT_RECEIVED)
+                                        && !status[1].equals(Constant.PAST_DEADLINE)) {
+                                    Intent intent = new Intent(MainActivity.this, InformationActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
+                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
+                                            .setSmallIcon(R.drawable.ic_mail)
+                                            .setContentTitle("Thông báo")
+                                            .setContentText("Có công việc chưa nhận: " + jobObject.getTitleJob())
+                                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                            .setContentIntent(pendingIntent)
+                                            .setAutoCancel(true);;
+                                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
+                                    notificationManager.notify(count++, mBuilder.build());
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                    }
+                });
+            }
+            notification = false;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +142,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if (id.equals(jobObject.getIdManageJob())) {
                             listJobs.add(jobObject);
-
-
                         }
                     }
-
                     progressDialog.dismiss();
                 }
 
@@ -152,6 +207,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void navigationAdmin(){
 
+        btnAddJod.setVisibility(View.VISIBLE);
+
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.item_navigation_admin);
 
@@ -185,10 +242,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
-                    case R.id.mn_about_me:
-                        aboutMe();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
                 }
                 return true;
             }
@@ -196,6 +249,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void navigationEmployee(){
+
+        btnAddJod.setVisibility(View.INVISIBLE);
 
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.item_navigation_employee);
@@ -221,10 +276,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
-                    case R.id.mn_about_me:
-                        aboutMe();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
                 }
                 return true;
             }
@@ -234,9 +285,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void addEvents() {
         btnAddJod.setOnClickListener(this);
-
-        //rvJob.setOnClickListener();
-
     }
 
     private void addControls() {
@@ -250,6 +298,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         rvJob.setAdapter(jobAdapter);
         rvJob.setLayoutManager(manager);
+
+        notification = true;
     }
 
     private void setUpToolbar() {
@@ -281,11 +331,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void information() {
         Intent intent = new Intent(this, InformationActivity.class);
-        startActivity(intent);
-    }
-
-    private void aboutMe() {
-        Intent intent = new Intent(this, AboutMeActivity.class);
         startActivity(intent);
     }
 

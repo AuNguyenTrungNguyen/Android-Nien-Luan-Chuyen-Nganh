@@ -43,10 +43,6 @@
             android:label="@string/title_activity_information"
             android:parentActivityName=".Activity.MainActivity" />
         <activity
-            android:name=".Activity.AboutMeActivity"
-            android:label="@string/title_activity_about_me"
-            android:parentActivityName=".Activity.MainActivity" />
-        <activity
             android:name=".Activity.AddJobActivity"
             android:label="@string/title_activity_add_job"
             android:parentActivityName=".Activity.MainActivity" />

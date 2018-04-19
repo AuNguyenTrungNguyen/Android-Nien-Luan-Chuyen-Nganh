@@ -24,7 +24,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/common_google_signin_btn_icon_light"/>
+                android:src="@mipmap/ic_launcher"/>
             <TextView
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
@@ -33,8 +33,9 @@
                 android:text="JOB MANAGEMENT"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="21sp"/>
+                android:textSize="32sp"/>
         </LinearLayout>
+
         <android.support.v7.widget.CardView
             app:cardElevation="10dp"
             app:cardCornerRadius="25dp"
@@ -56,84 +57,127 @@
                     android:text="VERSION"
                     android:textColor="#09c6df"
                     android:textStyle="bold"
-                    android:textSize="21sp"
-                    />
+                    android:textSize="24sp"/>
+
                 <TextView
                     android:id="@+id/tv_version_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2.0"
                     android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:paddingTop="10dp"
+                    android:textSize="24sp"
+                    android:paddingTop="8dp"
                     android:textColor="@color/startBlue"/>
-
 
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
+
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:layout_marginTop="0dp">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:paddingLeft="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_menu_slideshow"/>
-            <TextView
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="Wiliam@gmail.com"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            android:paddingLeft="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_menu_slideshow"/>
-            <TextView
-                android:textStyle="bold"
 
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="+266 225 225"/>
-        </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="25dp"
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
+            android:paddingLeft="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_menu_slideshow"/>
-            <TextView
-                android:textStyle="bold"
+                android:src="@drawable/ic_mail"/>
 
+            <TextView
+                android:textSize="16sp"
+                android:textColor="@color/startBlue"
+                android:textStyle="bold"
+                android:id="@+id/tv_email"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="Add to group"/>
+                android:text="nienluanchuyennganh@gmail.com"/>
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:paddingLeft="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_call"/>
+
+            <LinearLayout
+                android:layout_gravity="center|left"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/startBlue"
+                    android:id="@+id/tv_phone_sang"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text="0949593457"/>
+
+                <TextView
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/startBlue"
+                    android:id="@+id/tv_phone_nguyen"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text="01642724966"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:paddingLeft="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_facebook"/>
+
+            <TextView
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/startBlue"
+                android:id="@+id/tv_faceBook"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="Job Management"/>
+
+        </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>

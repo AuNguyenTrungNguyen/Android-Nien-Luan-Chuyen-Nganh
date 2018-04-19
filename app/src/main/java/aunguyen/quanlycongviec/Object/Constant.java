@@ -37,10 +37,8 @@ public class Constant {
     public static final String EARLY_DEADLINE = "Sắp Hết Hạn"; //2
     public static final String DEADLINE = "Hết Hạn"; //3
     public static final String PAST_DEADLINE = "Quá Hạn"; //4
+
     //statisticfinal
-    public static final String SPANNABLE_TOTAL = " Công việc được giao";
-    public static final String SPANNABLE_RECEIVE = " Công việc đã nhận";
-    public static final String SPANNABLE_NOT_RECEIVE = " Công việc chưa nhận";
     public static final String KEY_ID_EMPLOYEE_STATISTIC = "idEmployee";
     public static final int TYPE_TOTAL = 0;
     public static final int TYPE_STATUS = 1;
