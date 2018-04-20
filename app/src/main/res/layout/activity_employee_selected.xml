@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context="aunguyen.quanlycongviec.Activity.SelectEmployeeToJobActivity">
 
     <include
@@ -13,9 +14,14 @@
         android:layout_height="wrap_content" />
 
     <Button
+        android:layout_gravity="center"
+        android:background="@drawable/custom_button"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:layout_margin="16dp"
         android:id="@+id/btn_add"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add" />
 

@@ -61,7 +61,7 @@ public class SelectEmployeeToJobAdapter extends RecyclerView.Adapter<SelectEmplo
                     holder.cvSelected.setCardBackgroundColor(Color.WHITE);
                 }else{
                     listCheck.set(position, true);
-                    holder.cvSelected.setCardBackgroundColor(Color.GREEN);
+                    holder.cvSelected.setCardBackgroundColor(context.getColor(R.color.background_recycle));
                 }
             }
         });

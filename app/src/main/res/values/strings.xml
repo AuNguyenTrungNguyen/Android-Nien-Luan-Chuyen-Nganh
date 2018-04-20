@@ -5,26 +5,36 @@
     <string name="password">Password</string>
     <string name="domain">Domain</string>
     <string name="full_name">Full Name</string>
-    <string name="birth_day">Click To Set Birthday</string>
+    <string name="birth_day">Birthday</string>
     <string name="gender">Gender</string>
     <string name="account_type">Account Type</string>
     <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="job_title">Title</string>
-    <string name="job_description">Description</string>
+
     <string name="job_start">Start time</string>
     <string name="job_end">End time</string>
-    <string name="job_list">List Employee</string>
-    <string name="job_add">Add job</string>
+
     <string name="office_default">Manager</string>
 
-    <string name="sign_in">Sign In</string>
-    <string name="sign_up">Sign Up</string>
+    <!--Label editText-->
+    <string name="job_title">Tiêu đề</string>
+    <string name="job_description">Mô tả</string>
+
+    <!--Label textView-->
+    <string name="job_list">Danh sách nhân viên</string>
+    <string name="set_birth_day">Chọn sinh nhật</string>
+    <string name="set_job_start">Chọn thời gian bắt đầu</string>
+    <string name="set_job_end">Chọn thời gian kết thúc</string>
+
+    <!--Label button-->
+    <string name="sign_in">Đăng nhập</string>
+    <string name="sign_up">Đăng ký</string>
     <string name="register">Register</string>
-    <string name="add">Add</string>
-    <string name="statistic">Statistic</string>
+    <string name="job_add">Thêm công việc</string>
+    <string name="add">Chọn</string>
+    <string name="statistic">Thống kê</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -58,11 +68,16 @@
     <string name="dialog_choose_account_type">Choose Account Type</string>
 
     <!--Toast-->
-    <string name="toast_sign_up_success">Sign Up Success!!!</string>
-    <string name="toast_domain_exist">Domain Exist!!!</string>
-    <string name="toast_data_fail">Data Is Fail!!!</string>
-    <string name="toast_username_or_password_empty">Username Or Password Empty</string>
-    <string name="toast_account_incorrect">Account Incorrect</string>
+    <string name="toast_sign_up_success">Đăng ký thành công</string>
+    <string name="toast_domain_exist">Tên miền tồn tại</string>
+    <string name="toast_data_fail">Lỗi nhập liệu</string>
+    <string name="toast_username_or_password_empty">Tên đăng nhập và mật khẩu không được để trống</string>
+    <string name="toast_account_incorrect">Tài khoản không tồn tại</string>
+
+    <!--Activity Add Job -->
+    <string name="toast_add_all_employee">Bạn đã thêm toàn bộ nhân viên!</string>
+    <string name="toast_date_fail">Ngày không hợp lệ</string>
+    <string name="toast_add_job_success">Thêm công việc thành công</string>
 
     <string name="message_graph_state">State</string>
     <string name="spannable_total"> Công việc được giao</string>

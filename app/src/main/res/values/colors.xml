@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff33b5e5</color>
-    <color name="colorPrimaryDark">#ff0099cc</color>
-    <color name="colorAccent">#ff33b5e5</color>
+    <color name="colorPrimary">#ff0000</color>
+    <color name="colorPrimaryDark">#bb0000</color>
+    <color name="colorAccent">#ff0000</color>
     <color name="white">#FFF</color>
     <color name="red">#F00</color>
+
+    <color name="background_recycle">#fdf0f0</color>
 
     <color name="primaryDark">#292b3d</color>
     <color name="grayLight">#fafafa</color>

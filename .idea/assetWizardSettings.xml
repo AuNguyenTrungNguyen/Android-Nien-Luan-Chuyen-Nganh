@@ -19,10 +19,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="E:\FILE_NLCN\icon_mail.png" />
-                                      <entry key="outputName" value="ic_mail" />
+                                      <entry key="imageAsset" value="E:\FILE_NLCN\icon\floating.png" />
+                                      <entry key="outputName" value="ic_floating" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="000000" />
+                                      <entry key="themeColor" value="ffffff" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -20,6 +20,7 @@
             app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
+            android:textColor="@color/colorPrimary"
             android:id="@+id/tv_name_employee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

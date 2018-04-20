@@ -57,7 +57,8 @@
         <activity
             android:name=".Activity.SelectEmployeeToJobActivity"
             android:label="@string/title_activity_employee"
-            android:parentActivityName=".Activity.AddJobActivity" />
+            android:parentActivityName=".Activity.AddJobActivity"
+            />
         <activity
             android:name=".Activity.MyJobActivity"
             android:label="@string/title_activity_my_job"
@@ -72,15 +73,17 @@
             android:parentActivityName=".Activity.ManageMyEmployeesActivity"
             android:windowSoftInputMode="stateHidden" />
 
-        <activity android:name=".Activity.DetailJobActivity"
+        <activity
+            android:name=".Activity.DetailJobActivity"
             android:label="@string/title_activity_detail_job"
             android:parentActivityName=".Activity.MainActivity"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
 
-        <activity android:name=".Activity.DetailJobEmployeeActivity"
+        <activity
+            android:name=".Activity.DetailJobEmployeeActivity"
             android:label="@string/title_activity_detail_job"
             android:parentActivityName=".Activity.MyJobActivity"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="310dp">
         <LinearLayout
-            android:background="@drawable/gradient_background"
+            android:background="@drawable/information_background"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:orientation="vertical">

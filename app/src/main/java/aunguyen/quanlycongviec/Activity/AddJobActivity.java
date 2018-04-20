@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -98,10 +97,10 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_start:
-                setTime(tvStart, getResources().getString(R.string.job_start));
+                setTime(tvStart, getResources().getString(R.string.set_job_start));
                 break;
             case R.id.tv_end:
-                setTime(tvEnd, getResources().getString(R.string.job_end));
+                setTime(tvEnd, getResources().getString(R.string.set_job_end));
                 break;
             case R.id.btn_add_employee:
                 addEmployee();
@@ -113,13 +112,12 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void addEmployee() {
-        Log.i("ANTN", "MaxSize: " + maxSize);
         if (listEmployees.size() < maxSize) {
             Intent intent = new Intent(this, SelectEmployeeToJobActivity.class);
             intent.putExtra("LIST_EMPLOYEE_ADDED", (Serializable) listEmployees);
             startActivityForResult(intent, Constant.REQUEST_CODE);
         } else {
-            Toast.makeText(this, "Bạn đã thêm toàn bộ nhân viên!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_add_all_employee), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -139,6 +137,8 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
     private void addJob() {
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setTitle(getResources().getString(R.string.dialog));
+        dialog.setCancelable(false);
+
         String title = edtTitle.getText().toString();
         String description = edtDescription.getText().toString();
         String timeStart = tvStart.getText().toString();
@@ -146,8 +146,8 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
 
         if (!title.equals("")
                 && !description.equals("")
-                && !timeStart.equals(getResources().getString(R.string.job_start))
-                && !timeEnd.equals(getResources().getString(R.string.job_end))
+                && !timeStart.equals(getResources().getString(R.string.set_job_start))
+                && !timeEnd.equals(getResources().getString(R.string.set_job_end))
                 && listEmployees.size() > 0) {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -212,17 +212,16 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onSuccess(Void aVoid) {
                         dialog.dismiss();
-                        Toast.makeText(AddJobActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddJobActivity.this, getString(R.string.toast_add_job_success), Toast.LENGTH_SHORT).show();
                     }
                 });
 
-
             } else {
-                Toast.makeText(this, "Date is fail!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.toast_date_fail), Toast.LENGTH_SHORT).show();
             }
 
         } else {
-            Toast.makeText(this, "Data is empty!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_data_fail), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -268,14 +267,13 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
     private boolean compareDate(String start, String end) {
         String splitStart[] = start.split("/");
         int dayStart = Integer.parseInt(splitStart[0]);
-        int mouthStart = Integer.parseInt(splitStart[1]) - 1;
+        int mouthStart = Integer.parseInt(splitStart[1]);
         int yearStart = Integer.parseInt(splitStart[2]);
 
         String splitEnd[] = end.split("/");
         int dayEnd = Integer.parseInt(splitEnd[0]);
-        int mouthEnd = Integer.parseInt(splitEnd[1]) - 1;
+        int mouthEnd = Integer.parseInt(splitEnd[1]);
         int yearEnd = Integer.parseInt(splitEnd[2]);
-
 
         return (yearEnd >= yearStart && mouthEnd >= mouthStart && dayEnd >= dayStart);
     }
@@ -283,12 +281,12 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
     private int setStatusJob(String start, String end) {
         String splitStart[] = start.split("/");
         int dayStart = Integer.parseInt(splitStart[0]);
-        int mouthStart = Integer.parseInt(splitStart[1]) - 1;
+        int mouthStart = Integer.parseInt(splitStart[1]);
         int yearStart = Integer.parseInt(splitStart[2]);
 
         String splitEnd[] = end.split("/");
         int dayEnd = Integer.parseInt(splitEnd[0]);
-        int mouthEnd = Integer.parseInt(splitEnd[1]) - 1;
+        int mouthEnd = Integer.parseInt(splitEnd[1]);
         int yearEnd = Integer.parseInt(splitEnd[2]);
 
         if (yearEnd - yearStart > 0) {
