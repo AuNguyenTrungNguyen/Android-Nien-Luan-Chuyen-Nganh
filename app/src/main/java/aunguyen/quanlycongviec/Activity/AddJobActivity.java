@@ -169,6 +169,7 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
                 for (EmployeeObject object : listEmployees) {
                     StatusJob statusJob = new StatusJob();
                     statusJob.setIdMember(object.getIdEmployee());
+                    statusJob.setNotify(Constant.NOT_NOTIFY);
 
                     switch (setStatusJob(timeStart, timeEnd)){
                         case 1:

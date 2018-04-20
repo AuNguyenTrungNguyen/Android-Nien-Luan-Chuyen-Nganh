@@ -1,12 +1,15 @@
 package aunguyen.quanlycongviec.Activity;
 
 
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         addControls();
 
-        //pushNotification();
+        pushNotification();
 
         setupNavigation();
 
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    /*private void pushNotification() {
+    private void pushNotification() {
         SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
 
@@ -76,46 +79,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    if(notification){
-                        int count = 0;
+                    int count = 0;
 
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            JobObject jobObject = snapshot.getValue(JobObject.class);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        JobObject jobObject = snapshot.getValue(JobObject.class);
 
-                            List<StatusJob> list = jobObject.getListIdMember();
-                            String status[] = jobObject.getStatusJob().split("/");
-
-                            for (int i = 0; i < list.size(); i++) {
-                                if (id.equals(list.get(i).getIdMember())
-                                        && status[0].equals(Constant.NOT_RECEIVED)
-                                        && !status[1].equals(Constant.PAST_DEADLINE)) {
-                                    Intent intent = new Intent(MainActivity.this, InformationActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
-                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
-                                            .setSmallIcon(R.drawable.ic_mail)
-                                            .setContentTitle("Thông báo")
-                                            .setContentText("Có công việc chưa nhận: " + jobObject.getTitleJob())
-                                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                                            .setContentIntent(pendingIntent)
-                                            .setAutoCancel(true);
-                                    ;
-                                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
-                                    notificationManager.notify(count++, mBuilder.build());
-                                    break;
-                                }
+                        List<StatusJob> list = jobObject.getListIdMember();
+                        for (int i = 0; i < list.size(); i++) {
+                            String notify = list.get(i).getNotify();
+                            if (id.equals(list.get(i).getIdMember())
+                                    &&  notify.equals(Constant.NOT_NOTIFY)){
+                                Intent intent = new Intent(MainActivity.this, InformationActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
+                                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
+                                        .setSmallIcon(R.drawable.ic_mail)
+                                        .setContentTitle("Thông báo")
+                                        .setContentText("Có công việc chưa nhận: " + jobObject.getTitleJob())
+                                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                        .setContentIntent(pendingIntent)
+                                        .setAutoCancel(true);
+                                ;
+                                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
+                                notificationManager.notify(count++, mBuilder.build());
+                                break;
                             }
                         }
-                        notification = false;
                     }
                 }
+
 
                 @Override
                 public void onCancelled(DatabaseError error) {
                 }
             });
         }
-    }*/
+    }
 
     private void loadDataFromFireBase() {
         progressDialog = new ProgressDialog(this);
@@ -132,9 +131,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     EmployeeObject employeeObject = dataSnapshot.getValue(EmployeeObject.class);
-                    if (id.equals(employeeObject.getIdEmployee())){
+                    if (id.equals(employeeObject.getIdEmployee())) {
                         String accountType = employeeObject.getAccountType();
-                        if (accountType.equals("0")){
+                        if (accountType.equals("0")) {
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_CONG_VIEC);
                             myRef.addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -158,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     Log.i("ANTN", "onCancelled() - Main", error.toException());
                                 }
                             });
-                        }else{
+                        } else {
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_CONG_VIEC);
                             myRef.addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -170,8 +169,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         JobObject jobObject = snapshot.getValue(JobObject.class);
                                         List<StatusJob> list = jobObject.getListIdMember();
 
-                                        for (int i = 0; i < list.size(); i++){
-                                            if(id.equals(list.get(i).getIdMember())){
+                                        for (int i = 0; i < list.size(); i++) {
+                                            if (id.equals(list.get(i).getIdMember())) {
                                                 listJobs.add(jobObject);
                                                 break;
                                             }
@@ -371,7 +370,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences.Editor editor = preferences.edit();
         Intent intent = new Intent(this, StatisticActivity.class);
         String id = preferences.getString(Constant.PREFERENCE_KEY_ID, "");
-        intent.putExtra("ID",id);
+        intent.putExtra("ID", id);
         editor.putString(Constant.KEY_ID_EMPLOYEE_STATISTIC, id);
         editor.apply();
         startActivity(intent);

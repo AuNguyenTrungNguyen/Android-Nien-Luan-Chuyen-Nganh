@@ -32,6 +32,9 @@ public class Constant {
     public static final String RECEIVED = "Đã Nhận";
     public static final String NOT_RECEIVED = "Chưa Nhận";
 
+    public static final String NOTIFY = "Đã Gửi";
+    public static final String NOT_NOTIFY = "Chưa Gửi";
+
     public static final String COMPLETE = "Hoàn Thành";//0
     public static final String STILL_DEADLINE = "Còn Hạn"; //1
     public static final String EARLY_DEADLINE = "Sắp Hết Hạn"; //2
