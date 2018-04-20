@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
     tools:context=".Activity.DetailJobActivity">
 
@@ -15,18 +14,20 @@
         android:layout_height="wrap_content" />
 
 
-
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp">
 
         <EditText
-            android:inputType="textCapWords"
             android:id="@+id/edt_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/job_title" />
+            android:hint="@string/job_title"
+            android:inputType="textCapWords"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textStyle="bold" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -38,7 +39,9 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         android:text="@string/job_start"
-        android:textSize="20sp" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_end"
@@ -49,7 +52,9 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         android:text="@string/job_end"
-        android:textSize="20sp" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -60,52 +65,62 @@
         android:layout_marginRight="16dp">
 
         <EditText
-            android:inputType="textCapSentences"
             android:id="@+id/edt_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/job_description" />
+            android:hint="@string/job_description"
+            android:inputType="textCapSentences"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textStyle="bold" />
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <Button
-            android:layout_weight="1"
             android:id="@+id/btn_edit_job"
-            android:text="Edit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button"
+            android:gravity="center"
+            android:text="@string/edit_job"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
 
         <Button
-            android:layout_weight="1"
             android:id="@+id/btn_delete_job"
-            android:text="Delete"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button"
+            android:gravity="center"
+            android:text="@string/delete_jod"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_employee"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp" />
 
-        <android.support.v7.widget.RecyclerView
-
-            android:id="@+id/rv_employee"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp" />
-
-    </ScrollView>
 </LinearLayout>

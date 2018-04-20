@@ -7,6 +7,7 @@
     <color name="red">#F00</color>
 
     <color name="background_recycle">#fdf0f0</color>
+    <color name="button_disable">#848484</color>
 
     <color name="primaryDark">#292b3d</color>
     <color name="grayLight">#fafafa</color>

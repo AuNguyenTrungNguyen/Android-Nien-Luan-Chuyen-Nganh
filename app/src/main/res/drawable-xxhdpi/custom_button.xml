@@ -1,12 +1,10 @@
-<shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="@color/colorPrimary">
-    </solid>
-    <corners
-        android:radius="400dp">
-    </corners>
 
-    <padding android:left="5dp"
-        android:right="5dp">
-    </padding>
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:state_enabled="true"
+    android:drawable="@drawable/layout_button_enable" />
+<item
+    android:state_enabled="false"
+    android:drawable="@drawable/layout_button_disable" />
+</selector>

@@ -31,6 +31,10 @@
     <!--Label button-->
     <string name="sign_in">Đăng nhập</string>
     <string name="sign_up">Đăng ký</string>
+    <string name="receive_job">Nhận công việc</string>
+    <string name="complete_jod">Hoàn thành</string>
+    <string name="edit_job">Chỉnh sửa</string>
+    <string name="delete_jod">Xóa</string>
     <string name="register">Register</string>
     <string name="job_add">Thêm công việc</string>
     <string name="add">Chọn</string>

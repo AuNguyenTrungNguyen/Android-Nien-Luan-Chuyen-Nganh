@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background">
 
     <include
         android:id="@+id/toolbar_my_employees"
@@ -27,6 +28,7 @@
             android:id="@+id/btn_add_employee"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:src="@drawable/ic_floating"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="16dp"
             android:layout_marginRight="16dp" />
