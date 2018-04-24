@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -72,14 +73,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void pushNotification() {
         SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
+        final int[] count = {0};
 
         if (id != null) {
             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constant.NODE_CONG_VIEC);
-            myRef.addValueEventListener(new ValueEventListener() {
+            myRef.addChildEventListener(new ChildEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                    int count = 0;
+                    JobObject jobObject = dataSnapshot.getValue(JobObject.class);
+
+                    List<StatusJob> list = jobObject.getListIdMember();
+                    for (int i = 0; i < list.size(); i++) {
+                        String notify = list.get(i).getNotify();
+                        if (id.equals(list.get(i).getIdMember())
+                                &&  notify.equals(Constant.NOT_NOTIFY)){
+                            Intent intent = new Intent(MainActivity.this, InformationActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
+                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
+                                    .setSmallIcon(R.drawable.ic_mail)
+                                    .setContentTitle("Thông báo")
+                                    .setContentText("Có công việc chưa nhận: " + jobObject.getTitleJob())
+                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                    .setContentIntent(pendingIntent)
+                                    .setAutoCancel(true);
+                            ;
+                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
+                            notificationManager.notify(count[0]++, mBuilder.build());
+                            break;
+                        }
+                    }
+
+                    /*int count = 0;
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         JobObject jobObject = snapshot.getValue(JobObject.class);
@@ -105,12 +131,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 break;
                             }
                         }
-                    }
+                    }*/
                 }
 
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
 
                 @Override
-                public void onCancelled(DatabaseError error) {
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
                 }
             });
         }
