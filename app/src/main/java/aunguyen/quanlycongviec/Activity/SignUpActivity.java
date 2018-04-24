@@ -153,7 +153,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         int mouthDef = 0;
         int yearDef = 1995;
 
-        if(!birthday.equals(getString(R.string.birth_day))){
+        if(!birthday.equals(getString(R.string.set_birth_day))){
             String split[] = birthday.split("/");
             dayDef =  Integer.parseInt(split[0]);
             mouthDef =  Integer.parseInt(split[1]) - 1;

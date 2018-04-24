@@ -24,9 +24,12 @@
 
     <!--Label textView-->
     <string name="job_list">Danh sách nhân viên</string>
-    <string name="set_birth_day">Chọn sinh nhật</string>
+    <string name="set_birth_day">Chọn ngày sinh</string>
     <string name="set_job_start">Chọn thời gian bắt đầu</string>
     <string name="set_job_end">Chọn thời gian kết thúc</string>
+    <string name="job_message">Hiện tại bạn chưa có công việc nào</string>
+    <string name="job_message_admin">Hiện tại bạn chưa giao công việc nào</string>
+    <string name="employee_message">Hiện tại bạn chưa có nhân viên nào</string>
 
     <!--Label button-->
     <string name="sign_in">Đăng nhập</string>
@@ -47,8 +50,7 @@
     <string name="title_activity_sign_up">Sign Up</string>
     <string name="title_activity_my_employees">Management Employees</string>
     <string name="title_activity_my_account">Management My Account</string>
-    <string name="title_activity_information">My Account</string>
-    <string name="title_activity_about_me">About Me</string>
+    <string name="title_activity_information">My Information</string>
     <string name="title_activity_add_job">Add Job</string>
     <string name="title_activity_add_employee">Add Employee</string>
     <string name="title_activity_employee">Employee</string>

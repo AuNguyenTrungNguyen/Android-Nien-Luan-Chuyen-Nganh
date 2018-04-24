@@ -13,7 +13,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
 
         <!--Code here-->
         <LinearLayout
@@ -32,7 +33,10 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/full_name"
                     android:inputType="textCapWords"
-                    android:textColorHint="@color/red" />
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColorHint="@color/red"
+                    android:textStyle="bold" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -43,11 +47,14 @@
                 android:layout_marginRight="16dp">
 
                 <EditText
+
                     android:id="@+id/edt_username_employee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/username"
-                    android:textColorHint="@color/red" />
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textStyle="bold" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -60,12 +67,15 @@
                 app:passwordToggleEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
+
                     android:id="@+id/edt_password_employee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:textColorHint="@color/red" />
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textStyle="bold" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -74,11 +84,13 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:text="@string/account_type" />
+                android:text="@string/account_type"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:orientation="horizontal"
@@ -89,14 +101,16 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/message_employee" />
+                    android:text="@string/message_employee"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/rdb_admin"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/message_admin" />
+                    android:text="@string/message_admin"
+                    android:textStyle="bold" />
 
             </RadioGroup>
 
@@ -104,10 +118,14 @@
                 android:id="@+id/tv_birthday_employee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:gravity="center"
-                android:text="@string/birth_day"
-                android:textSize="20sp" />
+                android:text="@string/set_birth_day"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -115,11 +133,13 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:text="@string/gender" />
+                android:text="@string/gender"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:orientation="horizontal"
@@ -130,14 +150,16 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/male" />
+                    android:text="@string/male"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/rdb_female_employee"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/female" />
+                    android:text="@string/female"
+                    android:textStyle="bold" />
 
             </RadioGroup>
 
@@ -153,7 +175,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone"
-                    android:inputType="phone" />
+                    android:inputType="phone"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textStyle="bold" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -168,18 +193,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/address"
-                    android:inputType="textCapWords" />
+                    android:inputType="textCapWords"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textStyle="bold" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_register_employee"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:background="@drawable/custom_button"
                 android:gravity="center"
-                android:text="@string/register" />
+                android:text="@string/register"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

@@ -30,7 +30,7 @@ import aunguyen.quanlycongviec.Object.Constant;
 import aunguyen.quanlycongviec.Object.EmployeeObject;
 import aunguyen.quanlycongviec.R;
 
-public class AddEmployeeActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddEmployeeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbarAddEmployee;
 
@@ -99,12 +99,12 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void showPass() {
-        if(!isShow){
+        if (!isShow) {
             edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             isShow = true;
             layoutPassword.setPasswordVisibilityToggleEnabled(false);
-        }else{
-            edtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD );
+        } else {
+            edtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             isShow = false;
             layoutPassword.setPasswordVisibilityToggleEnabled(true);
         }
@@ -117,7 +117,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
         layoutPassword.setOnClickListener(this);
     }
 
-    private void setUpToolbar(){
+    private void setUpToolbar() {
         toolbarAddEmployee = findViewById(R.id.toolbar_add_employee);
         setSupportActionBar(toolbarAddEmployee);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -129,22 +129,22 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
         int mouthDef = 0;
         int yearDef = 1995;
 
-        if(!birthday.equals(getString(R.string.birth_day))){
+        if (!birthday.equals(getString(R.string.set_birth_day))) {
             String split[] = birthday.split("/");
-            dayDef =  Integer.parseInt(split[0]);
-            mouthDef =  Integer.parseInt(split[1]) - 1;
-            yearDef =  Integer.parseInt(split[2]);
+            dayDef = Integer.parseInt(split[0]);
+            mouthDef = Integer.parseInt(split[1]) - 1;
+            yearDef = Integer.parseInt(split[2]);
         }
 
         DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                 String day, month, year;
-                day = (i2 < 10) ? "0"+i2 : ""+i2;
+                day = (i2 < 10) ? "0" + i2 : "" + i2;
 
-                i1+=1;
-                month = (i1 < 10) ? "0"+i1 : ""+i1;
-                year = ""+i;
+                i1 += 1;
+                month = (i1 < 10) ? "0" + i1 : "" + i1;
+                year = "" + i;
 
                 tvBirthday.setText(day + "/" + month + "/" + year);
 
@@ -155,7 +155,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_register_employee:
                 signUp();
                 break;
@@ -193,8 +193,8 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
 
         referenceEmployee = databaseEmployee.getReference(Constant.NODE_NHAN_VIEN);
 
-        if(!username.equals("") && !password.equals("") && !fullName.equals("")){
-            mAuth.createUserWithEmailAndPassword(username+domain, password)
+        if (!username.equals("") && !password.equals("") && !fullName.equals("")) {
+            mAuth.createUserWithEmailAndPassword(username + domain, password)
                     .addOnCompleteListener(AddEmployeeActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -204,34 +204,34 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
                                 EmployeeObject employeeObject = new EmployeeObject();
 
 
-                                if (rdbAdmin.isChecked()){
+                                if (rdbAdmin.isChecked()) {
                                     employeeObject.setAccountType("0");
-                                }else{
+                                } else {
                                     employeeObject.setAccountType("1");
                                 }
 
                                 employeeObject.setIdEmployee(user.getUid());
                                 employeeObject.setIdManage(id);
-                                employeeObject.setUsernameEmployee(username+domain);
+                                employeeObject.setUsernameEmployee(username + domain);
 
-                                if(!phone.equals("")){
+                                if (!phone.equals("")) {
                                     employeeObject.setPhoneEmployee(phone);
-                                }else{
+                                } else {
                                     employeeObject.setPhoneEmployee("");
                                 }
 
-                                if(!address.equals("")){
+                                if (!address.equals("")) {
                                     employeeObject.setAddressEmployee(address);
-                                }else{
+                                } else {
                                     employeeObject.setAddressEmployee("");
                                 }
 
                                 employeeObject.setNameEmployee(fullName);
 
-                                if (rdbMale.isChecked()){
+                                if (rdbMale.isChecked()) {
                                     employeeObject.setGenderEmployee(getResources().getString(R.string.male));
                                     employeeObject.setUrlAvatar(Constant.URL_MALE);
-                                }else{
+                                } else {
                                     employeeObject.setGenderEmployee(getResources().getString(R.string.female));
                                     employeeObject.setUrlAvatar(Constant.URL_FEMALE);
                                 }
@@ -244,7 +244,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
                             }
                         }
                     });
-        }else{
+        } else {
             Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_data_fail), Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         }

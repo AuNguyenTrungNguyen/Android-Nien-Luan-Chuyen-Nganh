@@ -53,7 +53,6 @@
                     android:hint="@string/username"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:textColorHint="@color/red"
                     android:textStyle="bold" />
             </android.support.design.widget.TextInputLayout>
 
@@ -74,7 +73,6 @@
                     android:inputType="textPassword"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:textColorHint="@color/red"
                     android:textStyle="bold" />
             </android.support.design.widget.TextInputLayout>
 
@@ -105,7 +103,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:gravity="center"
-                android:text="@string/birth_day"
+                android:text="@string/set_birth_day"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />

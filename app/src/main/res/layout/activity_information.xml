@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="JOB MANAGEMENT"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="32sp"/>
         </LinearLayout>
@@ -45,7 +45,6 @@
             android:layout_marginTop="210dp">
 
             <LinearLayout
-                android:background="#fff"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -55,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="VERSION"
-                    android:textColor="#09c6df"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="24sp"/>
 
@@ -67,7 +66,7 @@
                     android:textStyle="bold"
                     android:textSize="24sp"
                     android:paddingTop="8dp"
-                    android:textColor="@color/startBlue"/>
+                    android:textColor="@color/colorPrimary"/>
 
             </LinearLayout>
 
@@ -95,7 +94,7 @@
 
             <TextView
                 android:textSize="16sp"
-                android:textColor="@color/startBlue"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:id="@+id/tv_email"
                 android:layout_gravity="center_vertical"
@@ -122,16 +121,14 @@
                 android:layout_gravity="center|left"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_weight="1"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/startBlue"
+                    android:textColor="@color/colorPrimary"
                     android:id="@+id/tv_phone_sang"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
@@ -141,9 +138,8 @@
                     android:layout_weight="1"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/startBlue"
+                    android:textColor="@color/colorPrimary"
                     android:id="@+id/tv_phone_nguyen"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
@@ -168,7 +164,7 @@
             <TextView
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/startBlue"
+                android:textColor="@color/colorPrimary"
                 android:id="@+id/tv_faceBook"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"

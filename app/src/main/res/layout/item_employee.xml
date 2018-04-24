@@ -10,30 +10,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="4dp">
 
-        <FrameLayout
+        <ImageView
+            android:id="@+id/img_avatar"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginRight="4dp">
-
-            <ImageView
-                android:id="@+id/img_avatar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:srcCompat="@mipmap/ic_launcher" />
-
-        </FrameLayout>
+            android:layout_height="match_parent"
+            android:layout_marginRight="4dp"
+            app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/tv_name_employee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Administrator"
+            android:layout_margin="4dp"
             android:textAllCaps="false"
-            android:textColor="@android:color/holo_blue_light"
+            android:textColor="@color/colorPrimary"
             android:textSize="20dp" />
+
 
     </LinearLayout>
 

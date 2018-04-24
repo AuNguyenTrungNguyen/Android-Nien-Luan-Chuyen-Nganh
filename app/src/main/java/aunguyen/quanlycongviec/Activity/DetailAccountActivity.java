@@ -69,7 +69,7 @@ public class DetailAccountActivity extends AppCompatActivity implements View.OnC
     }
 
     private void loadData() {
-        if(getIntent()!=null){
+        if (getIntent() != null) {
             String id = getIntent().getStringExtra("ID");
             if (id != null) {
                 DatabaseReference myRef = database.getReference(Constant.NODE_NHAN_VIEN).child(id);
@@ -155,7 +155,7 @@ public class DetailAccountActivity extends AppCompatActivity implements View.OnC
             case R.id.btn_statistic:
                 Intent intent = new Intent(DetailAccountActivity.this, StatisticActivity.class);
                 String id = getIntent().getStringExtra("ID");
-                intent.putExtra("ID",id);
+                intent.putExtra("ID", id);
                 SharedPreferences preferences = getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(Constant.KEY_ID_EMPLOYEE_STATISTIC, id);
@@ -193,19 +193,19 @@ public class DetailAccountActivity extends AppCompatActivity implements View.OnC
         int dayDef, mouthDef, yearDef;
 
         String split[] = birthday.split("/");
-        dayDef =  Integer.parseInt(split[0]);
-        mouthDef =  Integer.parseInt(split[1]) - 1;
-        yearDef =  Integer.parseInt(split[2]);
+        dayDef = Integer.parseInt(split[0]);
+        mouthDef = Integer.parseInt(split[1]) - 1;
+        yearDef = Integer.parseInt(split[2]);
 
         DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                 String day, month, year;
-                day = (i2 < 10) ? "0"+i2 : ""+i2;
+                day = (i2 < 10) ? "0" + i2 : "" + i2;
 
-                i1+=1;
-                month = (i1 < 10) ? "0"+i1 : ""+i1;
-                year = ""+i;
+                i1 += 1;
+                month = (i1 < 10) ? "0" + i1 : "" + i1;
+                year = "" + i;
 
                 tvBirthday.setText(day + "/" + month + "/" + year);
 
@@ -216,19 +216,19 @@ public class DetailAccountActivity extends AppCompatActivity implements View.OnC
     }
 
     private void edit() {
-        if (flag){
+        if (flag) {
             edtEnable(true);
             flag = false;
             check = true;
             imgEdit.setImageResource(R.drawable.ic_save);
 
-        }else{
+        } else {
             upFirebase();
         }
     }
 
     private void upFirebase() {
-        if(getIntent()!=null) {
+        if (getIntent() != null) {
             String id = getIntent().getStringExtra("ID");
             if (id != null) {
 
@@ -238,9 +238,9 @@ public class DetailAccountActivity extends AppCompatActivity implements View.OnC
                 String phone = edtPhone.getText().toString();
                 String address = edtAddress.getText().toString();
                 String type;
-                if(accountType.equals(getString(R.string.message_employee))){
+                if (accountType.equals(getString(R.string.message_employee))) {
                     type = "1";
-                }else {
+                } else {
                     type = "0";
                 }
 
@@ -270,9 +270,9 @@ public class DetailAccountActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onBackPressed() {
-        if(!check){
+        if (!check) {
             finish();
-        }else {
+        } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
 

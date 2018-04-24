@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,7 +28,6 @@ import aunguyen.quanlycongviec.R;
 public class SelectEmployeeToJobActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbarEmployee;
-    //private SearchView searchView;
 
     private Button btnAdd;
 
@@ -82,6 +80,7 @@ public class SelectEmployeeToJobActivity extends AppCompatActivity implements Vi
 
     private void loadDataFromFireBase() {
         progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(getResources().getString(R.string.dialog));
         progressDialog.show();
         SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
@@ -95,6 +94,7 @@ public class SelectEmployeeToJobActivity extends AppCompatActivity implements Vi
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         EmployeeObject employeeObject = snapshot.getValue(EmployeeObject.class);
 
+                        assert employeeObject != null;
                         if (id.equals(employeeObject.getIdManage())) {
                             listEmployees.add(employeeObject);
                             listCheck.add(false);
@@ -102,17 +102,17 @@ public class SelectEmployeeToJobActivity extends AppCompatActivity implements Vi
                         }
                     }
                     getData();
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onCancelled(DatabaseError error) {
-                    Log.i("ABC", "Failed to read value.", error.toException());
+                    progressDialog.dismiss();
                 }
             });
 
         } else {
             progressDialog.dismiss();
-            Log.i("ANTN", "ID Manage is null!");
         }
     }
 
@@ -163,35 +163,4 @@ public class SelectEmployeeToJobActivity extends AppCompatActivity implements Vi
         finish();
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-
-        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            //lọc ra loại thuốc có tên trùng với người dùng nhập vào
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                List<EmployeeObject> listSearch = new ArrayList<>();
-                List<Boolean> listCheckSearch = new ArrayList<>();
-                for (int i = 0; i < listEmployees.size(); i++) {
-                    if (listEmployees.get(i).getNameEmployee().toLowerCase().contains(newText.toLowerCase())) {
-                        listSearch.add(listEmployees.get(i));
-                        listCheckSearch.add(false);
-                    }
-                }
-                employeeAdapter = new SelectEmployeeToJobAdapter(SelectEmployeeToJobActivity.this, listSearch, listCheckSearch);
-                rvEmployee.setAdapter(employeeAdapter);
-                return true;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
-    }*/
 }

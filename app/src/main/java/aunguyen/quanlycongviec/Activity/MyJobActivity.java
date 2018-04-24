@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,11 +23,13 @@ import java.util.List;
 import aunguyen.quanlycongviec.Adapter.JobAdapter;
 import aunguyen.quanlycongviec.Object.Constant;
 import aunguyen.quanlycongviec.Object.JobObject;
+import aunguyen.quanlycongviec.Object.StatusJob;
 import aunguyen.quanlycongviec.R;
 
 public class MyJobActivity extends AppCompatActivity {
 
     private Toolbar toolbarMyJob;
+    private TextView tvMessage;
 
     private RecyclerView rvMyJob;
     private List<JobObject> listJobs;
@@ -60,6 +64,7 @@ public class MyJobActivity extends AppCompatActivity {
 
     private void addControls() {
         rvMyJob = findViewById(R.id.rv_my_job);
+        tvMessage = findViewById(R.id.tv_message);
         listJobs = new ArrayList<>();
 
         jobAdapter = new JobAdapter(this, listJobs);
@@ -69,8 +74,7 @@ public class MyJobActivity extends AppCompatActivity {
         rvMyJob.setLayoutManager(manager);
     }
 
-    private void addEvents() {
-    }
+    private void addEvents() {}
 
     private void loadDataFromFireBase() {
         progressDialog = new ProgressDialog(this);
@@ -90,13 +94,21 @@ public class MyJobActivity extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         JobObject jobObject = snapshot.getValue(JobObject.class);
 
-                        for(int i = 0; i < jobObject.getListIdMember().size(); i++){
-                            if (id.equals(jobObject.getListIdMember().get(i).getIdMember())) {
+                        assert jobObject != null;
+                        List<StatusJob> list = jobObject.getListIdMember();
+
+                        for (int i = 0; i < list.size(); i++) {
+                            if (id.equals(list.get(i).getIdMember())) {
+                                String status = list.get(i).getStatus();
+                                jobObject.setStatusJob(status);
                                 listJobs.add(jobObject);
                                 jobAdapter.notifyDataSetChanged();
                                 break;
                             }
                         }
+                    }
+                    if (listJobs.size() > 0){
+                        tvMessage.setVisibility(View.GONE);
                     }
 
                     progressDialog.dismiss();

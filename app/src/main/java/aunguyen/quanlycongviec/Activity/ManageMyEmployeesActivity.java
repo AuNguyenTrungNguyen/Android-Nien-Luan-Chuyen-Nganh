@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +29,7 @@ import aunguyen.quanlycongviec.R;
 public class ManageMyEmployeesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbarMyEmployees;
+    private TextView tvMessage;
 
     private FloatingActionButton btnAddEmployee;
 
@@ -69,13 +71,19 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        tvMessage.setVisibility(View.VISIBLE);
+                        rvEmployee.setVisibility(View.GONE);
                         EmployeeObject employeeObject = snapshot.getValue(EmployeeObject.class);
-
-                        if(id.equals(employeeObject.getIdManage())){
+                        assert employeeObject != null;
+                        if (id.equals(employeeObject.getIdManage())) {
                             listEmployee.add(employeeObject);
                             employeeAdapter.notifyDataSetChanged();
                         }
+                    }
+                    if (listEmployee.size() > 0) {
+                        tvMessage.setVisibility(View.GONE);
+                        rvEmployee.setVisibility(View.VISIBLE);
                     }
                     progressDialog.dismiss();
                 }
@@ -85,7 +93,7 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
                     progressDialog.dismiss();
                 }
             });
-        }else{
+        } else {
             progressDialog.dismiss();
         }
     }
@@ -93,6 +101,7 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
     private void addControls() {
 
         database = FirebaseDatabase.getInstance();
+        tvMessage = findViewById(R.id.tv_message);
 
         btnAddEmployee = findViewById(R.id.btn_add_employee);
 

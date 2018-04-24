@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -105,7 +104,6 @@ public class DetailJobEmployeeActivity extends AppCompatActivity implements View
     private void loadData() {
         if (getIntent() != null) {
             String idJob = getIntent().getStringExtra("IDJob");
-            Log.i("ABCE", idJob);
             if (idJob != null) {
 
                 SharedPreferences preferences = getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
@@ -128,13 +126,12 @@ public class DetailJobEmployeeActivity extends AppCompatActivity implements View
                             for (int i = 0; i < jobObject.getListIdMember().size(); i++) {
                                 if (idEmployee.equals(jobObject.getListIdMember().get(i).getIdMember())) {
                                     String status[] = jobObject.getListIdMember().get(i).getStatus().split("/");
-                                    if (status[1].equals("Quá Hạn") || status[1].equals("Hoàn Thành")) {
+                                    if (status[1].equals(Constant.PAST_DEADLINE) || status[1].equals(Constant.COMPLETE)) {
                                         btnReceiveJob.setEnabled(false);
                                         btnCompleteJob.setEnabled(false);
                                     } else {
-                                        if (status[0].equals("Đã Nhận")) {
+                                        if (status[0].equals(Constant.RECEIVED)) {
                                             btnReceiveJob.setEnabled(false);
-                                            btnReceiveJob.setText("Đã Nhận");
                                             btnCompleteJob.setEnabled(true);
                                         } else {
                                             btnReceiveJob.setEnabled(true);
@@ -231,20 +228,20 @@ public class DetailJobEmployeeActivity extends AppCompatActivity implements View
 
                             String status[] = jobObject.getListIdMember().get(i).getStatus().split("/");
 
-                            if(!status[1].equals(Constant.COMPLETE)){
+                            if (!status[1].equals(Constant.COMPLETE)) {
                                 break;
-                            }else {
+                            } else {
                                 count++;
                             }
                         }
 
                         String status[] = jobObject.getStatusJob().split("/");
 
-                        if (count == jobObject.getListIdMember().size()){
+                        if (count == jobObject.getListIdMember().size()) {
                             database.getReference(Constant.NODE_CONG_VIEC)
                                     .child(idJob)
                                     .child("statusJob")
-                                    .setValue(status[0]+"/"+Constant.COMPLETE);
+                                    .setValue(status[0] + "/" + Constant.COMPLETE);
                         }
                     }
 
@@ -280,14 +277,14 @@ public class DetailJobEmployeeActivity extends AppCompatActivity implements View
                                         .child("listIdMember")
                                         .child(String.valueOf(i))
                                         .child("status")
-                                        .setValue("Đã Nhận" + "/" + status[1]);
+                                        .setValue(Constant.RECEIVED + "/" + status[1]);
 
-                                database.getReference(Constant.NODE_CONG_VIEC)
+                                /*database.getReference(Constant.NODE_CONG_VIEC)
                                         .child(idJob)
                                         .child("listIdMember")
                                         .child(String.valueOf(i))
                                         .child("notify")
-                                        .setValue(Constant.NOTIFY);
+                                        .setValue(Constant.NOTIFY);*/
 
                                 break;
                             }
@@ -320,20 +317,20 @@ public class DetailJobEmployeeActivity extends AppCompatActivity implements View
 
                             String status[] = jobObject.getListIdMember().get(i).getStatus().split("/");
 
-                            if(status[0].equals(Constant.NOT_RECEIVED)){
+                            if (status[0].equals(Constant.NOT_RECEIVED)) {
                                 break;
-                            }else {
+                            } else {
                                 count++;
                             }
                         }
 
                         String status[] = jobObject.getStatusJob().split("/");
 
-                        if (count == jobObject.getListIdMember().size()){
+                        if (count == jobObject.getListIdMember().size()) {
                             database.getReference(Constant.NODE_CONG_VIEC)
                                     .child(idJob)
                                     .child("statusJob")
-                                    .setValue(Constant.RECEIVED+"/"+status[1]);
+                                    .setValue(Constant.RECEIVED + "/" + status[1]);
                         }
                     }
 

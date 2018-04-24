@@ -16,14 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_employees"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            tools:listitem="@layout/item_employee">
-        </android.support.v7.widget.RecyclerView>
-
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/btn_add_employee"
             android:layout_width="48dp"
@@ -32,6 +24,24 @@
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="16dp"
             android:layout_marginRight="16dp" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/employee_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_employees"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            tools:listitem="@layout/item_employee">
+        </android.support.v7.widget.RecyclerView>
 
     </FrameLayout>
 

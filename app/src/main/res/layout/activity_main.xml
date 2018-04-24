@@ -35,6 +35,16 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/ic_floating"/>
 
+            <TextView
+                android:id="@+id/tv_message"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/job_message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_job"
                 android:layout_width="match_parent"
