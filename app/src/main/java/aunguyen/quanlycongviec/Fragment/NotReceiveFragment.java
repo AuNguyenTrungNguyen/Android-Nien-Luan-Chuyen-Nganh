@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,7 +114,7 @@ public class NotReceiveFragment extends Fragment {
                         for (int i = 0; i < jobObject.getListIdMember().size(); i++) {
                             if (id.equals(jobObject.getListIdMember().get(i).getIdMember())) {
                                 if (testDate(jobObject.getEndDateJob(), start, end)) {
-                                    String statusJob = jobObject.getStatusJob();
+                                    String statusJob = jobObject.getListIdMember().get(i).getStatus();
                                     String test = statusJob.substring(0, statusJob.indexOf("/"));
                                     if (test.equals(Constant.NOT_RECEIVED)) {
                                         countNotReceived += 1;
@@ -149,13 +148,11 @@ public class NotReceiveFragment extends Fragment {
                 @Override
                 public void onCancelled(DatabaseError error) {
                     progressDialog.dismiss();
-                    Log.i("ANTN", "onCancelled() - NotReceiveFrag", error.toException());
                 }
             });
 
         } else {
             progressDialog.dismiss();
-            Log.i("ANTN", "ID Manage in NotReceiveFrag is null!");
         }
 
     }
@@ -210,7 +207,7 @@ public class NotReceiveFragment extends Fragment {
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
-        pieChart.setEntryLabelColor(context.getResources().getColor(R.color.colorPrimary));
+        pieChart.setEntryLabelColor(context.getResources().getColor(R.color.startBlue));
         pieChart.setEntryLabelTextSize(12f);
         PieDataSet dataSet = new PieDataSet(arrayList, context.getResources().getString(R.string.message_graph_state));
         dataSet.setDrawIcons(false);
@@ -230,7 +227,7 @@ public class NotReceiveFragment extends Fragment {
         PieData data = new PieData(dataSet);
         data.setValueTextSize(10f);
         data.setValueFormatter(new PercentFormatter());
-        data.setValueTextColor(context.getResources().getColor(R.color.colorPrimary));
+        data.setValueTextColor(context.getResources().getColor(R.color.startBlue));
         pieChart.setData(data);
         pieChart.animateX(1000);
         pieChart.invalidate();

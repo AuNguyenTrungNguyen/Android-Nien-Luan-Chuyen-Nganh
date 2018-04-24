@@ -119,7 +119,6 @@ public class StatisticActivity extends AppCompatActivity implements View.OnClick
 
     private void checkTime(){
         if(compareDate(btnStartTime.getText().toString(),btnEndTime.getText().toString())){
-
             edtEnable(true);
         }else {
             edtEnable(false);

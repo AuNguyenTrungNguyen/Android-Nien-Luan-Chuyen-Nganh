@@ -104,34 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             break;
                         }
                     }
-
-                    /*int count = 0;
-
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        JobObject jobObject = snapshot.getValue(JobObject.class);
-
-                        List<StatusJob> list = jobObject.getListIdMember();
-                        for (int i = 0; i < list.size(); i++) {
-                            String notify = list.get(i).getNotify();
-                            if (id.equals(list.get(i).getIdMember())
-                                    &&  notify.equals(Constant.NOT_NOTIFY)){
-                                Intent intent = new Intent(MainActivity.this, InformationActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
-                                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
-                                        .setSmallIcon(R.drawable.ic_mail)
-                                        .setContentTitle("Thông báo")
-                                        .setContentText("Có công việc chưa nhận: " + jobObject.getTitleJob())
-                                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                                        .setContentIntent(pendingIntent)
-                                        .setAutoCancel(true);
-                                ;
-                                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
-                                notificationManager.notify(count++, mBuilder.build());
-                                break;
-                            }
-                        }
-                    }*/
                 }
 
                 @Override
@@ -213,6 +185,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         for (int i = 0; i < list.size(); i++) {
                                             if (id.equals(list.get(i).getIdMember())) {
                                                 listJobs.add(jobObject);
+                                                String status = list.get(i).getStatus();
+                                                jobObject.setStatusJob(status);
                                                 break;
                                             }
                                         }

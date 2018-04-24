@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,7 +113,7 @@ public class TotalFragment extends Fragment {
                             if (id.equals(jobObject.getListIdMember().get(i).getIdMember())) {
                                 if (testDate(jobObject.getEndDateJob(), start, end)) {
                                     count += 1;
-                                    String statusJob = jobObject.getStatusJob();
+                                    String statusJob = jobObject.getListIdMember().get(i).getStatus();
                                     String status = statusJob.substring(0, statusJob.indexOf("/"));
                                     if (status.equals(Constant.NOT_RECEIVED)) {
                                         countUnReceived += 1;
@@ -136,13 +135,12 @@ public class TotalFragment extends Fragment {
 
                 @Override
                 public void onCancelled(DatabaseError error) {
-                    Log.i("ABC", "Failed to read value.", error.toException());
+                    progressDialog.dismiss();
                 }
             });
 
         } else {
             progressDialog.dismiss();
-            Log.i("ANTN", "ID Manage is null!");
         }
     }
 
@@ -158,10 +156,10 @@ public class TotalFragment extends Fragment {
 
     private void handlingGraph(float value1, float value2, int sumJob) {
         if (value1 != 0) {
-            totalList.add(new PieEntry(value1, "Đã Nhận"));
+            totalList.add(new PieEntry(value1, Constant.RECEIVED));
         }
         if (value2 != 0) {
-            totalList.add(new PieEntry(value2, "Chưa Nhận"));
+            totalList.add(new PieEntry(value2, Constant.NOT_RECEIVED));
         }
 
         pieChart(pcTotal, totalList, sumJob);
@@ -190,7 +188,7 @@ public class TotalFragment extends Fragment {
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
-        pieChart.setEntryLabelColor(context.getResources().getColor(R.color.colorPrimary));
+        pieChart.setEntryLabelColor(context.getResources().getColor(R.color.startBlue));
         pieChart.setEntryLabelTextSize(12f);
         PieDataSet dataSet = new PieDataSet(arrayList, context.getResources().getString(R.string.message_graph_state));
         dataSet.setDrawIcons(false);
@@ -208,7 +206,7 @@ public class TotalFragment extends Fragment {
         PieData data = new PieData(dataSet);
         data.setValueTextSize(10f);
         data.setValueFormatter(new PercentFormatter());
-        data.setValueTextColor(context.getResources().getColor(R.color.colorPrimary));
+        data.setValueTextColor(context.getResources().getColor(R.color.startBlue));
         pieChart.setData(data);
         pieChart.animateX(1000);
         pieChart.invalidate();

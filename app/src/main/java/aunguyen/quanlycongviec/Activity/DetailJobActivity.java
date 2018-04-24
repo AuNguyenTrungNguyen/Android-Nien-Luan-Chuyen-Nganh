@@ -100,6 +100,7 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
         btnEditJob.setOnClickListener(this);
         btnDeleteJob.setOnClickListener(this);
     }
+
     private void setUpFirebase() {
 
         database = FirebaseDatabase.getInstance();
@@ -140,7 +141,6 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
         }
 
     }
-
 
     @Override
     public void onClick(View view) {
