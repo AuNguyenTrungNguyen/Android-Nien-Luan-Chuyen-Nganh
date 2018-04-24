@@ -282,7 +282,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                progressDialog.dismiss();
             }
         });
     }

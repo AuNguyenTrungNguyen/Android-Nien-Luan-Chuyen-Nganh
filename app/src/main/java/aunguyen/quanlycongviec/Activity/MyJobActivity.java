@@ -117,6 +117,7 @@ public class MyJobActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(DatabaseError error) {
                     Log.i("ABC", "Failed to read value.", error.toException());
+                    progressDialog.dismiss();
                 }
             });
 

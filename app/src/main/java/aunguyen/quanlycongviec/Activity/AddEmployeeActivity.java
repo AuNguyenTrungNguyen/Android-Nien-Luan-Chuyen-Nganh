@@ -241,6 +241,9 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
                                 referenceEmployee.child(user.getUid()).setValue(employeeObject);
                                 Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_sign_up_success), Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
+                            }else{
+                                Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_add_employee_not_success), Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
                             }
                         }
                     });

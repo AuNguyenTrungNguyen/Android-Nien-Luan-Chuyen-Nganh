@@ -219,10 +219,12 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
 
             } else {
                 Toast.makeText(this, getString(R.string.toast_date_fail), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
 
         } else {
             Toast.makeText(this, getString(R.string.toast_data_fail), Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
         }
 
     }

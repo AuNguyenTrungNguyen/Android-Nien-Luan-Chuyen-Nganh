@@ -72,6 +72,8 @@
     <!--Dialog-->
     <string name="dialog">Loading...</string>
     <string name="dialog_choose_account_type">Choose Account Type</string>
+    <string name="notification_title">Thông báo</string>
+    <string name="notification_text">Có công việc chưa nhận:</string>
 
     <!--Toast-->
     <string name="toast_sign_up_success">Đăng ký thành công</string>
@@ -79,6 +81,7 @@
     <string name="toast_data_fail">Lỗi nhập liệu</string>
     <string name="toast_username_or_password_empty">Tên đăng nhập và mật khẩu không được để trống</string>
     <string name="toast_account_incorrect">Tài khoản không tồn tại</string>
+    <string name="toast_add_employee_not_success">Có lỗi khi thêm nhân viên</string>
 
     <!--Activity Add Job -->
     <string name="toast_add_all_employee">Bạn đã thêm toàn bộ nhân viên!</string>

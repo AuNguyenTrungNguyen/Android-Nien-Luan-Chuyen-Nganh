@@ -1,5 +1,6 @@
 package aunguyen.quanlycongviec.Activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -102,11 +103,15 @@ public class DetailJobEmployeeActivity extends AppCompatActivity implements View
     }
 
     private void loadData() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(getResources().getString(R.string.dialog));
+        progressDialog.setCancelable(false);
         if (getIntent() != null) {
             String idJob = getIntent().getStringExtra("IDJob");
             if (idJob != null) {
 
-                SharedPreferences preferences = getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
+                progressDialog.show();
+                final SharedPreferences preferences = getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
                 final String idEmployee = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
 
                 DatabaseReference myRef = database.getReference(Constant.NODE_CONG_VIEC).child(idJob);
@@ -147,12 +152,15 @@ public class DetailJobEmployeeActivity extends AppCompatActivity implements View
 
                             rvEmployee.setAdapter(memberAdapter);
                             rvEmployee.setLayoutManager(manager);
+                            progressDialog.dismiss();
+                        }else {
+                            progressDialog.dismiss();
                         }
-
                     }
 
                     @Override
                     public void onCancelled(DatabaseError error) {
+                        progressDialog.dismiss();
                     }
                 });
             }

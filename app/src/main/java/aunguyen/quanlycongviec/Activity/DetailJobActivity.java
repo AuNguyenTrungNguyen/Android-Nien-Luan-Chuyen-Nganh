@@ -1,5 +1,6 @@
 package aunguyen.quanlycongviec.Activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -85,9 +86,6 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
 
         rvEmployee = findViewById(R.id.rv_employee);
 
-
-
-
         edtEnable(false);
     }
 
@@ -107,17 +105,23 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void loadData() {
-        if(getIntent()!=null) {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(getResources().getString(R.string.dialog));
+        progressDialog.setCancelable(false);
+
+        if (getIntent() != null) {
             String id = getIntent().getStringExtra("IDJob");
-            Log.i("ABCE", id);
+
             if (id != null) {
+
+                progressDialog.show();
                 DatabaseReference myRef = database.getReference(Constant.NODE_CONG_VIEC).child(id);
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         JobObject jobObject = dataSnapshot.getValue(JobObject.class);
-                        if(jobObject !=null){
+                        if (jobObject != null) {
                             edtTitle.setText(jobObject.getTitleJob());
                             edtDescription.setText(jobObject.getDescriptionJob());
 
@@ -125,11 +129,14 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
                             tvEnd.setText(getString(R.string.job_end) + ": " + jobObject.getEndDateJob());
 
                             listMember = jobObject.getListIdMember();
-                            memberAdapter = new MemberAdapter(DetailJobActivity.this,listMember);
+                            memberAdapter = new MemberAdapter(DetailJobActivity.this, listMember);
                             RecyclerView.LayoutManager manager = new LinearLayoutManager(DetailJobActivity.this, LinearLayoutManager.VERTICAL, false);
 
                             rvEmployee.setAdapter(memberAdapter);
                             rvEmployee.setLayoutManager(manager);
+                            progressDialog.dismiss();
+                        }else{
+                            progressDialog.dismiss();
                         }
                     }
 
@@ -137,6 +144,8 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
                     public void onCancelled(DatabaseError error) {
                     }
                 });
+            }else{
+                progressDialog.dismiss();
             }
         }
 
@@ -155,19 +164,19 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void edit() {
-        if (flag){
+        if (flag) {
             edtEnable(true);
             flag = false;
             check = true;
             btnEditJob.setText("SAVE");
 
-        }else{
+        } else {
             save();
         }
     }
 
     private void save() {
-        if(getIntent()!=null) {
+        if (getIntent() != null) {
             String id = getIntent().getStringExtra("IDJob");
             if (id != null) {
                 String title = edtTitle.getText().toString();
@@ -197,9 +206,9 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onBackPressed() {
-        if(!check){
+        if (!check) {
             finish();
-        }else {
+        } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
 
@@ -241,7 +250,7 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(final DialogInterface dialogInterface, int i) {
 
-                if(getIntent()!= null) {
+                if (getIntent() != null) {
                     String id = getIntent().getStringExtra("IDJob");
                     Log.i("ABCE", id);
                     if (id != null) {
@@ -262,7 +271,7 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
                             }
                         });
                     }
-                }else{
+                } else {
                     Toast.makeText(DetailJobActivity.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                     dialogInterface.dismiss();
                 }

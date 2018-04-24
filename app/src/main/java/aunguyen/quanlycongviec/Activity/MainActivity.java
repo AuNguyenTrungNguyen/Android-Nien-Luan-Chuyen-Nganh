@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
                             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
                                     .setSmallIcon(R.drawable.ic_mail)
-                                    .setContentTitle("Thông báo")
-                                    .setContentText("Có công việc chưa nhận: " + jobObject.getTitleJob())
+                                    .setContentTitle(getString(R.string.notification_title))
+                                    .setContentText(getString(R.string.notification_text) + " " + jobObject.getTitleJob())
                                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                     .setContentIntent(pendingIntent)
                                     .setAutoCancel(true);
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
+                    progressDialog.dismiss();
                 }
             });
 

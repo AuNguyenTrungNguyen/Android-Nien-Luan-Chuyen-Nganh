@@ -100,7 +100,6 @@ public class DetailAccountActivity extends AppCompatActivity implements View.OnC
                 });
             }
         }
-
     }
 
     private void setUpFirebase() {
