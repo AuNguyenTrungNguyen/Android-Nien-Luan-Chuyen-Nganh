@@ -269,6 +269,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             editor.apply();
 
                                             startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+                                        }else{
+                                            progressDialog.dismiss();
+                                            Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_domain_fail), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });

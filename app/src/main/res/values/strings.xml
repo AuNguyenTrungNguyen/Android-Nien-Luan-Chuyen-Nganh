@@ -1,22 +1,22 @@
 <resources>
     <string name="app_name">Job Management</string>
 
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="domain">Domain</string>
-    <string name="full_name">Full Name</string>
-    <string name="birth_day">Birthday</string>
-    <string name="gender">Gender</string>
-    <string name="account_type">Account Type</string>
-    <string name="phone">Phone</string>
-    <string name="address">Address</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
+    <string name="username">Tài khoản</string>
+    <string name="password">Mật khẩu</string>
+    <string name="domain">Tên miền</string>
+    <string name="full_name">Họ và tên</string>
+    <string name="birth_day">Ngày sinh</string>
+    <string name="gender">Giới tính</string>
+    <string name="account_type">Loại tài khoản</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="address">Địa chỉ</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
 
-    <string name="job_start">Start time</string>
-    <string name="job_end">End time</string>
+    <string name="job_start">Thời gian bắt đầu</string>
+    <string name="job_end">Thời gian kết thúc</string>
 
-    <string name="office_default">Manager</string>
+    <!--<string name="office_default">Manager</string>-->
 
     <!--Label editText-->
     <string name="job_title">Tiêu đề</string>
@@ -38,7 +38,7 @@
     <string name="complete_jod">Hoàn thành</string>
     <string name="edit_job">Chỉnh sửa</string>
     <string name="delete_jod">Xóa</string>
-    <string name="register">Register</string>
+    <string name="register">Đăng ký</string>
     <string name="job_add">Thêm công việc</string>
     <string name="add">Chọn</string>
     <string name="statistic">Thống kê</string>
@@ -60,24 +60,25 @@
     <string name="title_activity_detail_job">Detail Job</string>
 
     <!--Message and Notification-->
-    <string name="message_admin">Administrator</string>
-    <string name="message_employee">Employee</string>
-    <string name="message_edit_and_save">You not save, are you quit?</string>
-    <string name="message_positive_save">Quit</string>
-    <string name="message_negative_save">Cancel</string>
-    <string name="message_delete_job">You want delete?</string>
-    <string name="message_positive_delete_job">Quit</string>
-    <string name="message_negative_delete_job">Delete</string>
+    <string name="message_admin">Quản lý</string>
+    <string name="message_employee">Nhân viên</string>
+    <string name="message_edit_and_save">Bạn chưa lưu, bạn vẫn muốn thoát?</string>
+    <string name="message_positive_save">Thoát</string>
+    <string name="message_negative_save">Hủy</string>
+    <string name="message_delete_job">Bạn có chắc muốn xóa?</string>
+    <string name="message_positive_delete_job">Hủy</string>
+    <string name="message_negative_delete_job">Xóa</string>
 
     <!--Dialog-->
-    <string name="dialog">Loading...</string>
-    <string name="dialog_choose_account_type">Choose Account Type</string>
+    <string name="dialog">Đang tải…</string>
+    <string name="dialog_choose_account_type">Chọn loại tài khoản</string>
     <string name="notification_title">Thông báo</string>
     <string name="notification_text">Có công việc chưa nhận:</string>
 
     <!--Toast-->
     <string name="toast_sign_up_success">Đăng ký thành công</string>
     <string name="toast_domain_exist">Tên miền tồn tại</string>
+    <string name="toast_domain_fail">Tên miền không đúng</string>
     <string name="toast_data_fail">Lỗi nhập liệu</string>
     <string name="toast_username_or_password_empty">Tên đăng nhập và mật khẩu không được để trống</string>
     <string name="toast_account_incorrect">Tài khoản không tồn tại</string>
@@ -88,13 +89,23 @@
     <string name="toast_date_fail">Ngày không hợp lệ</string>
     <string name="toast_add_job_success">Thêm công việc thành công</string>
 
-    <string name="message_graph_state">State</string>
+    <string name="message_graph_state">Trạng thái</string>
     <string name="spannable_total"> Công việc được giao</string>
     <string name="spannable_receive"> Công việc đã nhận</string>
     <string name="spannable_not_receive"> Công việc chưa nhận</string>
 
-    <string name="lable_tap_total"> Total</string>
-    <string name="lable_tap_receive"> RECEIVE</string>
-    <string name="lable_tap_not_receive"> NOT RECEIVE </string>
+    <string name="lable_tap_total"> TỔNG</string>
+    <string name="lable_tap_receive"> ĐÃ NHẬN</string>
+    <string name="lable_tap_not_receive">CHƯA NHẬN</string>
+
+    <string name="label_mn_my_account">Quản lý tài khoản cá nhân</string>
+    <string name="label_mn_my_employees">Quản lý nhân viên</string>
+    <string name="label_mn_my_job">Công việc của tôi</string>
+    <string name="label_mn_sign_out">Đăng xuất</string>
+    <string name="label_mn_information">Thông tin ứng dụng</string>
+    <string name="label_mn_statistic">Thống kê</string>
+    <string name="label_mn_about">Về chúng tôi</string>
+    <string name="label_info_version">Phiên bản</string>
+
 
 </resources>

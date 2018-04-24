@@ -2,36 +2,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Cài đặt">
-        <menu>
-            <item
-                android:id="@+id/mn_my_account"
-                android:title="Quản lý tài khoản cá nhân"
-                app:showAsAction="never" />
+    <item
+        android:id="@+id/mn_my_account"
+        android:title="@string/label_mn_my_account"
+        app:showAsAction="never" />
 
-            <item
-                android:id="@+id/mn_my_employees"
-                android:title="Quản lý nhân viên"
-                app:showAsAction="never" />
+    <item
+        android:id="@+id/mn_my_employees"
+        android:title="@string/label_mn_my_employees"
+        app:showAsAction="never" />
 
-            <item
-                android:id="@+id/mn_my_job"
-                android:title="Công việc của tui"
-                app:showAsAction="never" />
+    <item
+        android:id="@+id/mn_my_job"
+        android:title="@string/label_mn_my_job"
+        app:showAsAction="never" />
 
-            <item
-                android:id="@+id/mn_sign_out"
-                android:title="Đăng xuất"
-                app:showAsAction="never" />
+    <item
+        android:id="@+id/mn_sign_out"
+        android:title="@string/label_mn_sign_out"
+        app:showAsAction="never" />
 
-        </menu>
-    </item>
-
-    <item android:title="Về chúng tôi">
+    <item android:title="@string/label_mn_about">
         <menu>
             <item
                 android:id="@+id/mn_information"
-                android:title="Thông tin ứng dụng "
+                android:title="@string/label_mn_information"
                 app:showAsAction="never" />
         </menu>
     </item>

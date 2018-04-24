@@ -2,27 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Cài đặt">
-        <menu>
 
-            <item
-                android:id="@+id/mn_statistic"
-                android:title="Thống kê"
-                app:showAsAction="never" />
+    <item
+        android:id="@+id/mn_statistic"
+        android:title="@string/label_mn_statistic"
+        app:showAsAction="never" />
 
-            <item
-                android:id="@+id/mn_sign_out"
-                android:title="Đăng xuất"
-                app:showAsAction="never" />
+    <item
+        android:id="@+id/mn_sign_out"
+        android:title="@string/label_mn_sign_out"
+        app:showAsAction="never" />
 
-        </menu>
-    </item>
-
-    <item android:title="Về chúng tôi">
+    <item android:title="@string/label_mn_about">
         <menu>
             <item
                 android:id="@+id/mn_information"
-                android:title="Thông tin ứng dụng "
+                android:title="@string/label_mn_information"
                 app:showAsAction="never" />
         </menu>
     </item>

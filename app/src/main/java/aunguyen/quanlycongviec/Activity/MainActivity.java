@@ -20,8 +20,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -147,6 +149,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences preferences = this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
 
+        View view =  navigationView.getHeaderView(0);
+        final ImageView imgNav = view.findViewById(R.id.img_nav);
+        final TextView tvName = view.findViewById(R.id.tv_name_nav);
+        final TextView tvUsername = view.findViewById(R.id.tv_username_nav);
+
         if (id != null) {
 
             DatabaseReference myAccount = FirebaseDatabase.getInstance().getReference(Constant.NODE_NHAN_VIEN);
@@ -155,6 +162,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     EmployeeObject employeeObject = dataSnapshot.getValue(EmployeeObject.class);
                     if (employeeObject != null) {
+                        Glide.with(MainActivity.this)
+                                .load(employeeObject.getUrlAvatar())
+                                .into(imgNav);
+                        tvName.setText(employeeObject.getNameEmployee());
+                        tvUsername.setText(employeeObject.getUsernameEmployee());
                         if (id.equals(employeeObject.getIdEmployee())) {
                             String accountType = employeeObject.getAccountType();
                             if (accountType.equals("0")) {
