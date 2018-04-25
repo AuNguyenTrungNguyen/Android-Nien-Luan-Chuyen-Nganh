@@ -144,89 +144,83 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
         String timeStart = tvStart.getText().toString();
         String timeEnd = tvEnd.getText().toString();
 
-        if (!title.equals("")
-                && !description.equals("")
-                && !timeStart.equals(getResources().getString(R.string.set_job_start))
-                && !timeEnd.equals(getResources().getString(R.string.set_job_end))
-                && listEmployees.size() > 0) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String now = dateFormat.format(date);
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = new Date();
-            String now = dateFormat.format(date);
+        if (title.equals("")) {
+            Toast.makeText(AddJobActivity.this, getString(R.string.toast_title_empty), Toast.LENGTH_SHORT).show();
+        } else if (timeStart.equals(getResources().getString(R.string.set_job_start))
+                || timeEnd.equals(getResources().getString(R.string.set_job_end))
+                || compareDate(now, timeStart)
+                || compareDate(timeStart, timeEnd)) {
+            Toast.makeText(this, getString(R.string.toast_date_fail), Toast.LENGTH_SHORT).show();
+        } else if (listEmployees.size() == 0) {
+            Toast.makeText(this, getString(R.string.toast_list_empty), Toast.LENGTH_SHORT).show();
+        } else {
 
-            if (compareDate(now, timeStart) && compareDate(timeStart, timeEnd)) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference reference = database.getReference().child(Constant.NODE_CONG_VIEC);
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference reference = database.getReference().child(Constant.NODE_CONG_VIEC);
 
-                String idJob = reference.push().getKey();
-                StringBuilder status = new StringBuilder(Constant.NOT_RECEIVED);
+            String idJob = reference.push().getKey();
+            StringBuilder status = new StringBuilder(Constant.NOT_RECEIVED);
 
-                SharedPreferences preferences = getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
-                String idManage = preferences.getString(Constant.PREFERENCE_KEY_ID, "");
+            SharedPreferences preferences = getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
+            String idManage = preferences.getString(Constant.PREFERENCE_KEY_ID, "");
 
-                List<StatusJob> listStatus = new ArrayList();
+            List<StatusJob> listStatus = new ArrayList<>();
 
-                for (EmployeeObject object : listEmployees) {
-                    StatusJob statusJob = new StatusJob();
-                    statusJob.setIdMember(object.getIdEmployee());
-                    statusJob.setNotify(Constant.NOT_NOTIFY);
+            for (EmployeeObject object : listEmployees) {
+                StatusJob statusJob = new StatusJob();
+                statusJob.setIdMember(object.getIdEmployee());
+                statusJob.setNotify(Constant.NOT_NOTIFY);
 
-                    switch (setStatusJob(timeStart, timeEnd)){
-                        case 1:
-                            status.delete(0, status.length());
-                            status.append(Constant.NOT_RECEIVED);
-                            status.append("/").append(Constant.STILL_DEADLINE);
-                            break;
-                        case 2:
-                            status.delete(0, status.length());
-                            status.append(Constant.NOT_RECEIVED);
-                            status.append("/").append(Constant.EARLY_DEADLINE);
-                            break;
-                        case 3:
-                            status.delete(0, status.length());
-                            status.append(Constant.NOT_RECEIVED);
-                            status.append("/").append(Constant.DEADLINE);
-                            break;
-                        case 4:
-                            status.delete(0, status.length());
-                            status.append(Constant.NOT_RECEIVED);
-                            status.append("/").append(Constant.PAST_DEADLINE);
-                            break;
-                    }
-                    statusJob.setStatus(String.valueOf(status));
-                    listStatus.add(statusJob);
+                switch (setStatusJob(timeStart, timeEnd)) {
+                    case 1:
+                        status.delete(0, status.length());
+                        status.append(Constant.NOT_RECEIVED);
+                        status.append("/").append(Constant.STILL_DEADLINE);
+                        break;
+                    case 2:
+                        status.delete(0, status.length());
+                        status.append(Constant.NOT_RECEIVED);
+                        status.append("/").append(Constant.EARLY_DEADLINE);
+                        break;
+                    case 3:
+                        status.delete(0, status.length());
+                        status.append(Constant.NOT_RECEIVED);
+                        status.append("/").append(Constant.DEADLINE);
+                        break;
+                    case 4:
+                        status.delete(0, status.length());
+                        status.append(Constant.NOT_RECEIVED);
+                        status.append("/").append(Constant.PAST_DEADLINE);
+                        break;
                 }
-
-                JobObject jobObject = new JobObject();
-                jobObject.setIdJob(idJob);
-                jobObject.setIdManageJob(idManage);
-                jobObject.setTitleJob(title);
-                jobObject.setDescriptionJob(description);
-                jobObject.setStartDateJob(timeStart);
-                jobObject.setEndDateJob(timeEnd);
-                jobObject.setStatusJob(String.valueOf(status));
-                jobObject.setListIdMember(listStatus);
-
-                dialog.show();
-
-                reference.child(idJob).setValue(jobObject).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        dialog.dismiss();
-                        Toast.makeText(AddJobActivity.this, getString(R.string.toast_add_job_success), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            } else {
-                Toast.makeText(this, getString(R.string.toast_date_fail), Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                statusJob.setStatus(String.valueOf(status));
+                listStatus.add(statusJob);
             }
 
-        } else {
-            Toast.makeText(this, getString(R.string.toast_data_fail), Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-        }
+            JobObject jobObject = new JobObject();
+            jobObject.setIdJob(idJob);
+            jobObject.setIdManageJob(idManage);
+            jobObject.setTitleJob(title);
+            jobObject.setDescriptionJob(description);
+            jobObject.setStartDateJob(timeStart);
+            jobObject.setEndDateJob(timeEnd);
+            jobObject.setStatusJob(String.valueOf(status));
+            jobObject.setListIdMember(listStatus);
 
+            dialog.show();
+
+            reference.child(idJob).setValue(jobObject).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    dialog.dismiss();
+                    Toast.makeText(AddJobActivity.this, getString(R.string.toast_add_job_success), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private void setTime(final TextView textView, String text) {
@@ -278,7 +272,7 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
         int mouthEnd = Integer.parseInt(splitEnd[1]);
         int yearEnd = Integer.parseInt(splitEnd[2]);
 
-        return (yearEnd >= yearStart && mouthEnd >= mouthStart && dayEnd >= dayStart);
+        return (yearEnd < yearStart || mouthEnd < mouthStart || dayEnd < dayStart);
     }
 
     private int setStatusJob(String start, String end) {
@@ -294,19 +288,19 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
 
         if (yearEnd - yearStart > 0) {
             return 1;
-        }else{
-            if(mouthEnd - mouthStart > 0){
+        } else {
+            if (mouthEnd - mouthStart > 0) {
                 return 1;
-            }else{
-                if(dayEnd - dayStart > 3){
+            } else {
+                if (dayEnd - dayStart > 3) {
                     return 1;
-                }else if(dayEnd - dayStart <= 3 && dayEnd - dayStart > 0){
+                } else if (dayEnd - dayStart <= 3 && dayEnd - dayStart > 0) {
                     return 2;
-                }else if(dayEnd - dayStart == 0){
+                } else if (dayEnd - dayStart == 0) {
                     return 3;
                 }
             }
         }
-        return  4;
+        return 4;
     }
 }

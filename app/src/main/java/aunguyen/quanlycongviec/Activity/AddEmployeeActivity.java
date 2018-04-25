@@ -248,7 +248,7 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
                         }
                     });
         } else {
-            Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_data_fail), Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_internet), Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         }
     }

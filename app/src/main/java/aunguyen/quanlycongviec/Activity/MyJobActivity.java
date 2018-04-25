@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -109,6 +108,8 @@ public class MyJobActivity extends AppCompatActivity {
                     }
                     if (listJobs.size() > 0){
                         tvMessage.setVisibility(View.GONE);
+                    }else{
+                        tvMessage.setVisibility(View.VISIBLE);
                     }
 
                     progressDialog.dismiss();
@@ -116,14 +117,12 @@ public class MyJobActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(DatabaseError error) {
-                    Log.i("ABC", "Failed to read value.", error.toException());
                     progressDialog.dismiss();
                 }
             });
 
         } else {
             progressDialog.dismiss();
-            Log.i("ANTN", "ID Manage is null!");
         }
     }
 

@@ -26,6 +26,7 @@
             android:layout_marginRight="16dp" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_message"
             android:gravity="center"
             android:textSize="30sp"

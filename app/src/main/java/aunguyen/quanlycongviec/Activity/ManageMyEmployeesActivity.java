@@ -84,6 +84,8 @@ public class ManageMyEmployeesActivity extends AppCompatActivity implements View
                     if (listEmployee.size() > 0) {
                         tvMessage.setVisibility(View.GONE);
                         rvEmployee.setVisibility(View.VISIBLE);
+                    }else {
+                        tvMessage.setVisibility(View.VISIBLE);
                     }
                     progressDialog.dismiss();
                 }

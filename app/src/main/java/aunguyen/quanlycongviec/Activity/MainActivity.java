@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     EmployeeObject employeeObject = dataSnapshot.getValue(EmployeeObject.class);
                     if (employeeObject != null) {
-                        Glide.with(MainActivity.this)
+                        Glide.with(getApplicationContext())
                                 .load(employeeObject.getUrlAvatar())
                                 .into(imgNav);
                         tvName.setText(employeeObject.getNameEmployee());
