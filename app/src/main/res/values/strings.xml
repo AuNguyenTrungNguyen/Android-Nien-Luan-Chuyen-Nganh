@@ -73,7 +73,11 @@
     <string name="dialog">Đang tải…</string>
     <string name="dialog_choose_account_type">Chọn loại tài khoản</string>
     <string name="notification_title">Thông báo</string>
-    <string name="notification_text">Có công việc chưa nhận:</string>
+    <string name="notification_text">Có công việc chưa nhận</string>
+    <string name="dialog_change_wifi">Vui lòng kiểm tra kết nối mạng</string>
+    <string name="dialog_change_wifi_title">Đang kiểm tra kết nối mạng</string>
+    <string name="dialog_change_wifi_positive">Kiểm tra</string>
+    <string name="dialog_change_wifi_negative">Thoát</string>
 
     <!--Toast V2-->
     <string name="toast_full_name_empty">Họ tên rỗng</string>

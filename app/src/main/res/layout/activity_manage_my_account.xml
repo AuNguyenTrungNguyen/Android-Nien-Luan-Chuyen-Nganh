@@ -127,8 +127,7 @@ android:orientation="vertical">
                 android:text="@string/phone"
                 android:padding="20dp"
                 android:textSize="20dp"
-                android:textColor="#000"
-                android:inputType="date"/>
+                android:textColor="#000" />
 
             <EditText
                 android:textColor="#000"
