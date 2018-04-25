@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -197,23 +198,27 @@ public class ManageMyAccountActivity extends AppCompatActivity implements View.O
             String phone = edtPhone.getText().toString();
             String address = edtAddress.getText().toString();
 
-            database.getReference(Constant.NODE_NHAN_VIEN).child(id).
-                    child(Constant.KEY_ADDRESS).
-                    setValue(address);
-            database.getReference(Constant.NODE_NHAN_VIEN).child(id).
-                    child(Constant.KEY_BIRTHDAY).
-                    setValue(birthday);
-            database.getReference(Constant.NODE_NHAN_VIEN).child(id).
-                    child(Constant.KEY_PHONE).
-                    setValue(phone);
-            database.getReference(Constant.NODE_NHAN_VIEN).child(id).
-                    child(Constant.KEY_NAME).
-                    setValue(name);
+            if (!checkInputPhone(phone)) {
+                Toast.makeText(this, getString(R.string.toast_phone_incorrect), Toast.LENGTH_SHORT).show();
+            }else{
+                database.getReference(Constant.NODE_NHAN_VIEN).child(id).
+                        child(Constant.KEY_ADDRESS).
+                        setValue(address);
+                database.getReference(Constant.NODE_NHAN_VIEN).child(id).
+                        child(Constant.KEY_BIRTHDAY).
+                        setValue(birthday);
+                database.getReference(Constant.NODE_NHAN_VIEN).child(id).
+                        child(Constant.KEY_PHONE).
+                        setValue(phone);
+                database.getReference(Constant.NODE_NHAN_VIEN).child(id).
+                        child(Constant.KEY_NAME).
+                        setValue(name);
 
-            flag = true;
-            edtEnable(false);
-            imgEdit.setImageResource(R.drawable.ic_edit);
-            check = false;
+                flag = true;
+                edtEnable(false);
+                imgEdit.setImageResource(R.drawable.ic_edit);
+                check = false;
+            }
         }
     }
 
@@ -245,5 +250,30 @@ public class ManageMyAccountActivity extends AppCompatActivity implements View.O
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+    }
+
+    private boolean checkInputPhone(String phone) {
+        phone = phone.trim();
+        int length = phone.length();
+
+        if (phone.equals("")) {
+            return true;
+        }
+
+        if (length >= 10 && length <= 11) {
+            String one = phone.substring(0, 1);
+            String two = phone.substring(1, 2);
+
+            for (int i = 1; i < length; i++) {
+
+                if (phone.charAt(i) < '0' || phone.charAt(i) > '9') {
+                    return false;
+                }
+            }
+
+            return one.equals("0") && !two.equals("0");
+        }
+
+        return false;
     }
 }

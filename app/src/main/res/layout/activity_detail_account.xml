@@ -21,9 +21,9 @@
             <ImageView
                 android:id="@+id/header_cover_image"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="160dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/smallbackground" />
 
             <ImageView
                 android:id="@+id/img_avatar"
@@ -50,12 +50,10 @@
                     android:id="@+id/img_edit"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="36dp"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="26dp"
-                    android:layout_toEndOf="@+id/edt_full_name"
-                    android:layout_toRightOf="@+id/edt_full_name"
+                    android:layout_alignParentRight="true"
                     android:src="@drawable/ic_edit" />
 
 
@@ -82,7 +80,7 @@
                     android:gravity="center"
                     android:text="CEO"
                     android:textColor="#fff"
-                    android:textSize="28sp" />
+                    android:textSize="24sp" />
 
             </RelativeLayout>
 

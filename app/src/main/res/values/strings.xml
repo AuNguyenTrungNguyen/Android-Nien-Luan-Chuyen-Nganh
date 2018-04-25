@@ -45,7 +45,6 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="title_activity_sign_in">Sign In</string>
     <string name="title_activity_sign_up">Sign Up</string>
     <string name="title_activity_my_employees">Management Employees</string>
@@ -93,7 +92,7 @@
     <string name="toast_title_empty">Tên đăng nhập rỗng</string>
     <string name="toast_date_fail">Ngày không hợp lệ</string>
     <string name="toast_list_empty">Chưa thêm nhân viên</string>
-    <string name="toast_add_employee_success">Đăng ký thành công</string>
+    <string name="toast_add_employee_success">Thêm nhân viên thành công</string>
     <string name="toast_delete_success">Xóa thành công</string>
     <string name="toast_delete_fail">Xóa thất bại</string>
     <string name="toast_add_employee_not_success">Có lỗi khi thêm nhân viên</string>
