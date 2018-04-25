@@ -87,17 +87,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                     JobObject jobObject = dataSnapshot.getValue(JobObject.class);
+                    String idJob = jobObject.getIdJob();
 
                     List<StatusJob> list = jobObject.getListIdMember();
                     for (int i = 0; i < list.size(); i++) {
                         String notify = list.get(i).getNotify();
                         if (id.equals(list.get(i).getIdMember())
                                 && notify.equals(Constant.NOT_NOTIFY)) {
-                            Intent intent = new Intent(MainActivity.this, InformationActivity.class);
+                            Intent intent = new Intent(MainActivity.this, DetailJobEmployeeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
+                            intent.putExtra("IDJob", idJob);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, count[0], intent, PendingIntent.FLAG_ONE_SHOT);
                             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
-                                    .setSmallIcon(R.drawable.ic_mail)
+                                    .setSmallIcon(R.drawable.ic_notify)
                                     .setContentTitle(getString(R.string.notification_title))
                                     .setContentText(getString(R.string.notification_text) + " " + jobObject.getTitleJob())
                                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
