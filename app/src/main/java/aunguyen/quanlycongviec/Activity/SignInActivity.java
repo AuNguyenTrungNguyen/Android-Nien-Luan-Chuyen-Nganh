@@ -99,12 +99,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void showPass() {
-        if(!isShow){
+        if (!isShow) {
             edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             isShow = true;
             layoutPassword.setPasswordVisibilityToggleEnabled(false);
-        }else{
-            edtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD );
+        } else {
+            edtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             isShow = false;
             layoutPassword.setPasswordVisibilityToggleEnabled(true);
         }
@@ -117,26 +117,25 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signIn() {
-
-        final ProgressDialog progressDialog;
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle(getResources().getString(R.string.dialog));
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
         String email = edtUsername.getText().toString();
         String password = edtPassword.getText().toString();
 
-        //check(email, password);
-
-        if (!email.equals("") && !password.equals("")) {
+        if (email.equals("")) {
+            Toast.makeText(this, getString(R.string.toast_username_empty), Toast.LENGTH_SHORT).show();
+        } else if (!checkInputPassword(password)) {
+            Toast.makeText(this, getString(R.string.toast_password_incorrect), Toast.LENGTH_SHORT).show();
+        } else {
+            final ProgressDialog progressDialog;
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle(getResources().getString(R.string.dialog));
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 String email = user.getEmail();
                                 String domain = email.substring(email.indexOf('@'));
@@ -154,10 +153,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             }
                         }
                     });
-
-        } else {
-            Toast.makeText(this, getResources().getString(R.string.toast_username_or_password_empty), Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
         }
     }
 
@@ -189,27 +184,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         editor.apply();
     }
 
-    /*private boolean check(String username, String password){
+    private boolean checkInputPassword(String pass) {
 
-        if(TextUtils.isEmpty(username)){
-            edtUsername.setError("Username is empty!");
-        }else{
-            if(TextUtils.isEmpty(password)){
-                edtPassword.setError("Password is empty!");
-            }else{
-                if(!username.contains("@")){
-                    edtUsername.setError("Username must @!");
-                }else{
-                    if(!username.contains(".com")){
-                        edtUsername.setError("Username must .com!");
-                    }else{
-                        Toast.makeText(this, "OKE", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        }
+        pass = pass.trim();
 
-        return true;
-    }*/
+        return !pass.equals("") && pass.length() >= 6;
+    }
 
 }
