@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Job Management</string>
+    <string name="app_description">Giúp quản lý công việc hiệu quả hơn</string>
 
     <string name="username">Tài khoản</string>
     <string name="password">Mật khẩu</string>
@@ -84,7 +85,6 @@
     <string name="toast_sign_up_success">Đăng ký thành công</string>
     <string name="toast_sign_up_fail">Đăng ký thất bại</string>
     <string name="toast_account_incorrect">Tài khoản không đúng</string>
-
     <string name="toast_internet">Mất kết nối mạng</string>
     <string name="toast_title_empty">Tên đăng nhập rỗng</string>
     <string name="toast_date_fail">Ngày không hợp lệ</string>
@@ -92,17 +92,8 @@
     <string name="toast_add_employee_success">Đăng ký thành công</string>
     <string name="toast_delete_success">Xóa thành công</string>
     <string name="toast_delete_fail">Xóa thất bại</string>
-
-
-
-    <!--Toast v1-->
-    <string name="toast_username_or_password_empty">Tên đăng nhập và mật khẩu không được để trống</string>
-
     <string name="toast_add_employee_not_success">Có lỗi khi thêm nhân viên</string>
-
-    <!--Activity Add Job -->
-    <string name="toast_add_all_employee">Bạn đã thêm toàn bộ nhân viên!</string>
-
+    <string name="toast_add_all_employee">Bạn đã thêm toàn bộ nhân viên</string>
     <string name="toast_add_job_success">Thêm công việc thành công</string>
 
     <string name="message_graph_state">Trạng thái</string>
