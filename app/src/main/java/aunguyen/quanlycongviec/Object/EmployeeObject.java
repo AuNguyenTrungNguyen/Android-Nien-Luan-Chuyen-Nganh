@@ -10,7 +10,6 @@ public class EmployeeObject implements Serializable {
     private String idEmployee;
     private String idManage;
     private String usernameEmployee;
-    private String officeEmployee; //Chuc vu
     private String nameEmployee;
     private String birthdayEmployee;
     private String phoneEmployee;
@@ -25,7 +24,6 @@ public class EmployeeObject implements Serializable {
     public EmployeeObject(String idEmployee,
                           String idManage,
                           String usernameEmployee,
-                          String officeEmployee,
                           String nameEmployee,
                           String birthdayEmployee,
                           String phoneEmployee,
@@ -36,7 +34,6 @@ public class EmployeeObject implements Serializable {
         this.idEmployee = idEmployee;
         this.idManage = idManage;
         this.usernameEmployee = usernameEmployee;
-        this.officeEmployee = officeEmployee;
         this.nameEmployee = nameEmployee;
         this.birthdayEmployee = birthdayEmployee;
         this.phoneEmployee = phoneEmployee;
@@ -60,14 +57,6 @@ public class EmployeeObject implements Serializable {
 
     public void setUsernameEmployee(String usernameEmployee) {
         this.usernameEmployee = usernameEmployee;
-    }
-
-    public String getOfficeEmployee() {
-        return officeEmployee;
-    }
-
-    public void setOfficeEmployee(String officeEmployee) {
-        this.officeEmployee = officeEmployee;
     }
 
     public String getIdEmployee() {

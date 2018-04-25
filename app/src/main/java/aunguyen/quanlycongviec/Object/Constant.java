@@ -8,12 +8,12 @@ public class Constant {
     public static final String NODE_CONG_VIEC = "CongViec";
     public static final String NODE_NHAN_VIEN = "NhanVien";
     public static final String NODE_DOMAIN = "Domain";
-    public static final String NODE_OFFICE = "Office";
     public static final String PREFERENCE_NAME = "QuanLyCongViec";
     public static final String PREFERENCE_KEY_ID = "IdNhanVien";
     public static final String PREFERENCE_DOMAIN = "Domain";
     public static final String URL_MALE = "https://firebasestorage.googleapis.com/v0/b/nienluanchuyennganh-3fcb7.appspot.com/o/male.png?alt=media&token=2d1721fe-f658-4d37-9c3f-4ca7d683f720";
     public static final String URL_FEMALE = "https://firebasestorage.googleapis.com/v0/b/nienluanchuyennganh-3fcb7.appspot.com/o/female.png?alt=media&token=fb6252b7-9250-4aae-a498-1b8730b0bace";
+    public static final String DEFAULT_BIRTHDAY = "01/01/1995";
 
     //Child of a Efinal mployee on firebase
     public static final String KEY_ACCOUNT_TYPE = "accountType";
@@ -31,10 +31,8 @@ public class Constant {
     //status of job
     public static final String RECEIVED = "Đã Nhận";
     public static final String NOT_RECEIVED = "Chưa Nhận";
-
     public static final String NOTIFY = "Đã Gửi";
     public static final String NOT_NOTIFY = "Chưa Gửi";
-
     public static final String COMPLETE = "Hoàn Thành";//0
     public static final String STILL_DEADLINE = "Còn Hạn"; //1
     public static final String EARLY_DEADLINE = "Sắp Hết Hạn"; //2
@@ -49,9 +47,8 @@ public class Constant {
     public static final String KEY_START_STATISTIC = "start";
     public static final String KEY_END_STATISTIC = "end";
 
-    //detail joc
+    //detail jod
     public static final String KEY_TITLE_JOB = "titleJob";
     public static final String KEY_DESCRIPTION_JOB = "descriptionJob";
-
 
 }

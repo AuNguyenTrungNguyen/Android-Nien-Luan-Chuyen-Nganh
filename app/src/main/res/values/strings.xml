@@ -16,8 +16,6 @@
     <string name="job_start">Thời gian bắt đầu</string>
     <string name="job_end">Thời gian kết thúc</string>
 
-    <!--<string name="office_default">Manager</string>-->
-
     <!--Label editText-->
     <string name="job_title">Tiêu đề</string>
     <string name="job_description">Mô tả</string>
@@ -38,7 +36,7 @@
     <string name="complete_jod">Hoàn thành</string>
     <string name="edit_job">Chỉnh sửa</string>
     <string name="delete_jod">Xóa</string>
-    <string name="register">Đăng ký</string>
+    <string name="register">Thêm nhân viên</string>
     <string name="job_add">Thêm công việc</string>
     <string name="add">Chọn</string>
     <string name="statistic">Thống kê</string>
@@ -75,8 +73,18 @@
     <string name="notification_title">Thông báo</string>
     <string name="notification_text">Có công việc chưa nhận:</string>
 
-    <!--Toast-->
+    <!--Toast V2-->
+    <string name="toast_full_name_empty">Họ tên rỗng</string>
+    <string name="toast_username_empty">Tên đăng nhập rỗng</string>
+    <string name="toast_password_incorrect">Mật khẩu chứa ít nhất 6 ký tự</string>
+    <string name="toast_domain_incorrect">Tên miền không đúng</string>
+    <string name="toast_phone_incorrect">Số điện thoại không đúng</string>
     <string name="toast_sign_up_success">Đăng ký thành công</string>
+    <string name="toast_sign_up_fail">Đăng ký thất bại</string>
+    <string name="toast_internet">Mất kết nối mạng</string>
+
+    <!--Toast v1-->
+
     <string name="toast_domain_exist">Tên miền tồn tại</string>
     <string name="toast_domain_fail">Tên miền không đúng</string>
     <string name="toast_data_fail">Lỗi nhập liệu</string>

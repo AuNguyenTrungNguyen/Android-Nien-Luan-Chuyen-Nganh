@@ -119,7 +119,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_sign_up:
                 signUp();
                 break;
@@ -135,12 +135,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void showPass() {
-        if(!isShow){
+        if (!isShow) {
             edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             isShow = true;
             layoutPassword.setPasswordVisibilityToggleEnabled(false);
-        }else{
-            edtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD );
+        } else {
+            edtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             isShow = false;
             layoutPassword.setPasswordVisibilityToggleEnabled(true);
         }
@@ -153,22 +153,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         int mouthDef = 0;
         int yearDef = 1995;
 
-        if(!birthday.equals(getString(R.string.set_birth_day))){
+        if (!birthday.equals(getString(R.string.set_birth_day))) {
             String split[] = birthday.split("/");
-            dayDef =  Integer.parseInt(split[0]);
-            mouthDef =  Integer.parseInt(split[1]) - 1;
-            yearDef =  Integer.parseInt(split[2]);
+            dayDef = Integer.parseInt(split[0]);
+            mouthDef = Integer.parseInt(split[1]) - 1;
+            yearDef = Integer.parseInt(split[2]);
         }
 
         DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                 String day, month, year;
-                day = (i2 < 10) ? "0"+i2 : ""+i2;
+                day = (i2 < 10) ? "0" + i2 : "" + i2;
 
-                i1+=1;
-                month = (i1 < 10) ? "0"+i1 : ""+i1;
-                year = ""+i;
+                i1 += 1;
+                month = (i1 < 10) ? "0" + i1 : "" + i1;
+                year = "" + i;
 
                 tvBirthday.setText(day + "/" + month + "/" + year);
 
@@ -179,87 +179,89 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void signUp() {
 
-        final ProgressDialog progressDialog;
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle(getResources().getString(R.string.dialog));
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
-        final boolean[] isFirst = {true};
-
-        final List<String> listDomain = new ArrayList<>();
-
+        final String fullName = edtFullName.getText().toString();
         final String username = edtUsername.getText().toString();
         final String password = edtPassword.getText().toString();
         final String domain = edtDomain.getText().toString();
-        final String fullName = edtFullName.getText().toString();
-
         final String phone = edtPhone.getText().toString();
         final String address = edtAddress.getText().toString();
 
-        final DatabaseReference referenceDomain, referenceEmployee;
+        if (fullName.equals("")) {
+            Toast.makeText(this, getString(R.string.toast_full_name_empty), Toast.LENGTH_SHORT).show();
+        } else if (username.equals("")) {
+            Toast.makeText(this, getString(R.string.toast_username_empty), Toast.LENGTH_SHORT).show();
+        } else if (!checkInputPassword(password)) {
+            Toast.makeText(this, getString(R.string.toast_password_incorrect), Toast.LENGTH_SHORT).show();
+        } else if (!checkInputDomain(domain)) {
+            Toast.makeText(this, getString(R.string.toast_domain_incorrect), Toast.LENGTH_SHORT).show();
+        } else if (!checkInputPhone(phone)) {
+            Toast.makeText(this, getString(R.string.toast_phone_incorrect), Toast.LENGTH_SHORT).show();
+        } else {
+            final ProgressDialog progressDialog;
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle(getResources().getString(R.string.dialog));
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
-        referenceDomain = database.getReference(Constant.NODE_DOMAIN);
-        referenceEmployee = database.getReference(Constant.NODE_NHAN_VIEN);
+            final boolean[] isFirst = {true};
+            final List<String> listDomain = new ArrayList<>();
+            final DatabaseReference referenceDomain, referenceEmployee;
+            referenceDomain = database.getReference(Constant.NODE_DOMAIN);
+            referenceEmployee = database.getReference(Constant.NODE_NHAN_VIEN);
 
-        //Check domain exist
-        referenceDomain.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            referenceDomain.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    String domain = snapshot.getValue(String.class);
-                    listDomain.add(domain);
-                }
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String domain = snapshot.getValue(String.class);
+                        listDomain.add(domain);
+                    }
 
-                if(listDomain.contains(domain) && isFirst[0]){
-                    Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_domain_exist), Toast.LENGTH_SHORT).show();
-                    isFirst[0] = false;
-                    progressDialog.dismiss();
-                }else if(isFirst[0]){
-                    if(!username.equals("") && !password.equals("") && !domain.equals("") && !fullName.equals("")){
-                        mAuth.createUserWithEmailAndPassword(username+domain, password)
+                    if (listDomain.contains(domain) && isFirst[0]) {
+                        Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_domain_exist), Toast.LENGTH_SHORT).show();
+                        isFirst[0] = false;
+                        progressDialog.dismiss();
+                    } else if (isFirst[0]) {
+                        mAuth.createUserWithEmailAndPassword(username + domain, password)
                                 .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
                                             FirebaseUser user = mAuth.getCurrentUser();
-
                                             EmployeeObject employeeObject = new EmployeeObject();
                                             employeeObject.setAccountType("0");
                                             employeeObject.setIdEmployee(user.getUid());
                                             employeeObject.setIdManage("");
-                                            employeeObject.setUsernameEmployee(username+domain);
-                                            //employeeObject.setOfficeEmployee(getResources().getString(R.string.office_default));
+                                            employeeObject.setUsernameEmployee(username + domain);
 
-                                            if(!phone.equals("")){
+                                            if (!phone.equals("")) {
                                                 employeeObject.setPhoneEmployee(phone);
-                                            }else{
+                                            } else {
                                                 employeeObject.setPhoneEmployee("");
                                             }
 
-                                            if(!address.equals("")){
+                                            if (!address.equals("")) {
                                                 employeeObject.setAddressEmployee(address);
-                                            }else{
+                                            } else {
                                                 employeeObject.setAddressEmployee("");
                                             }
 
                                             employeeObject.setNameEmployee(fullName);
 
-                                            if (rdbMale.isChecked()){
+                                            if (rdbMale.isChecked()) {
                                                 employeeObject.setGenderEmployee(getResources().getString(R.string.male));
                                                 employeeObject.setUrlAvatar(Constant.URL_MALE);
-                                            }else{
+                                            } else {
                                                 employeeObject.setGenderEmployee(getResources().getString(R.string.female));
                                                 employeeObject.setUrlAvatar(Constant.URL_FEMALE);
                                             }
 
-                                            employeeObject.setBirthdayEmployee("01/01/1995");
+                                            employeeObject.setBirthdayEmployee(Constant.DEFAULT_BIRTHDAY);
 
                                             referenceEmployee.child(user.getUid()).setValue(employeeObject);
                                             referenceDomain.push().setValue(domain);
 
-                                            progressDialog.dismiss();
                                             Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_sign_up_success), Toast.LENGTH_SHORT).show();
                                             isFirst[0] = false;
 
@@ -267,26 +269,76 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             SharedPreferences.Editor editor = preferences.edit();
                                             editor.putString(Constant.PREFERENCE_DOMAIN, domain);
                                             editor.apply();
-
                                             startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-                                        }else{
                                             progressDialog.dismiss();
-                                            Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_domain_fail), Toast.LENGTH_SHORT).show();
+
+                                        } else {
+                                            Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_sign_up_fail), Toast.LENGTH_SHORT).show();
+                                            progressDialog.dismiss();
                                         }
                                     }
                                 });
-                    }else{
+                    } else {
                         progressDialog.dismiss();
-                        Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_data_fail), Toast.LENGTH_SHORT).show();
                     }
                 }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    progressDialog.dismiss();
+                    Toast.makeText(SignUpActivity.this, getResources().getString(R.string.toast_sign_up_fail), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private boolean checkInputPassword(String pass) {
+
+        pass = pass.trim();
+
+        return !pass.equals("") && pass.length() >= 6;
+    }
+
+    private boolean checkInputDomain(String domain) {
+
+        domain = domain.trim();
+        int length = domain.length();
+
+        if (length > 0) {
+            String check = domain.substring(0, 1);
+            int position = domain.indexOf(".");
+
+            return check.equals("@")
+                    && position != -1
+                    && position != 1
+                    && position != (length - 1);
+
+        }
+        return false;
+    }
+
+    private boolean checkInputPhone(String phone) {
+        phone = phone.trim();
+        int length = phone.length();
+
+        if (phone.equals("")) {
+            return true;
+        }
+
+        if (length >= 10 && length <= 11) {
+            String one = phone.substring(0, 1);
+            String two = phone.substring(1, 2);
+
+            for (int i = 1; i < length; i++) {
+
+                if (phone.charAt(i) < '0' || phone.charAt(i) > '9') {
+                    return false;
+                }
             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                progressDialog.dismiss();
-            }
-        });
+            return one.equals("0") && !two.equals("0");
+        }
+
+        return false;
     }
 }
