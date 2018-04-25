@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +31,7 @@ public class SelectEmployeeToJobActivity extends AppCompatActivity implements Vi
     private Toolbar toolbarEmployee;
 
     private Button btnAdd;
+    private TextView tvMessage;
 
     private RecyclerView rvEmployee;
     private List<EmployeeObject> listEmployees;
@@ -90,7 +92,7 @@ public class SelectEmployeeToJobActivity extends AppCompatActivity implements Vi
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-
+                    tvMessage.setVisibility(View.VISIBLE);
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         EmployeeObject employeeObject = snapshot.getValue(EmployeeObject.class);
 
@@ -100,6 +102,10 @@ public class SelectEmployeeToJobActivity extends AppCompatActivity implements Vi
                             listCheck.add(false);
                             employeeAdapter.notifyDataSetChanged();
                         }
+                    }
+
+                    if (listEmployees.size() > 0) {
+                        tvMessage.setVisibility(View.GONE);
                     }
                     getData();
                     progressDialog.dismiss();
@@ -122,6 +128,7 @@ public class SelectEmployeeToJobActivity extends AppCompatActivity implements Vi
 
     private void addControls() {
         btnAdd = findViewById(R.id.btn_add);
+        tvMessage = findViewById(R.id.tv_message);
 
         rvEmployee = findViewById(R.id.rv_employee);
         listEmployees = new ArrayList<>();

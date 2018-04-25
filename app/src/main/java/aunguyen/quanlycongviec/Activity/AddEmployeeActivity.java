@@ -172,11 +172,6 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
 
     private void signUp() {
 
-        final ProgressDialog progressDialog;
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle(getResources().getString(R.string.dialog));
-        progressDialog.show();
-
         SharedPreferences preferences = AddEmployeeActivity.this.getSharedPreferences(Constant.PREFERENCE_NAME, MODE_PRIVATE);
 
         final String id = preferences.getString(Constant.PREFERENCE_KEY_ID, null);
@@ -189,11 +184,24 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
         final String phone = edtPhone.getText().toString();
         final String address = edtAddress.getText().toString();
 
-        final DatabaseReference referenceEmployee;
+        if (fullName.equals("")) {
+            Toast.makeText(this, getString(R.string.toast_full_name_empty), Toast.LENGTH_SHORT).show();
+        } else if (username.equals("")) {
+            Toast.makeText(this, getString(R.string.toast_username_empty), Toast.LENGTH_SHORT).show();
+        } else if (!checkInputPassword(password)) {
+            Toast.makeText(this, getString(R.string.toast_password_incorrect), Toast.LENGTH_SHORT).show();
+        } else if (!checkInputPhone(phone)) {
+            Toast.makeText(this, getString(R.string.toast_phone_incorrect), Toast.LENGTH_SHORT).show();
+        } else {
 
-        referenceEmployee = databaseEmployee.getReference(Constant.NODE_NHAN_VIEN);
+            final ProgressDialog progressDialog;
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle(getResources().getString(R.string.dialog));
+            progressDialog.show();
 
-        if (!username.equals("") && !password.equals("") && !fullName.equals("")) {
+            final DatabaseReference referenceEmployee;
+            referenceEmployee = databaseEmployee.getReference(Constant.NODE_NHAN_VIEN);
+
             mAuth.createUserWithEmailAndPassword(username + domain, password)
                     .addOnCompleteListener(AddEmployeeActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -237,19 +245,48 @@ public class AddEmployeeActivity extends AppCompatActivity implements View.OnCli
                                 }
 
                                 employeeObject.setBirthdayEmployee("01/01/1995");
-
                                 referenceEmployee.child(user.getUid()).setValue(employeeObject);
-                                Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_sign_up_success), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_add_employee_success), Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
-                            }else{
+                            } else {
                                 Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_add_employee_not_success), Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                             }
                         }
                     });
-        } else {
-            Toast.makeText(AddEmployeeActivity.this, getResources().getString(R.string.toast_internet), Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
+
         }
+    }
+
+    private boolean checkInputPassword(String pass) {
+
+        pass = pass.trim();
+
+        return !pass.equals("") && pass.length() >= 6;
+    }
+
+    private boolean checkInputPhone(String phone) {
+        phone = phone.trim();
+        int length = phone.length();
+
+        if (phone.equals("")) {
+            return true;
+        }
+
+        if (length >= 10 && length <= 11) {
+            String one = phone.substring(0, 1);
+            String two = phone.substring(1, 2);
+
+            for (int i = 1; i < length; i++) {
+
+                if (phone.charAt(i) < '0' || phone.charAt(i) > '9') {
+                    return false;
+                }
+            }
+
+            return one.equals("0") && !two.equals("0");
+        }
+
+        return false;
     }
 }

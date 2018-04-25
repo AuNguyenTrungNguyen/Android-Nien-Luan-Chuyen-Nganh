@@ -168,7 +168,7 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
             edtEnable(true);
             flag = false;
             check = true;
-            btnEditJob.setText("SAVE");
+            btnEditJob.setText(getString(R.string.save));
 
         } else {
             save();
@@ -182,8 +182,7 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
                 String title = edtTitle.getText().toString();
                 String description = edtDescription.getText().toString();
 
-                if (!title.equals("") && !description.equals("")) {
-                    JobObject jobObject = new JobObject();
+                if (!title.equals("")) {
 
                     database.getReference(Constant.NODE_CONG_VIEC)
                             .child(id)
@@ -197,7 +196,7 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
 
                     flag = true;
                     edtEnable(false);
-                    btnEditJob.setText("EDIT");
+                    btnEditJob.setText(getString(R.string.edit_job));
                     check = false;
                 }
             }
@@ -260,19 +259,19 @@ public class DetailJobActivity extends AppCompatActivity implements View.OnClick
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
                                 dataSnapshot.getRef().removeValue();
-                                Toast.makeText(DetailJobActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DetailJobActivity.this, getString(R.string.toast_delete_success), Toast.LENGTH_SHORT).show();
                                 finish();
                             }
 
                             @Override
                             public void onCancelled(DatabaseError error) {
                                 dialogInterface.dismiss();
-                                Toast.makeText(DetailJobActivity.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DetailJobActivity.this, getString(R.string.toast_delete_fail), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 } else {
-                    Toast.makeText(DetailJobActivity.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailJobActivity.this, getString(R.string.toast_delete_fail), Toast.LENGTH_SHORT).show();
                     dialogInterface.dismiss();
                 }
             }

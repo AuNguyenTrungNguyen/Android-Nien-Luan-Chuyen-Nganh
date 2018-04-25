@@ -286,14 +286,6 @@ public class DetailJobEmployeeActivity extends AppCompatActivity implements View
                                         .child(String.valueOf(i))
                                         .child("status")
                                         .setValue(Constant.RECEIVED + "/" + status[1]);
-
-                                /*database.getReference(Constant.NODE_CONG_VIEC)
-                                        .child(idJob)
-                                        .child("listIdMember")
-                                        .child(String.valueOf(i))
-                                        .child("notify")
-                                        .setValue(Constant.NOTIFY);*/
-
                                 break;
                             }
                         }

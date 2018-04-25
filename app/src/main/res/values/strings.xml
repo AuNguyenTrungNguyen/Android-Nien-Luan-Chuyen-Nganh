@@ -40,6 +40,7 @@
     <string name="job_add">Thêm công việc</string>
     <string name="add">Chọn</string>
     <string name="statistic">Thống kê</string>
+    <string name="save">Lưu</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -88,6 +89,10 @@
     <string name="toast_title_empty">Tên đăng nhập rỗng</string>
     <string name="toast_date_fail">Ngày không hợp lệ</string>
     <string name="toast_list_empty">Chưa thêm nhân viên</string>
+    <string name="toast_add_employee_success">Đăng ký thành công</string>
+    <string name="toast_delete_success">Xóa thành công</string>
+    <string name="toast_delete_fail">Xóa thất bại</string>
+
 
 
     <!--Toast v1-->
