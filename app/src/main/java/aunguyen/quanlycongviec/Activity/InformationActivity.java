@@ -1,16 +1,20 @@
 package aunguyen.quanlycongviec.Activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
-import android.Manifest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import aunguyen.quanlycongviec.R;
 
@@ -29,6 +33,9 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        checkAndRequestPermissions();
+
         setContentView(R.layout.activity_information);
 
         setUpToolbar();
@@ -124,5 +131,22 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
             return;
         }
         startActivity(phoneIntent);
+    }
+
+    private void checkAndRequestPermissions() {
+        String[] permissions = new String[]{
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.READ_CONTACTS
+        };
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(permission);
+            }
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 1);
+        }
     }
 }
