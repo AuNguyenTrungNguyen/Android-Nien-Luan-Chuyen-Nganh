@@ -224,6 +224,22 @@ public class StatisticActivity extends AppCompatActivity implements View.OnClick
         int mouthEnd = Integer.parseInt(splitEnd[1]) - 1;
         int yearEnd = Integer.parseInt(splitEnd[2]);
 
-        return (yearEnd >= yearStart && mouthEnd >= mouthStart && dayEnd >= dayStart);
+        if(yearStart > yearEnd){
+            return false;
+        }else if(yearStart < yearEnd){
+            return true;
+        }else{
+            if(mouthStart > mouthEnd){
+                return false;
+            }else if(mouthStart < mouthEnd){
+                return true;
+            }else{
+                if(dayStart > dayEnd){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        }
     }
 }

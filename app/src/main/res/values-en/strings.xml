@@ -70,7 +70,7 @@
     <string name="toast_sign_up_fail">Sign up failed!</string>
     <string name="toast_account_incorrect">The account is incorrect</string>
     <string name="toast_internet">Network disconnected</string>
-    <string name="toast_title_empty">Username is empty</string>
+    <string name="toast_title_empty">Title is empty</string>
     <string name="toast_date_fail">Date is incorrect</string>
     <string name="toast_list_empty">No employee added</string>
     <string name="toast_add_employee_success">Add employee success</string>

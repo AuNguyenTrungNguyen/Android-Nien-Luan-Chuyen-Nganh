@@ -152,8 +152,8 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(AddJobActivity.this, getString(R.string.toast_title_empty), Toast.LENGTH_SHORT).show();
         } else if (timeStart.equals(getResources().getString(R.string.set_job_start))
                 || timeEnd.equals(getResources().getString(R.string.set_job_end))
-                || compareDate(now, timeStart)
-                || compareDate(timeStart, timeEnd)) {
+                || !compareDate(now, timeStart)
+                || !compareDate(timeStart, timeEnd)) {
             Toast.makeText(this, getString(R.string.toast_date_fail), Toast.LENGTH_SHORT).show();
         } else if (listEmployees.size() == 0) {
             Toast.makeText(this, getString(R.string.toast_list_empty), Toast.LENGTH_SHORT).show();
@@ -272,7 +272,23 @@ public class AddJobActivity extends AppCompatActivity implements View.OnClickLis
         int mouthEnd = Integer.parseInt(splitEnd[1]);
         int yearEnd = Integer.parseInt(splitEnd[2]);
 
-        return (yearEnd < yearStart || mouthEnd < mouthStart || dayEnd < dayStart);
+        if(yearStart > yearEnd){
+            return false;
+        }else if(yearStart < yearEnd){
+            return true;
+        }else{
+            if(mouthStart > mouthEnd){
+                return false;
+            }else if(mouthStart < mouthEnd){
+                return true;
+            }else{
+                if(dayStart > dayEnd){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        }
     }
 
     private int setStatusJob(String start, String end) {
