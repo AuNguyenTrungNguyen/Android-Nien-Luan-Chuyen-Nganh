@@ -50,13 +50,13 @@
     <string name="title_activity_detail_job">Detail Job</string>
     <string name="message_admin">Administrator</string>
     <string name="message_employee">Employee</string>
-    <string name="message_edit_and_save">You not save, are you cancle?</string>
+    <string name="message_edit_and_save">You not save, are you exit?</string>
     <string name="message_positive_save">Exit</string>
-    <string name="message_negative_save">Cancle</string>
+    <string name="message_negative_save">Cancel</string>
     <string name="message_delete_job">Are you sure you want to delete?</string>
-    <string name="message_positive_delete_job">Cancle</string>
+    <string name="message_positive_delete_job">Cancel</string>
     <string name="message_negative_delete_job">Delete</string>
-    <string name="dialog">Loading...</string>
+    <string name="dialog">Loading…</string>
     <string name="dialog_choose_account_type">Choose account type</string>
     <string name="notification_title">Notification</string>
     <string name="notification_text">A new job:</string>
